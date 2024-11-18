@@ -1,4 +1,3 @@
-import 'normalize.css';
 import { globalStyle } from './index.styles';
 import { css, Global } from '@emotion/react';
 
