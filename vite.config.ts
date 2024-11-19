@@ -6,5 +6,5 @@ const isTest = process.env.NODE_ENV === 'test';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), isTest && TanStackRouterVite()],
+  plugins: [!isTest && TanStackRouterVite(), react()],
 });
