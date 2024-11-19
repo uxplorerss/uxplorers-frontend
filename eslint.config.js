@@ -7,7 +7,7 @@ import prettier from 'eslint-config-prettier';
 import pluginRouter from '@tanstack/eslint-plugin-router';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '**/*.gen.ts'] },
   {
     extends: [
       js.configs.recommended,
