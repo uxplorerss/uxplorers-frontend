@@ -37,13 +37,11 @@ export const Route = createRootRoute({
         `}
       >
         <div className="p-2 flex gap-2">
-          <Link to="/" className="[&.active]:font-bold">
-            Home
-          </Link>{' '}
-          <Link to="/about" className="[&.active]:font-bold">
-            About
-          </Link>
-          <Link to="/booking">ff</Link>
+          <Link to="/">승차권 확인</Link>
+          <br />
+          <Link to="/booking">예매하기</Link>
+          <br />
+          <Link to="/account">마이페이지</Link>
         </div>
         <hr />
         <Outlet />
