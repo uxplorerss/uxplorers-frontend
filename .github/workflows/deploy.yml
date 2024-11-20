@@ -1,12 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_run:
-    workflows:
-      - Build Project
-    types:
-      - completed
-
   push:
     branches:
       - main
@@ -30,27 +24,28 @@ jobs:
       - name: Build the project
         run: yarn build
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: build
           path: dist
 
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    needs: build
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: dist
-
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+        id: deployment
+        uses: actions/deploy-pages@v4
