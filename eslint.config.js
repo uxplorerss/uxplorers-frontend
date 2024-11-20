@@ -4,11 +4,17 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
+import pluginRouter from '@tanstack/eslint-plugin-router';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '**/*.gen.ts'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...pluginRouter.configs['flat/recommended'],
+      prettier,
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -23,6 +29,12 @@ export default tseslint.config(
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^React$',
+        },
       ],
     },
   }
