@@ -24,5 +24,6 @@ export const EmptyState: Story = {
     onValueChange: (_) => {
       return;
     },
+    placeholder: '출발지 선택',
   },
 };
