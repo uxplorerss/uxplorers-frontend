@@ -7,5 +7,5 @@ export const Route = createFileRoute('/booking/seats/')({
 
 function IndexComponent() {
   // TODO 예매 좌석 선택 페이지 구현하기
-  return 'Hello /booking/seats/!';
+  return 'Hello /booking/seats/!!';
 }
