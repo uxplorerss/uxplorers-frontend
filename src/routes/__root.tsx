@@ -4,7 +4,7 @@ import { lazy, Suspense } from 'react';
 import { globalStyle } from '../index.styles';
 
 const TanStackRouterDevtools =
-  import.meta.env.NODE_ENV === 'production'
+  import.meta.env.MODE === 'production'
     ? () => null
     : lazy(() =>
         import('@tanstack/router-devtools').then((res) => ({
