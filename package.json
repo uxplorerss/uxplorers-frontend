@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsr watch-routes && vite",
     "build": "tsr generate && tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "format": "prettier . --write",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

@@ -12,6 +12,7 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
+      ...pluginRouter.configs['flat/recommended'],
       prettier,
     ],
     files: ['**/*.{ts,tsx}'],
@@ -29,7 +30,12 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^React$',
+        },
+      ],
     },
-    ...pluginRouter.configs['flat/recommended'],
   }
 );
