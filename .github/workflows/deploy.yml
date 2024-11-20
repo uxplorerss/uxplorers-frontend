@@ -1,12 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_run:
-    workflows:
-      - Build Project
-    types:
-      - completed
-
   push:
     branches:
       - main
@@ -37,6 +31,7 @@ jobs:
           path: dist
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
