@@ -12,6 +12,7 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
+      ...pluginRouter.configs['flat/recommended'],
       prettier,
     ],
     files: ['**/*.{ts,tsx}'],
@@ -30,6 +31,5 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
     },
-    ...pluginRouter.configs['flat/recommended'],
   }
 );
