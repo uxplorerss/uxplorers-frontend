@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+## React + TypeScript + Vite
 - package manager로 yarn을 사용합니다.
 ```shell
 yarn install
