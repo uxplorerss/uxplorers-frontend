@@ -1,12 +1,6 @@
 name: Build Project
 
 on:
-  workflow_run:
-    workflows:
-      - Lint Code
-    types:
-      - completed
-
   pull_request:
     branches:
       - main
