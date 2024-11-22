@@ -3,8 +3,10 @@ import BottomBar from "../../common/components/BottomBar";
 import Input from "../../common/components/Input";
 import { container, mainContent, dateSelector, dateBox, addDateButton, searchButton } from "./index.styles";
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
 function TicketsPage() {
+  const navigate = useNavigate();
 
   const [check, setCheck] = useState({
     departure: "",
@@ -32,6 +34,9 @@ function TicketsPage() {
               ...check,
               departure: value,
             });
+          }}
+          onClick={() => {
+            navigate({ to: '/booking/location' });
           }}
         />
         <Input 
