@@ -45,6 +45,11 @@ export const dateSelector = css({
     marginTop: '8px',
 });
 
+export const dateBox = css({
+  display: 'flex',
+  width: '100%',
+});
+
 export const addDateButton = css({
     padding: '8px 16px',
     border: '1px solid #ddd',
@@ -58,8 +63,8 @@ export const addDateButton = css({
 export const searchButton = css({
   width: '100%',
   padding: '16px',
-  backgroundColor: '#007AFF',
-  color: 'white',
+  backgroundColor: '#AAAAAA',
+  color: '#BABABA',
   border: 'none',
   borderRadius: '8px',
   fontSize: '16px',
