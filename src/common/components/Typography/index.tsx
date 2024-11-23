@@ -6,7 +6,7 @@ import { TypographyPropsType } from './index.types';
 function Typography({
   variant,
   children,
-  as: Component = 'div',
+  as: Component = 'span',
 }: TypographyPropsType) {
   const theme = useTheme();
 
