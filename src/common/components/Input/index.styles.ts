@@ -1,3 +1,3 @@
-import { css, Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
-export const useInput = (theme: Theme) => css({});
+export const useInput = () => css({});
