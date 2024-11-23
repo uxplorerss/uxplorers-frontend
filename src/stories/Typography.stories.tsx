@@ -23,6 +23,7 @@ export const Caption2: Story = {
     variant: 'typography2',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'li',
   },
 };
 
@@ -31,6 +32,7 @@ export const Caption3: Story = {
     variant: 'typography3',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'header',
   },
 };
 
@@ -39,6 +41,7 @@ export const Caption4: Story = {
     variant: 'typography4',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'footer',
   },
 };
 
@@ -47,6 +50,7 @@ export const Caption5: Story = {
     variant: 'typography5',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'div',
   },
 };
 
@@ -55,6 +59,7 @@ export const Caption6: Story = {
     variant: 'typography6',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'span',
   },
 };
 
@@ -63,6 +68,7 @@ export const Title: Story = {
     variant: 'title',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    as: 'h1',
   },
 };
 
