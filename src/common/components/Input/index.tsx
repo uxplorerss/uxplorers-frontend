@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { InputPropsType } from './types';
+import { useInput } from './index.styles';
+import { useTheme } from '@emotion/react';
 
 export default function Input({
   value,
