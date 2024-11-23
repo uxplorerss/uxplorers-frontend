@@ -1,4 +1,4 @@
-name: 'Chromatic Deployment'
+name: 'Deploy Storybook to Chromatic'
 on:
   push:
     branches:
