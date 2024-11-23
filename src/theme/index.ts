@@ -1,158 +1,54 @@
-export interface ThemeType {
+const theme = {
   colors: {
     primary: {
-      whitened: string;
-      lightest: string;
-      lighter: string;
-      light: string;
-      base: string;
-      primary: string;
-      slight: string;
-      dark: string;
-      darker: string;
-      darkest: string;
-    };
-    gray: {
-      whitened: string;
-      lightest: string;
-      lighter: string;
-      light: string;
-      base: string;
-      primary: string;
-      slight: string;
-      dark: string;
-      darker: string;
-      darkest: string;
-      blackened: string;
-    };
-    accent: {
-      success: string;
-      info: string;
-      warning: string;
-      danger: string;
-    };
-  };
-  fontSize: {
-    small: string;
-    normal: string;
-    medium: string;
-    large: string;
-  };
-  lineHeight: {
-    small: string;
-    normal: string;
-    medium: string;
-    large: string;
-  };
-  fontWeight: {
-    light: number;
-    normal: number;
-    medium: number;
-    bold: number;
-    extraBold: number;
-  };
-  spacing: {
-    small: string;
-    normal: string;
-    medium: string;
-    large: string;
-  };
-  radii: {
-    small: string;
-    normal: string;
-    medium: string;
-    large: string;
-    full: string;
-  };
-  zIndex: {
-    modal: number;
-    dropdown: number;
-    header: number;
-    default: number;
-    behind: number;
-  };
-  breakpoints: {
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-  };
-  heights: {
-    small: string;
-    medium: string;
-    large: string;
-    extraLarge: string;
-    full: string;
-    screen: string;
-  };
-}
-
-const theme: ThemeType = {
-  colors: {
-    primary: {
-      whitened: 'e6f6eb',
-      lightest: '#c4e8ce',
-      lighter: '#9ed9af',
-      light: '#75ca90',
-      base: '#55bf78',
-      primary: '#31b361',
-      slight: '#28a457',
-      dark: '#1e924b',
-      darker: '#148140',
-      darkest: '#00612c',
+      sub: '#fff8fe',
+      base: '#ba00a6',
     },
     gray: {
-      whitened: '#f9fafb',
-      lightest: '#f3f4f6',
-      lighter: '#e5e7eb',
-      light: '#d1d5db',
-      base: '#9ca3af',
-      primary: '#6b7280',
-      slight: '#4b5563',
-      dark: '#374151',
-      darker: '#1f2937',
-      darkest: '#111827',
-      blackened: '#030712',
-    },
-    accent: {
-      success: '#28a745',
-      info: '#17a2b8',
-      warning: '#ffc107',
-      danger: '#dc3545',
+      black: '#272727',
+      0: '#555555',
+      1: '#a5a5a5',
+      2: '#eaeaea',
+      3: '#f5f5f5',
+      4: '#858585',
+      white: '#ffffff',
     },
   },
   fontSize: {
-    small: '0.75rem',
-    normal: '1rem',
-    medium: '1.5rem',
-    large: '2rem',
+    1: '0.937rem',
+    2: '0.687rem',
+    3: '1rem',
+    4: '1.5rem',
+    5: '0.875rem',
+    6: '0.937rem',
+    title: '1.625rem',
+    body: '1.25rem',
   },
   lineHeight: {
-    small: '1.2',
-    normal: '1.4',
-    medium: '1.2',
-    large: '1.2',
+    1: 'normal',
+    2: 'normal',
+    3: 'normal',
+    4: 'normal',
+    5: 'normal',
+    6: 'normal',
+    title: '1.2',
+    body: 'normal',
   },
   fontWeight: {
-    light: 300,
-    normal: 400,
-    medium: 500,
-    bold: 700,
-    extraBold: 800,
+    1: 600,
+    2: 600,
+    3: 600,
+    4: 600,
+    5: 600,
+    6: 400,
+    title: 700,
+    body: 500,
   },
   spacing: {
-    small: '0.75rem',
-    normal: '1rem',
-    medium: '1.5rem',
-    large: '2rem',
+    normal: '1.25rem',
   },
   radii: {
-    small: '0.5rem',
-    normal: '0.75rem',
-    medium: '1rem',
-    large: '2rem',
-    full: '9999px',
+    normal: '1.06rem',
   },
   zIndex: {
     modal: 1000,
@@ -176,6 +72,8 @@ const theme: ThemeType = {
     full: '100%',
     screen: '100vh',
   },
-};
+} as const;
+
+export type ThemeType = typeof theme;
 
 export default theme;
