@@ -13,9 +13,11 @@ export default function Input({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onValueChange(event.target.value);
   };
+  const theme = useTheme();
 
   return (
     <input
+      css={useInput(theme)}
       type={type}
       value={value}
       onChange={handleChange}
