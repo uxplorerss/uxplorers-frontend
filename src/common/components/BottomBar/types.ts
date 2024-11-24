@@ -1,5 +1,5 @@
 export type BottomBarPropsType = {
-  leftContent?: React.ReactNode;
-  centerContent?: React.ReactNode;
-  rightContent?: React.ReactNode;
+  leftSlot?: React.ReactNode;
+  centerSlot?: React.ReactNode;
+  rightSlot?: React.ReactNode;
 };
