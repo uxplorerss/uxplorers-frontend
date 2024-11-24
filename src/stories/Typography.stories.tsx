@@ -10,71 +10,70 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Caption1: Story = {
+export const Title1: Story = {
   args: {
-    variant: 'typography1',
+    variant: 'title1',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
 };
 
-export const Caption2: Story = {
+export const Title2: Story = {
   args: {
-    variant: 'typography2',
+    variant: 'title2',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     as: 'li',
   },
 };
 
-export const Caption3: Story = {
+export const Title3: Story = {
   args: {
-    variant: 'typography3',
+    variant: 'title3',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     as: 'header',
   },
 };
 
-export const Caption4: Story = {
+export const Body1: Story = {
   args: {
-    variant: 'typography4',
-    children:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    as: 'footer',
-  },
-};
-
-export const Caption5: Story = {
-  args: {
-    variant: 'typography5',
+    variant: 'body1',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     as: 'div',
   },
 };
 
-export const Caption6: Story = {
+export const Body2: Story = {
   args: {
-    variant: 'typography6',
+    variant: 'body2',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     as: 'span',
   },
 };
 
-export const Title: Story = {
+export const Body3: Story = {
   args: {
-    variant: 'title',
+    variant: 'body3',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     as: 'h1',
   },
 };
 
-export const Body: Story = {
+export const Button1: Story = {
   args: {
-    variant: 'body',
+    variant: 'button1',
+    children:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  },
+};
+
+export const Caption1: Story = {
+  args: {
+    variant: 'caption1',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   },
