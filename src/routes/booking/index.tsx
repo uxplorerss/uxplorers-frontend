@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Typography, TopBar, Input, BottomBar } from '../../common/components';
+import { Typography, TopBar, Input, BottomBar, Button, IconButton } from '../../common/components';
 import LogoImg from '/ios/32.png?url';
+import TransferBtn from '../../assets/booking/btn_transfer.svg';
 import styled from '@emotion/styled';
-import Button from '../../common/components/Button';
 
 export const Route = createFileRoute('/booking/')({
   component: RouteComponent,
@@ -28,7 +28,7 @@ function TopBarContents({position}:{position: "left" | "right"}) {
   if (position === 'left') {
     return (
       <StyledTopBarLeft>
-        <img src={LogoImg}/>
+        <img src={LogoImg} alt='kumoneygo logo'/>
         <Typography variant='typography1'>KUmoney GO!</Typography>
       </StyledTopBarLeft>
     )
@@ -51,7 +51,7 @@ function TopBarContents({position}:{position: "left" | "right"}) {
 function BookmarkList() {
   return (
     <div style={{padding: "0 20px"}}>
-      <Typography variant='typography1' as='p'>즐겨찾기</Typography>
+      <Typography variant='body' as='p'>즐겨찾기</Typography>
       <Button>서울 경부 → 구미</Button>
     </div>
   )
@@ -86,11 +86,12 @@ function RouteComponent() {
     <>
       <TopBar leftSlot={<TopBarContents position='left' />} rightSlot={<TopBarContents position='right'/>}/>
 
-      <form style={{padding: "0 20px", justifyItems: 'center'}}>
+      <form style={{padding: "0 20px", justifyItems: 'center'}} onSubmit={(e) => e.preventDefault()}>
         <Typography variant='title' as='p'>어디로 갈까요?</Typography>
 
         <StyledInputContainer>
           <Input value='' onValueChange={handleChange} placeholder='출발지 선택' />
+          <IconButton src={TransferBtn} alt='transfer btn'/>
           <Input value='' onValueChange={handleChange} placeholder='도착지 선택' />
 
           <div className='date_type'>
