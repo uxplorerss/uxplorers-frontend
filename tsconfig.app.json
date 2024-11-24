@@ -25,5 +25,5 @@
     /* emotion */
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["src"]
+  "include": ["src", "svg.d.ts"]
 }
