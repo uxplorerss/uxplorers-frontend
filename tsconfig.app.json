@@ -23,7 +23,12 @@
     "noUncheckedSideEffectImports": true,
 
     /* emotion */
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+
+    /* path */
+    "paths" : {
+      "@/*" : ["./src/*"],
+    },
   },
   "include": ["src"]
 }
