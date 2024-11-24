@@ -26,9 +26,9 @@
     "jsxImportSource": "@emotion/react",
 
     /* path */
-    "paths" : {
-      "@/*" : ["./src/*"],
-    },
+    // "paths" : {
+    //   "@/*" : ["./src/*"],
+    // },
   },
   "include": ["src"]
 }
