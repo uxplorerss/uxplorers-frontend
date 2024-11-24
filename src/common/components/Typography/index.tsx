@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTypography } from './index.styles';
+import { buildTypography } from './index.styles';
 import { useTheme } from '@emotion/react';
 import { TypographyPropsType } from './index.types';
 
@@ -10,7 +10,9 @@ function Typography({
 }: TypographyPropsType) {
   const theme = useTheme();
 
-  return <Component css={useTypography(theme, variant)}>{children}</Component>;
+  return (
+    <Component css={buildTypography(theme, variant)}>{children}</Component>
+  );
 }
 
 export default Typography;

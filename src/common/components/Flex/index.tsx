@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import React, { CSSProperties, ReactNode } from 'react';
 import { FlexPropsType } from './index.types';
-import { useFlex } from './index.styles';
+import { buildFlex } from './index.styles';
 
 export default function Flex({
   children,
@@ -15,7 +15,7 @@ export default function Flex({
 }: FlexPropsType) {
   return (
     <div
-      css={useFlex({
+      css={buildFlex({
         align,
         justify,
         direction,

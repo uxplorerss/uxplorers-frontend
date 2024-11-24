@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { ThemeType } from '../../../theme';
 import { TypographyVariant } from './index.types';
 
-export const useTypography = (theme: ThemeType, variant: TypographyVariant) => {
+export const buildTypography = (
+  theme: ThemeType,
+  variant: TypographyVariant
+) => {
   const styles = {
     title1: css({
       fontSize: theme.fontSize.title1,

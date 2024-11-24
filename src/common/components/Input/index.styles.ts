@@ -1,10 +1,10 @@
 import { css, Theme } from '@emotion/react';
-import { useTypography } from '../Typography/index.styles';
-import { useFlex } from '../Flex/index.styles';
+import { buildTypography } from '../Typography/index.styles';
+import { buildFlex } from '../Flex/index.styles';
 
 export const useInput = (theme: Theme) => [
-  useTypography(theme, 'body'),
-  useFlex({
+  buildTypography(theme, 'body1'),
+  buildFlex({
     align: 'center',
     justify: 'flex-start',
     direction: 'row',
