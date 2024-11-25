@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Typography, TopBar, Input, BottomBar, Button, IconButton } from '../../common/components';
+import { Typography, TopBar, Input, BottomBar, Button, IconButton, LogoIcon, LanguageSwitchButton } from '../../common/components';
 import LogoImg from '/ios/32.png?url';
 import TransferBtn from '../../assets/booking/btn_transfer.svg';
 import styled from '@emotion/styled';
@@ -108,7 +108,9 @@ function RouteComponent() {
 
   return (
     <>
-      <TopBar leftSlot={<TopBarContents position='left' />} rightSlot={<TopBarContents position='right'/>}/>
+      <TopBar leftSlot={<Button>
+        <LogoIcon />
+      </Button>} rightSlot={<LanguageSwitchButton language='Korean' />}/>
 
       <form style={{padding: "0 20px", justifyItems: 'center', position: 'relative'}} onSubmit={(e) => e.preventDefault()}>
         <Typography variant='title1' as='p'>어디로 갈까요?</Typography>
