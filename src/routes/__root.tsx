@@ -23,7 +23,7 @@ export const Route = createRootRoute({
           <div className="p-2 flex gap-2">
             <Link to="/">승차권 확인</Link>
             <br />
-            <Link to="/booking/tickets">예매하기</Link>
+            <Link to="/booking">예매하기</Link>
             <br />
             <Link to="/account">마이페이지</Link>
           </div>
