@@ -1,12 +1,13 @@
 export type TypographyVariant =
-  | 'typography1'
-  | 'typography2'
-  | 'typography3'
-  | 'typography4'
-  | 'typography5'
-  | 'typography6'
-  | 'title'
-  | 'body';
+  | 'title1'
+  | 'title2'
+  | 'title3'
+  | 'title4'
+  | 'body1'
+  | 'body2'
+  | 'body3'
+  | 'button1'
+  | 'caption1';
 
 export interface TypographyPropsType {
   variant: TypographyVariant;

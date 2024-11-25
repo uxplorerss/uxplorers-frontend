@@ -1,16 +1,12 @@
-import { bottomBar, center, left, right } from './index.styles';
+import { bottomBar, buttonContainer } from './index.styles';
 import { BottomBarPropsType } from './types';
 
-function BottomBar({
-  leftContent,
-  centerContent,
-  rightContent,
-}: BottomBarPropsType) {
+function BottomBar({ leftSlot, centerSlot, rightSlot }: BottomBarPropsType) {
   return (
     <div css={bottomBar}>
-      <div css={left}>{leftContent}</div>
-      <div css={center}>{centerContent}</div>
-      <div css={right}>{rightContent}</div>
+      <div css={buttonContainer}>{leftSlot}</div>
+      <div css={buttonContainer}>{centerSlot}</div>
+      <div css={buttonContainer}>{rightSlot}</div>
     </div>
   );
 }
