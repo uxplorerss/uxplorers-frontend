@@ -1,4 +1,5 @@
-import { SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import type { ElementType } from 'react';
 
 export interface InputPropsType
   extends React.ComponentPropsWithoutRef<'input'> {
@@ -6,4 +7,5 @@ export interface InputPropsType
   onValueChange: (value: string) => void;
   error?: string;
   css?: SerializedStyles;
+  as?: ElementType;
 }

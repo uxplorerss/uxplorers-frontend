@@ -9,6 +9,7 @@ export default function Input({
   type = 'text',
   error,
   css,
+  as: Component = 'input',
   ...rest
 }: InputPropsType) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +18,7 @@ export default function Input({
   const theme = useTheme();
 
   return (
-    <input
+    <Component
       css={[useInput(theme), ...(css ? [css] : [])]}
       type={type}
       value={value}
