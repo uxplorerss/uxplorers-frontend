@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-const IconButton = styled.img`
+const container = css`
   width: 44px;
   height: 44px;
   cursor: pointer;
@@ -11,6 +11,12 @@ const IconButton = styled.img`
   &:active {
     filter: brightness(0.8);
   }
-`
+`;
+
+function IconButton({...rest}: React.ImgHTMLAttributes<HTMLImageElement>) {
+  return (
+    <img css={container} {...rest}/>
+  )
+}
 
 export default IconButton;

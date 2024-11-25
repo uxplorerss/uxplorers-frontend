@@ -29,12 +29,12 @@ function TopBarContents({position}:{position: "left" | "right"}) {
     return (
       <StyledTopBarLeft>
         <img src={LogoImg} alt='kumoneygo logo'/>
-        <Typography variant='typography1'>KUmoney GO!</Typography>
+        <Typography variant='caption1'>KUmoney GO!</Typography>
       </StyledTopBarLeft>
     )
   } else if (position === 'right') {
     return (
-      <Typography variant='typography1'>
+      <Typography variant='caption1'>
         <StyledSelect name='languages'>
           <option value='ko'>KOR</option>
           <option value='en'>ENG</option>
@@ -51,7 +51,7 @@ function TopBarContents({position}:{position: "left" | "right"}) {
 function BookmarkList() {
   return (
     <div style={{padding: "0 20px"}}>
-      <Typography variant='body' as='p'>즐겨찾기</Typography>
+      <Typography variant='body1' as='p'>즐겨찾기</Typography>
       <Button>서울 경부 → 구미</Button>
     </div>
   )
@@ -87,7 +87,7 @@ function RouteComponent() {
       <TopBar leftSlot={<TopBarContents position='left' />} rightSlot={<TopBarContents position='right'/>}/>
 
       <form style={{padding: "0 20px", justifyItems: 'center'}} onSubmit={(e) => e.preventDefault()}>
-        <Typography variant='title' as='p'>어디로 갈까요?</Typography>
+        <Typography variant='title1' as='p'>어디로 갈까요?</Typography>
 
         <StyledInputContainer>
           <Input value='' onValueChange={handleChange} placeholder='출발지 선택' />
