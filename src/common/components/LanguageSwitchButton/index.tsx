@@ -1,5 +1,5 @@
 import React from 'react';
-import { LanguagePropsType } from './index.types';
+import type { LanguagePropsType } from './index.types';
 import Button from '../Button';
 import { buildLanguageSwitchButton } from './index.styles';
 import { useTheme } from '@emotion/react';

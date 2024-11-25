@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 export type BottomBarPropsType = {
-  leftSlot?: React.ReactNode;
-  centerSlot?: React.ReactNode;
-  rightSlot?: React.ReactNode;
+  leftSlot?: ReactNode;
+  centerSlot?: ReactNode;
+  rightSlot?: ReactNode;
 };

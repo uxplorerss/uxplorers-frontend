@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import BottomBar from '../common/components/BottomBar';
 import PersonIcon from '../assets/PersonIcon.svg?react';
 import QRIcon from '../assets/QRIcon.svg?react';

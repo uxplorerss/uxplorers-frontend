@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import TopBar from '../common/components/TopBar';
 import LogoIcon from '../assets/LogoIcon.svg?react';
 import { css } from '@emotion/react';

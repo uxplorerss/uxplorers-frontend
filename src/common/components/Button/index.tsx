@@ -1,5 +1,5 @@
 import { container } from './index.styles';
-import { ButtonPropsType } from './index.types';
+import type { ButtonPropsType } from './index.types';
 
 export default function Button({
   children,
