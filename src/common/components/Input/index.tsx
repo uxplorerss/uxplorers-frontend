@@ -1,15 +1,17 @@
 import type { ChangeEvent } from 'react';
 import type { InputPropsType } from './index.types';
-import { useInput } from './index.styles';
+import { buildInput } from './index.styles';
 import { useTheme } from '@emotion/react';
 
 export default function Input({
   value,
   onValueChange,
   type = 'text',
+
+  as: Component = 'input',
   error,
   css,
-  as: Component = 'input',
+
   ...rest
 }: InputPropsType) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +21,7 @@ export default function Input({
 
   return (
     <Component
-      css={[useInput(theme), ...(css ? [css] : [])]}
+      css={[buildInput(theme)].concat(css ?? [])}
       type={type}
       value={value}
       onChange={handleChange}
