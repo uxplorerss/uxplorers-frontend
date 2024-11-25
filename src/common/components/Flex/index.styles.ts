@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { FlexPropsType } from './index.types';
 
-export const useFlex = ({
+export const buildFlex = ({
   justify,
   align,
   direction,
