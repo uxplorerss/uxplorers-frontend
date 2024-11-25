@@ -8,6 +8,7 @@ export type TypographyVariant =
   | 'body1'
   | 'body2'
   | 'body3'
+  | 'body4'
   | 'button1'
   | 'caption1';
 

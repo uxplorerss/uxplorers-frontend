@@ -42,6 +42,11 @@ export const buildTypography = (
       lineHeight: theme.lineHeight.body3,
       fontWeight: theme.fontWeight.body3,
     }),
+    body4: css({
+      fontSize: theme.fontSize.body4,
+      lineHeight: theme.lineHeight.body4,
+      fontWeight: theme.fontWeight.body4,
+    }),
     button1: css({
       fontSize: theme.fontSize.button1,
       lineHeight: theme.lineHeight.button1,
