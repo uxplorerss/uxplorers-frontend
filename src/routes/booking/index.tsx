@@ -110,12 +110,12 @@ function RouteComponent() {
     <>
       <TopBar leftSlot={<TopBarContents position='left' />} rightSlot={<TopBarContents position='right'/>}/>
 
-      <form style={{padding: "0 20px", justifyItems: 'center'}} onSubmit={(e) => e.preventDefault()}>
+      <form style={{padding: "0 20px", justifyItems: 'center', position: 'relative'}} onSubmit={(e) => e.preventDefault()}>
         <Typography variant='title1' as='p'>어디로 갈까요?</Typography>
 
+        <IconButton src={TransferBtn} alt='transfer btn' onClick={handleTransfer} style={{position: 'absolute', right: '10%', top: '33%'}}/>
         <StyledInputContainer>
           <Input value={origin} onValueChange={(e) => handleChange('origin', e)} placeholder='출발지 선택' />
-          <IconButton src={TransferBtn} alt='transfer btn' onClick={handleTransfer}/>
           <Input value={destination} onValueChange={(e) => handleChange('destination', e)} placeholder='도착지 선택' />
 
           <div className='date_type'>
