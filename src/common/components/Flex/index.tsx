@@ -1,4 +1,4 @@
-import { FlexPropsType } from './index.types';
+import type { FlexPropsType } from './index.types';
 import { buildFlex } from './index.styles';
 
 export default function Flex({

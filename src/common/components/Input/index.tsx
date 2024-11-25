@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react';
-import { InputPropsType } from './index.types';
+import type { ChangeEvent } from 'react';
+import type { InputPropsType } from './index.types';
 import { useInput } from './index.styles';
 import { useTheme } from '@emotion/react';
 
