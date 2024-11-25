@@ -3,6 +3,7 @@ import { Typography, TopBar, Input, BottomBar, Button, IconButton } from '../../
 import LogoImg from '/ios/32.png?url';
 import TransferBtn from '../../assets/booking/btn_transfer.svg';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 export const Route = createFileRoute('/booking/')({
   component: RouteComponent,
@@ -75,11 +76,34 @@ const StyledInputContainer = styled.div`
 `
 
 function RouteComponent() {
-  const handleChange = (value: string) => {
-    console.log(value);
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+
+  const handleChange = (handleName: "origin" | "destination" | "time" | "왕복", e: string ) => {
+    console.log(handleName);
+    switch (handleName) {
+      case 'origin':
+        setOrigin(e);
+        break;
+      case 'destination':
+        setDestination(e);
+        break;
+      case 'time':
+        break;
+      case '왕복':
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSearchBus = () => {
+  };
+
+  const handleTransfer = () => {
+    const temp = origin;
+    setOrigin(destination);
+    setDestination(temp);
   };
 
   return (
@@ -90,13 +114,13 @@ function RouteComponent() {
         <Typography variant='title1' as='p'>어디로 갈까요?</Typography>
 
         <StyledInputContainer>
-          <Input value='' onValueChange={handleChange} placeholder='출발지 선택' />
-          <IconButton src={TransferBtn} alt='transfer btn'/>
-          <Input value='' onValueChange={handleChange} placeholder='도착지 선택' />
+          <Input value={origin} onValueChange={(e) => handleChange('origin', e)} placeholder='출발지 선택' />
+          <IconButton src={TransferBtn} alt='transfer btn' onClick={handleTransfer}/>
+          <Input value={destination} onValueChange={(e) => handleChange('destination', e)} placeholder='도착지 선택' />
 
           <div className='date_type'>
-            <Input value={(new Date()).toDateString()} onValueChange={handleChange} placeholder='날짜 선택' />
-            <Input value='' onValueChange={handleChange} placeholder='+ 왕복 선택' />
+            <Input value={(new Date()).toDateString()} onValueChange={(e) => handleChange('time', e)} placeholder='날짜 선택' />
+            <Input value='' onValueChange={(e) => handleChange('왕복', e)} placeholder='+ 왕복 선택' />
           </div>
         </StyledInputContainer>
 
