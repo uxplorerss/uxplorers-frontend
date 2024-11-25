@@ -5,15 +5,16 @@ import TopBar from '../../../common/components/TopBar';
 import {
   SeatPropsType,
   SeatVariant,
-} from '../../../common/components/Seats/types';
+} from '../../../common/components/Seat/types';
 import { useState, useEffect } from 'react';
-import Seat from '../../../common/components/Seats';
+import Seat from '../../../common/components/Seat';
+import { ReaminSeat } from '../../../common/Seats/RemainSeat';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
 });
 
-interface seat {
+export interface seat {
   id: number | undefined;
   status: SeatVariant;
 }
@@ -39,31 +40,18 @@ function IndexComponent() {
     console.log(seats);
   }, [seats]);
   useEffect(() => {
+    console.log(selected);
     if (selected !== undefined) {
-      console.log(selected, seats[selected - 1].status);
-      const now = seats.find((seat) => seat.id === selected);
-      if (now !== undefined) {
-        if (now.status === 'SELECTED') {
-          now.status = 'NORMAL';
-        } else {
-          now.status = 'SELECTED';
-        }
-        setSeats([...seats]);
-      }
     }
-    console.log(seats);
   }, [selected]);
   useEffect(() => {
     initSeats();
   }, []);
-  // TODO 예매 좌석 선택 페이지 구현하기
-
-  const seatClickHandler = () => {
-    console.log('CLICK!');
-  };
   return (
     <>
       <TopBar />
+      <ReaminSeat num={2} />
+
       <div
         css={css`
           display: flex;
@@ -89,7 +77,7 @@ function IndexComponent() {
                   key={index}
                   attr={value.status}
                   num={value.id}
-                  handler={setSelected}
+                  handler={setSeats}
                 ></Seat>
               );
             }
