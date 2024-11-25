@@ -4,45 +4,50 @@ import { TypographyVariant } from './index.types';
 
 export const useTypography = (theme: ThemeType, variant: TypographyVariant) => {
   const styles = {
-    typography1: css({
-      fontSize: theme.fontSize[1],
-      lineHeight: theme.lineHeight[1],
-      fontWeight: theme.fontWeight[1],
+    title1: css({
+      fontSize: theme.fontSize.title1,
+      lineHeight: theme.lineHeight.title1,
+      fontWeight: theme.fontWeight.title1,
     }),
-    typography2: css({
-      fontSize: theme.fontSize[2],
-      lineHeight: theme.lineHeight[2],
-      fontWeight: theme.fontWeight[2],
+    title2: css({
+      fontSize: theme.fontSize.title2,
+      lineHeight: theme.lineHeight.title2,
+      fontWeight: theme.fontWeight.title2,
     }),
-    typography3: css({
-      fontSize: theme.fontSize[3],
-      lineHeight: theme.lineHeight[3],
-      fontWeight: theme.fontWeight[3],
+    title3: css({
+      fontSize: theme.fontSize.title3,
+      lineHeight: theme.lineHeight.title3,
+      fontWeight: theme.fontWeight.title3,
     }),
-    typography4: css({
-      fontSize: theme.fontSize[4],
-      lineHeight: theme.lineHeight[4],
-      fontWeight: theme.fontWeight[4],
+    title4: css({
+      fontSize: theme.fontSize.title4,
+      lineHeight: theme.lineHeight.title4,
+      fontWeight: theme.fontWeight.title4,
     }),
-    typography5: css({
-      fontSize: theme.fontSize[5],
-      lineHeight: theme.lineHeight[5],
-      fontWeight: theme.fontWeight[5],
+    body1: css({
+      fontSize: theme.fontSize.body1,
+      lineHeight: theme.lineHeight.body1,
+      fontWeight: theme.fontWeight.body1,
     }),
-    typography6: css({
-      fontSize: theme.fontSize[6],
-      lineHeight: theme.lineHeight[6],
-      fontWeight: theme.fontWeight[6],
+    body2: css({
+      fontSize: theme.fontSize.body2,
+      lineHeight: theme.lineHeight.body2,
+      fontWeight: theme.fontWeight.body2,
     }),
-    title: css({
-      fontSize: theme.fontSize.title,
-      lineHeight: theme.lineHeight.title,
-      fontWeight: theme.fontWeight.title,
+    body3: css({
+      fontSize: theme.fontSize.body3,
+      lineHeight: theme.lineHeight.body3,
+      fontWeight: theme.fontWeight.body3,
     }),
-    body: css({
-      fontSize: theme.fontSize.body,
-      lineHeight: theme.lineHeight.body,
-      fontWeight: theme.fontWeight.body,
+    button1: css({
+      fontSize: theme.fontSize.button1,
+      lineHeight: theme.lineHeight.button1,
+      fontWeight: theme.fontWeight.button1,
+    }),
+    caption1: css({
+      fontSize: theme.fontSize.caption1,
+      lineHeight: theme.lineHeight.caption1,
+      fontWeight: theme.fontWeight.caption1,
     }),
   };
 
