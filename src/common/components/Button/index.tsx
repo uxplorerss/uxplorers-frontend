@@ -4,10 +4,11 @@ import { ButtonPropsType } from './index.types';
 export default function Button({
   children,
   type = 'button',
+  css,
   ...rest
 }: ButtonPropsType) {
   return (
-    <button css={container} type={type} {...rest}>
+    <button css={[container, ...(css ? [css] : [])]} type={type} {...rest}>
       {children}
     </button>
   );

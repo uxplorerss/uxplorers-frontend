@@ -1,4 +1,10 @@
-import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
+import { SerializedStyles } from '@emotion/react';
+import type {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementType,
+  ReactNode,
+} from 'react';
 
 export interface FlexPropsType extends ComponentPropsWithoutRef<'div'> {
   children?: ReactNode;
@@ -8,4 +14,6 @@ export interface FlexPropsType extends ComponentPropsWithoutRef<'div'> {
   gap?: CSSProperties['gap'];
   wrap?: CSSProperties['flexWrap'];
   width?: CSSProperties['width'];
+  css?: SerializedStyles;
+  as?: ElementType;
 }
