@@ -1,5 +1,5 @@
 import { bottomBar, buttonContainer } from './index.styles';
-import { BottomBarPropsType } from './types';
+import type { BottomBarPropsType } from './types';
 
 function BottomBar({ leftSlot, centerSlot, rightSlot }: BottomBarPropsType) {
   return (

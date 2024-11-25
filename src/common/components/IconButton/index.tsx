@@ -1,4 +1,5 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { ImgHTMLAttributes } from 'react';
 
 const container = css`
   width: 44px;
@@ -13,10 +14,8 @@ const container = css`
   }
 `;
 
-function IconButton({...rest}: React.ImgHTMLAttributes<HTMLImageElement>) {
-  return (
-    <img css={container} {...rest}/>
-  )
+function IconButton({ ...rest }: ImgHTMLAttributes<HTMLImageElement>) {
+  return <img css={container} {...rest} />;
 }
 
 export default IconButton;

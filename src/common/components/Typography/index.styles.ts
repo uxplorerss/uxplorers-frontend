@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ThemeType } from '../../../theme';
+import type { ThemeType } from '../../../theme';
 import { TypographyVariant } from './index.types';
 
 export const buildTypography = (

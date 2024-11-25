@@ -1,7 +1,7 @@
 import React from 'react';
 import { buildTypography } from './index.styles';
 import { useTheme } from '@emotion/react';
-import { TypographyPropsType } from './index.types';
+import type { TypographyPropsType } from './index.types';
 
 function Typography({
   variant,

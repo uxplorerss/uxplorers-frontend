@@ -1,4 +1,5 @@
-export interface ButtonPropsType
-  extends React.ComponentPropsWithoutRef<'button'> {
-  children: React.ReactNode;
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+
+export interface ButtonPropsType extends ComponentPropsWithoutRef<'button'> {
+  children: ReactNode;
 }

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
 export interface FlexPropsType extends ComponentPropsWithoutRef<'div'> {
   children?: ReactNode;

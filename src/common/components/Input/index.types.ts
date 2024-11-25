@@ -1,5 +1,6 @@
-export interface InputPropsType
-  extends React.ComponentPropsWithoutRef<'input'> {
+import type { ComponentPropsWithoutRef } from 'react';
+
+export interface InputPropsType extends ComponentPropsWithoutRef<'input'> {
   value: string;
   onValueChange: (value: string) => void;
   error?: string;

@@ -1,3 +1,5 @@
+import type { ElementType, ReactNode } from 'react';
+
 export type TypographyVariant =
   | 'title1'
   | 'title2'
@@ -11,6 +13,6 @@ export type TypographyVariant =
 
 export interface TypographyPropsType {
   variant: TypographyVariant;
-  children: React.ReactNode;
-  as?: React.ElementType;
+  children: ReactNode;
+  as?: ElementType;
 }
