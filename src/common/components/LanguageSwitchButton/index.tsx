@@ -10,8 +10,11 @@ export default function LanguageSwitchButton({ language }: LanguagePropsType) {
     case 'English':
       return <Button css={buildLanguageSwitchButton(theme)}>한</Button>;
     case 'Korean':
-      return <Button css={buildLanguageSwitchButton(theme)}>ENG</Button>;
+      return (
+        <Button css={buildLanguageSwitchButton(theme)} lang="en">
+          ENG
+        </Button>
+      );
     default:
-      throw new Error('No language option');
   }
 }
