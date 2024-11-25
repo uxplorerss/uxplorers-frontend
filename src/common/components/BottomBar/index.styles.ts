@@ -17,15 +17,7 @@ export const bottomBar = css([
   },
 ]);
 
-export const buttonContainer = css([
-  buildFlex({
-    justify: 'center',
-    align: 'center',
-    direction: 'column',
-    wrap: 'nowrap',
-    gap: '0',
-  }),
-  {
-    flex: 'auto',
-  },
-]);
+export const buttonContainer = css({
+  flex: 'auto',
+  flexDirection: 'column',
+});
