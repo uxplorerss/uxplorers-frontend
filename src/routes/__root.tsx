@@ -1,4 +1,4 @@
-import { css, Global, ThemeProvider } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 import { lazy, Suspense } from 'react';
 import { globalStyle } from '../index.styles';
