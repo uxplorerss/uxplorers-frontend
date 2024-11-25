@@ -46,19 +46,19 @@ export const Payment: Story = {
     ),
     centerSlot: (
       <div
-        css={[buildTypography(theme, 'body2'), css({ fontSize: '1.125rem' })]}
+        css={css([buildTypography(theme, 'body2'), { fontSize: '1.125rem' }])}
       >
         결제하기
       </div>
     ),
     rightSlot: (
       <Button
-        css={[
+        css={css([
           buildTypography(theme, 'title4'),
-          css({
+          {
             color: theme.colors.primary.base,
-          }),
-        ]}
+          },
+        ])}
       >
         결제수단
       </Button>
