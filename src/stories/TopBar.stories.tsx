@@ -2,7 +2,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import TopBar from '../common/components/TopBar';
 import LogoIcon from '../assets/LogoIcon.svg?react';
 import { css } from '@emotion/react';
-import Flex from '../common/components/Flex';
 import Button from '../common/components/Button';
 import LanguageSwitchButton from '../common/components/LanguageSwitchButton';
 import LeftArrowIcon from '../assets/LeftArrowIcon.svg?react';
