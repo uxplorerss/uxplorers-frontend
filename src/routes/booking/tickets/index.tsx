@@ -4,7 +4,10 @@ import { css } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/favoriteStarIcon.svg';
 import { useEffect } from 'react';
-import { getBusNowTimeAPI } from '../../../apis/getBusTickets';
+import {
+  getBusNowTimeAPI,
+  getBusTicketsAPI,
+} from '../../../apis/getBusTickets';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -16,7 +19,10 @@ function RouteComponent() {
 
   useEffect(() => {
     //console.log(selectTime);
-    getBusNowTimeAPI('010', '700');
+    getBusNowTimeAPI('010', '700').then((data) => console.log(data));
+    getBusTicketsAPI('NAEK030', 'NAEK700', '20241126').then((data) =>
+      console.log(data)
+    );
   }, []);
 
   return (

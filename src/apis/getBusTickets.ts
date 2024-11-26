@@ -11,7 +11,13 @@ export const getBusNowTimeAPI = async (fromTmnId: string, toTmnId: string) => {
   const queryString = new URLSearchParams(queryStringParams).toString();
 
   const response = await fetch(
-    `http://apis.data.go.kr/1613000/ExpBusArrInfoService?${queryString}`
+    `/uxplorers-frontend/api/ExpBusArrInfoService/getExpBusArrPrdtInfo?${queryString}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
   );
   const data = await response.json();
 
@@ -71,9 +77,13 @@ export const getBusTicketsAPI = async (
   };
 
   const queryString = new URLSearchParams(queryStringParams).toString();
+  console.log(queryString);
 
   const response = await fetch(
-    `http://apis.data.go.kr/1613000/ExpBusInfoService?${queryString}`
+    `/uxplorers-frontend/api/ExpBusInfoService/getStrtpntAlocFndExpbusInfo?${queryString}`,
+    {
+      method: 'GET',
+    }
   );
   const data = await response.json();
 
