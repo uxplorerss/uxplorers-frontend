@@ -1,32 +1,24 @@
-import React from 'react';
 import type { ActionBarPropsType } from './index.types';
 import Flex from '../Flex';
-import { css, useTheme } from '@emotion/react';
-import Typography from '../Typography';
+
+import { buildActionBar } from './index.styles';
+import { useTheme } from '@emotion/react';
 
 export default function ActionBar({
   bodySlot,
   actionSlot,
+  cx,
 }: ActionBarPropsType) {
   const theme = useTheme();
   return (
     <Flex
       as="section"
-      justify="center"
-      align="center"
-      css={css({
-        margin: '20px 20px 34px 20px',
-      })}
+      direction="column"
+      cx={[buildActionBar(theme), cx]}
+      gap="28px"
+      width="100%"
+      boxSizing="border-box"
     >
-      <Typography
-        as="p"
-        variant="body4"
-        cx={css({
-          color: theme.colors.gray[4],
-        })}
-      >
-        일반 1, 초등생 1
-      </Typography>
       {bodySlot}
       {actionSlot}
     </Flex>
