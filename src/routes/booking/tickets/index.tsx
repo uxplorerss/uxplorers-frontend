@@ -1,8 +1,10 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { Card, TopBar, Typography } from '../../../common/components';
 import { css } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/favoriteStarIcon.svg';
+import { useEffect } from 'react';
+import { getBusNowTimeAPI } from '../../../apis/getBusTickets';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -12,11 +14,21 @@ function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
   //const selectTime = new Date(`AM 9:00`);
 
+  useEffect(() => {
+    //console.log(selectTime);
+    getBusNowTimeAPI('010', '700');
+  }, []);
+
   return (
     <>
       <TopBar
         exitButton={
-          <Link onClick={() => history.go(-1)}>
+          <Link
+            onClick={(e) => {
+              e.preventDefault();
+              history.go(-1);
+            }}
+          >
             <img src={LeftArrowIcon} />
           </Link>
         }
