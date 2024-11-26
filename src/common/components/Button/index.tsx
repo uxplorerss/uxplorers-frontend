@@ -9,7 +9,7 @@ export default function Button({
   ...rest
 }: ButtonPropsType) {
   return (
-    <Component css={[container].concat(css ?? [])} type={type} {...rest}>
+    <Component css={[container, css]} type={type} {...rest}>
       {children}
     </Component>
   );

@@ -1,3 +1,4 @@
+import type { Interpolation, Theme } from '@emotion/react';
 import type { ElementType, ReactNode } from 'react';
 
 export type TypographyVariant =
@@ -16,4 +17,5 @@ export interface TypographyPropsType {
   variant: TypographyVariant;
   children: ReactNode;
   as?: ElementType;
+  css?: Interpolation<Theme>;
 }

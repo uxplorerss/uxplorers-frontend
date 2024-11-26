@@ -24,7 +24,8 @@ export default function Flex({
           wrap,
           width,
         }),
-      ].concat(css ?? [])}
+        css,
+      ]}
       {...rest}
     >
       {children}

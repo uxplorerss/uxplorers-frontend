@@ -21,7 +21,7 @@ export default function Input({
 
   return (
     <Component
-      css={[buildInput(theme)].concat(css ?? [])}
+      css={[buildInput(theme), css]}
       type={type}
       value={value}
       onChange={handleChange}
