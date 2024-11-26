@@ -86,7 +86,7 @@ export const PaymentActionWithQuantityOnBottom: Story = {
       direction="column"
       justify="start"
       align="center"
-      css={{ minHeight: '100vh' }}
+      cx={{ minHeight: '100vh' }}
     >
       <Typography variant="body3" cx={{ flex: 1 }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod

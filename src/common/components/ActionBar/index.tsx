@@ -10,6 +10,7 @@ export default function ActionBar({
   cx,
 }: ActionBarPropsType) {
   const theme = useTheme();
+
   return (
     <Flex
       as="section"
