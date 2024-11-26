@@ -76,6 +76,7 @@ export const Default: Story = {
     </ViewportContainer>
   ),
   args: {
+    as: 'section',
     children: (
       <ActionBar
         actionSlot={

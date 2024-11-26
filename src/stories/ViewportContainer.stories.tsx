@@ -95,7 +95,7 @@ export const Default: Story = {
           nulla pellentesque dignissim enim sit amet venenatis. Sed lectus
           vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt.s
         </Typography>
-        <StickyFooter>
+        <StickyFooter as="section">
           <ActionBar
             actionSlot={
               <MainButton>
