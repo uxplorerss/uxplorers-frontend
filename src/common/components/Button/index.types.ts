@@ -1,10 +1,10 @@
-import type { SerializedStyles } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 
 export interface ButtonPropsType
   extends React.ComponentPropsWithoutRef<'button'> {
   children: React.ReactNode;
-  css?: SerializedStyles;
+  cx?: Interpolation<Theme>;
   as?: ElementType;
 }
 

@@ -1,14 +1,11 @@
 import type { Preview } from '@storybook/react';
 
-import { Global, ThemeProvider } from '@emotion/react';
-import { globalStyle } from '../src/index.styles';
+import { ThemeProvider } from '@emotion/react';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import FontProvider from '../src/common/components/FontProvider';
 import theme from '../src/theme';
 import React from 'react';
-
-/* TODO: replace with your own global styles, or remove */
-const GlobalStyles = () => <Global styles={globalStyle} />;
+import GlobalStyles from './GlobalStyles';
 
 const preview: Preview = {
   parameters: {

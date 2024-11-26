@@ -10,7 +10,7 @@ export default function Flex({
   wrap = 'nowrap',
   width = 'auto',
   as: Component = 'div',
-  css,
+  cx,
   ...rest
 }: FlexPropsType) {
   return (
@@ -24,7 +24,8 @@ export default function Flex({
           wrap,
           width,
         }),
-      ].concat(css ?? [])}
+        cx,
+      ]}
       {...rest}
     >
       {children}

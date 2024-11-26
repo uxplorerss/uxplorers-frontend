@@ -3,7 +3,7 @@ import { buildTextPosition, buildTypography } from './index.styles';
 import { useTheme } from '@emotion/react';
 import type { TypographyPropsType } from './index.types';
 
-function Typography({
+export default function Typography({
   variant,
   children,
   as: Component = 'span',
@@ -20,5 +20,3 @@ function Typography({
     </Component>
   );
 }
-
-export default Typography;
