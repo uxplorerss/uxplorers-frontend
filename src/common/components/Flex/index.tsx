@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-import React, { CSSProperties, ReactNode } from 'react';
-import { FlexPropsType } from './index.types';
+import type { FlexPropsType } from './index.types';
 import { buildFlex } from './index.styles';
 
 export default function Flex({
@@ -10,22 +8,27 @@ export default function Flex({
   direction = 'row',
   gap = '0',
   wrap = 'nowrap',
-  width = '100%',
+  width = 'auto',
+  as: Component = 'div',
+  css,
   ...rest
 }: FlexPropsType) {
   return (
-    <div
-      css={buildFlex({
-        align,
-        justify,
-        direction,
-        gap,
-        wrap,
-        width,
-      })}
+    <Component
+      css={[
+        buildFlex({
+          align,
+          justify,
+          direction,
+          gap,
+          wrap,
+          width,
+        }),
+        ...(css ? [css] : []),
+      ]}
       {...rest}
     >
       {children}
-    </div>
+    </Component>
   );
 }

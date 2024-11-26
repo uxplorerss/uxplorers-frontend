@@ -1,13 +1,16 @@
-import { ComponentPropsWithoutRef } from 'react';
 import { container } from './index.styles';
+import type { ButtonPropsType } from './index.types';
 
 export default function Button({
   children,
+  type = 'button',
+  css,
+  as: Component = 'button',
   ...rest
-}: { children: React.ReactNode } & ComponentPropsWithoutRef<'button'>) {
+}: ButtonPropsType) {
   return (
-    <button css={container} {...rest}>
+    <Component css={[container, ...(css ? [css] : [])]} type={type} {...rest}>
       {children}
-    </button>
+    </Component>
   );
 }

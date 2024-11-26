@@ -1,5 +1,5 @@
 import React from 'react';
-import { TopBarPropsType } from './types';
+import type { TopBarPropsType } from './types';
 import { container } from './index.styles';
 
 export default function TopBar({

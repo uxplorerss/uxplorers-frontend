@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react';
-import { InputPropsType } from './types';
+import type { ChangeEvent } from 'react';
+import type { InputPropsType } from './index.types';
 import { useInput } from './index.styles';
 import { useTheme } from '@emotion/react';
 
@@ -8,6 +8,8 @@ export default function Input({
   onValueChange,
   type = 'text',
   error,
+  css,
+  as: Component = 'input',
   ...rest
 }: InputPropsType) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,8 +18,8 @@ export default function Input({
   const theme = useTheme();
 
   return (
-    <input
-      css={useInput(theme)}
+    <Component
+      css={[useInput(theme), ...(css ? [css] : [])]}
       type={type}
       value={value}
       onChange={handleChange}

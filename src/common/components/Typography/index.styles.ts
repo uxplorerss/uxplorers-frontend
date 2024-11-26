@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ThemeType } from '../../../theme';
+import type { ThemeType } from '../../../theme';
 import { TypographyVariant } from './index.types';
 
 export const buildTypography = (
@@ -41,6 +41,11 @@ export const buildTypography = (
       fontSize: theme.fontSize.body3,
       lineHeight: theme.lineHeight.body3,
       fontWeight: theme.fontWeight.body3,
+    }),
+    body4: css({
+      fontSize: theme.fontSize.body4,
+      lineHeight: theme.lineHeight.body4,
+      fontWeight: theme.fontWeight.body4,
     }),
     button1: css({
       fontSize: theme.fontSize.button1,
