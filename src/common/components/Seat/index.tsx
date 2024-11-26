@@ -2,20 +2,12 @@ import { css } from '@emotion/react';
 import occupiedIcon from '../../../assets/occupied_seat.svg';
 import normalIcon from '../../../assets/normal_seat.svg';
 import selectedIcon from '../../../assets/selected_seat.svg';
-import { SeatPropsType } from './types';
+import { SeatPropsType } from '../../Seats/Seat/types';
 import { useEffect } from 'react';
 
-const Seat = ({ attr, num, onSelectSeat, seats }: SeatPropsType) => {
+const Seat = ({ attr, num, onSelectSeat }: SeatPropsType) => {
   const seatClickHandler = () => {
-    const now = seats.find((seat) => seat.id === num);
-    if (now !== undefined) {
-      if (now.status === 'SELECTED') {
-        now.status = 'NORMAL';
-      } else {
-        now.status = 'SELECTED';
-      }
-      onSelectSeat([...seats]);
-    }
+    onSelectSeat(num);
   };
   switch (attr) {
     case 'OCCUPIED':

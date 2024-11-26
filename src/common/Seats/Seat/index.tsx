@@ -3,8 +3,12 @@ import occupiedIcon from '../../../assets/occupied_seat.svg';
 import normalIcon from '../../../assets/normal_seat.svg';
 import selectedIcon from '../../../assets/selected_seat.svg';
 import { SeatPropsType } from './types';
+import { useEffect } from 'react';
 
-const Seat = ({ attr, num, handler }: SeatPropsType) => {
+const Seat = ({ attr, num, onSelectSeat }: SeatPropsType) => {
+  const seatClickHandler = () => {
+    onSelectSeat(num);
+  };
   switch (attr) {
     case 'OCCUPIED':
       return (
@@ -16,7 +20,7 @@ const Seat = ({ attr, num, handler }: SeatPropsType) => {
       return (
         <div
           onClick={() => {
-            handler(num);
+            seatClickHandler();
           }}
           css={css`
             display: flex;
@@ -41,7 +45,7 @@ const Seat = ({ attr, num, handler }: SeatPropsType) => {
       return (
         <div
           onClick={() => {
-            handler(num);
+            seatClickHandler();
           }}
           css={css`
             display: flex;

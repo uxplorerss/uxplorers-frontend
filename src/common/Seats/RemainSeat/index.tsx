@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { remainSeatPropsType } from './types';
 import refreshIcon from '../../../assets/refresh.svg';
 
-export const ReaminSeat = ({ num }: remainSeatPropsType) => {
+const ReaminSeat = ({ num }: remainSeatPropsType) => {
   return (
     <>
       <div>잔여 {num} / 28석</div>
@@ -11,3 +11,5 @@ export const ReaminSeat = ({ num }: remainSeatPropsType) => {
     </>
   );
 };
+
+export default ReaminSeat;
