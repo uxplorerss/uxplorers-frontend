@@ -6,6 +6,7 @@ import Flex from '../common/components/Flex';
 import { css } from '@emotion/react';
 import theme from '../theme';
 import { Typography } from '../common/components';
+import ViewportContainer from '../common/components/ViewportContainer';
 
 const meta = {
   title: 'common/StickyFooter',
@@ -20,14 +21,7 @@ export const Default: Story = {
     layout: 'fullscreen',
   },
   decorators: (Story) => (
-    <Flex
-      direction="column"
-      width="100%"
-      boxSizing="border-box"
-      cx={{ minHeight: '100vh' }}
-      justify="start"
-      align="center"
-    >
+    <ViewportContainer>
       <Typography variant="body3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -79,7 +73,7 @@ export const Default: Story = {
         mattis ullamcorper velit sed ullamcorper morbi tincidunt.s
       </Typography>
       <Story />
-    </Flex>
+    </ViewportContainer>
   ),
   args: {
     children: (

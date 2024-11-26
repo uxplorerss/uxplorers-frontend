@@ -5,6 +5,7 @@ import Flex from '../common/components/Flex';
 import StikcyHeader from '../common/components/StickyHeader';
 import LeftArrowIcon from '../assets/LeftArrowIcon.svg?react';
 import theme from '../theme';
+import ViewportContainer from '../common/components/ViewportContainer';
 
 const meta = {
   title: 'common/StikcyHeader',
@@ -20,14 +21,7 @@ export const Default: Story = {
     layout: 'fullscreen',
   },
   decorators: (Story) => (
-    <Flex
-      direction="column"
-      width="100%"
-      boxSizing="border-box"
-      cx={{ minHeight: '100vh' }}
-      justify="start"
-      align="center"
-    >
+    <ViewportContainer>
       <Story />
       <Typography variant="body3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -79,7 +73,7 @@ export const Default: Story = {
         pellentesque dignissim enim sit amet venenatis. Sed lectus vestibulum
         mattis ullamcorper velit sed ullamcorper morbi tincidunt.s
       </Typography>
-    </Flex>
+    </ViewportContainer>
   ),
   args: {
     children: (
