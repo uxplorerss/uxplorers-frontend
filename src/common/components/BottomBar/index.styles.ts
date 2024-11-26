@@ -1,38 +1,23 @@
-// Emotion styles in object format
-
 import { css } from '@emotion/react';
+import { buildFlex } from '../Flex/index.styles';
 
-export const bottomBar = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '0 16px',
-  height: '60px',
-  backgroundColor: '#fff',
-  borderTop: '1px solid #ddd',
-  boxShadow: '0 -2px 5px rgba(0, 0, 0, 0.1)',
-  position: 'fixed',
-  bottom: '0',
-  width: '100%',
-});
+export const bottomBar = css([
+  buildFlex({
+    justify: 'space-between',
+    align: 'center',
+    direction: 'row',
+    wrap: 'nowrap',
+    gap: '0',
+    width: '100%',
+  }),
+  {
+    padding: '10px 0 33px 0',
+    borderTop: '1px solid #C7C7C7',
+    boxSizing: 'border-box',
+  },
+]);
 
-export const left = css({
-  flex: 1,
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-});
-
-export const center = css({
-  flex: 1,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
-
-export const right = css({
-  flex: 1,
-  display: 'flex',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
+export const buttonContainer = css({
+  flex: 'auto',
+  flexDirection: 'column',
 });

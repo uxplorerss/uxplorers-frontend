@@ -1,16 +1,13 @@
-import { bottomBar, center, left, right } from './index.styles';
-import { BottomBarPropsType } from './types';
+import Flex from '../Flex';
+import { bottomBar, buttonContainer } from './index.styles';
+import type { BottomBarPropsType } from './types';
 
-function BottomBar({
-  leftContent,
-  centerContent,
-  rightContent,
-}: BottomBarPropsType) {
+function BottomBar({ leftSlot, centerSlot, rightSlot }: BottomBarPropsType) {
   return (
     <div css={bottomBar}>
-      <div css={left}>{leftContent}</div>
-      <div css={center}>{centerContent}</div>
-      <div css={right}>{rightContent}</div>
+      <Flex css={buttonContainer}>{leftSlot}</Flex>
+      <Flex css={buttonContainer}>{centerSlot}</Flex>
+      <Flex css={buttonContainer}>{rightSlot}</Flex>
     </div>
   );
 }

@@ -1,19 +1,11 @@
 import type { Preview } from '@storybook/react';
 
-import { Global, css, ThemeProvider } from '@emotion/react';
+import { ThemeProvider } from '@emotion/react';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import FontProvider from '../src/common/components/FontProvider';
+import theme from '../src/theme';
 import React from 'react';
-
-/* TODO: replace with your own global styles, or remove */
-const GlobalStyles = () => (
-  <Global
-    styles={css`
-      body {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }
-    `}
-  />
-);
+import GlobalStyles from './GlobalStyles';
 
 const preview: Preview = {
   parameters: {
@@ -29,6 +21,16 @@ const preview: Preview = {
     withThemeFromJSXProvider({
       GlobalStyles,
     }),
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+    (Story) => (
+      <FontProvider>
+        <Story />
+      </FontProvider>
+    ),
   ],
 };
 
