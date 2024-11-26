@@ -2,15 +2,22 @@ import { useState } from "react";
 import { Container, SearchBox, LocationList, LocationItem, LocationName, InfoIcon } from "./index.styles";
 import TopBar from "../../../common/components/TopBar";
 import Input from "../../../common/components/Input";
+import terminalData from "../../../constants/terminal.json";
 
+interface Terminal {
+  tmnCd: number | string;
+  tmnNm: string;
+}
 
 function LocationSelectPage() {
   const [searchKeyword, setSearchKeyword] = useState("");
+
+  const terminals: Terminal[] = terminalData.response.body.items.item;
+
+  const filteredTerminals = terminals.filter(terminal => 
+    terminal.tmnNm.includes(searchKeyword)
+  )
   
-  const locations = [
-    "부산", "울산", "서울", "서울남부", "순천", "인천", "인천공항T1", "인천공항T2", 
-    "김해시청", "광주시청"
-  ];
 
   return (
     <div css={Container}>
@@ -31,11 +38,9 @@ function LocationSelectPage() {
       </div>
 
       <div css={LocationList}>
-        {locations
-          .filter(loc => loc.includes(searchKeyword))
-          .map((location, index) => (
-            <div css ={LocationItem} key={index}>
-              <div css ={LocationName}>{location}</div>
+        {filteredTerminals.map((terminal) => (
+            <div css ={LocationItem} key={terminal.tmnCd}>
+              <div css ={LocationName}>{terminal.tmnNm}</div>
               <div css ={InfoIcon}>i</div>
             </div>
           ))}
