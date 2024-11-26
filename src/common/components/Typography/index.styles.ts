@@ -63,7 +63,7 @@ export const buildTypography = (
   return styles[variant];
 };
 
-export const buildTextPosition = (textAlign: CSSProperties['textAlign']) =>
+export const buildTextPosition = (textAlign?: CSSProperties['textAlign']) =>
   css({
     textAlign,
   });

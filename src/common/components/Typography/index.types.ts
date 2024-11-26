@@ -17,6 +17,6 @@ export interface TypographyPropsType {
   variant: TypographyVariant;
   children: ReactNode;
   as?: ElementType;
-  textAlign: CSSProperties['textAlign'];
+  textAlign?: CSSProperties['textAlign'];
   cx?: Interpolation<Theme>;
 }
