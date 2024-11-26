@@ -7,12 +7,12 @@ export default function Typography({
   variant,
   children,
   as: Component = 'span',
-  css,
+  cx,
 }: TypographyPropsType) {
   const theme = useTheme();
 
   return (
-    <Component css={[buildTypography(theme, variant), css]}>
+    <Component css={[buildTypography(theme, variant), cx]}>
       {children}
     </Component>
   );

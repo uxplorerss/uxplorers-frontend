@@ -17,5 +17,5 @@ export interface TypographyPropsType {
   variant: TypographyVariant;
   children: ReactNode;
   as?: ElementType;
-  css?: Interpolation<Theme>;
+  cx?: Interpolation<Theme>;
 }

@@ -5,6 +5,6 @@ export interface InputPropsType extends ComponentPropsWithoutRef<'input'> {
   value: string;
   onValueChange: (value: string) => void;
   error?: string;
-  css?: Interpolation<Theme>;
+  cx?: Interpolation<Theme>;
   as?: ElementType;
 }

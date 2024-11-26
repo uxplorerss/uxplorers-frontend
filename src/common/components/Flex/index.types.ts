@@ -14,6 +14,6 @@ export interface FlexPropsType extends ComponentPropsWithoutRef<'div'> {
   gap?: CSSProperties['gap'];
   wrap?: CSSProperties['flexWrap'];
   width?: CSSProperties['width'];
-  css?: Interpolation<Theme>;
+  cx?: Interpolation<Theme>;
   as?: ElementType;
 }

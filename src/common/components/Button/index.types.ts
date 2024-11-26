@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 export interface ButtonPropsType
   extends React.ComponentPropsWithoutRef<'button'> {
   children: React.ReactNode;
-  css?: Interpolation<Theme>;
+  cx?: Interpolation<Theme>;
   as?: ElementType;
 }
 
