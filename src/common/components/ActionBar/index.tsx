@@ -21,7 +21,7 @@ export default function ActionBar({
       <Typography
         as="p"
         variant="body4"
-        css={css({
+        cx={css({
           color: theme.colors.gray[4],
         })}
       >
