@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { ThemeType } from '../../../theme';
 import { TypographyVariant } from './index.types';
+import { CSSProperties } from 'react';
 
 export const buildTypography = (
   theme: ThemeType,
@@ -61,3 +62,8 @@ export const buildTypography = (
 
   return styles[variant];
 };
+
+export const buildTextPosition = (textAlign: CSSProperties['textAlign']) =>
+  css({
+    textAlign,
+  });
