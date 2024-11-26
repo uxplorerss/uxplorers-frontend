@@ -49,11 +49,15 @@ function TicketsPage() {
               destination: value,
             });
           }}  
+          onClick={() => {
+            navigate({ to: '/booking/location' });
+          }}
         />
         <div css={dateSelector}>
-          <div css={dateBox}>
           <Input 
-            value="11월 22일 (금)"
+            css={dateBox} 
+            placeholder="날짜 선택"
+            value=""
             onValueChange={(value: string) => {
               setCheck({
                 ...check,
@@ -61,17 +65,17 @@ function TicketsPage() {
               });
             }}
           />
-          </div>
-          <div css={dateBox}>
-            <Input 
-            value="+왕복 선택" 
+          <Input 
+            css={dateBox}
+            placeholder="+왕복 선택"
+            value=""
             onValueChange={(value: string ) => {
               setCheck({
                 ...check,
                 roundTrip: value === "왕복",
               });
-            }}/>
-          </div>
+            }}
+          />
         </div>
         <button css={searchButton}>조회하기</button>
         </main>

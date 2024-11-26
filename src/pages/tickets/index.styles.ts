@@ -23,7 +23,6 @@ export const locationSelector = css({
 
 export const locationBox = css({
   display: 'flex',
-  flexDirection: 'column',
   gap: '8px',
   
   '& span': {
@@ -40,14 +39,13 @@ export const locationBox = css({
 
 export const dateSelector = css({
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
     gap: '12px',
     marginTop: '8px',
 });
 
 export const dateBox = css({
-  display: 'flex',
-  width: '100%',
+  width: '50%',
 });
 
 export const addDateButton = css({
