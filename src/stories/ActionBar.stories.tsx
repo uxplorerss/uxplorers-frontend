@@ -5,6 +5,7 @@ import theme from '../theme';
 import { Typography } from '../common/components';
 import Flex from '../common/components/Flex';
 import MainButton from '../common/components/MainButton';
+import StickyFooter from '../common/components/StickyFooter';
 
 const meta = {
   title: 'common/ActionBar',
@@ -138,15 +139,9 @@ export const PaymentActionWithQuantityOnBottom: Story = {
         pellentesque dignissim enim sit amet venenatis. Sed lectus vestibulum
         mattis ullamcorper velit sed ullamcorper morbi tincidunt.
       </Typography>
-      <div
-        css={{
-          position: 'sticky',
-          bottom: 0,
-          width: '100%',
-        }}
-      >
+      <StickyFooter>
         <Story />
-      </div>
+      </StickyFooter>
     </Flex>
   ),
   args: {
