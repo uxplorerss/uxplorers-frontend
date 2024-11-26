@@ -3,7 +3,10 @@ import { StikcyHeaderPropsType } from './index.types';
 import { buildStickyHeader } from './index.styles';
 import { useTheme } from '@emotion/react';
 
-export default function StikcyHeader({ children }: StikcyHeaderPropsType) {
+export default function StikcyHeader({
+  children,
+  as: Component = 'header',
+}: StikcyHeaderPropsType) {
   const theme = useTheme();
-  return <header css={buildStickyHeader(theme)}>{children}</header>;
+  return <Component css={buildStickyHeader(theme)}>{children}</Component>;
 }
