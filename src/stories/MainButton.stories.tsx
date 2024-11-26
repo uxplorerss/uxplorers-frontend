@@ -32,7 +32,7 @@ export const Payment: Story = {
       <Flex gap="20px">
         <span>30,200원 결제하기</span>
         <Flex
-          css={css({
+          cx={css({
             borderRadius: theme.radii.circle,
             width: '27px',
             height: '27px',
