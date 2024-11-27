@@ -5,4 +5,8 @@ import { css } from '@emotion/react';
 export const globalStyle = css`
   ${fontStyles}
   ${normalizedStyles}
+
+  * {
+    box-sizing: border-box;
+  }
 `;
