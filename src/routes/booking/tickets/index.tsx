@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { Card, TopBar, Typography } from '../../../common/components';
 import { css } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
-import FavIcon from '../../../assets/favoriteStarIcon.svg';
+import FavIcon from '../../../assets/FavoriteStarIcon.svg';
 import { useEffect, useState } from 'react';
 import {
   BusTicket,
