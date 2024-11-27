@@ -1,0 +1,46 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL SERVICE."
+    },
+    "body": {
+      "items": {
+        "item": [
+          {
+            "gradeId": 1,
+            "gradeNm": "우등"
+          },
+          {
+            "gradeId": 2,
+            "gradeNm": "고속"
+          },
+          {
+            "gradeId": 3,
+            "gradeNm": "심야우등"
+          },
+          {
+            "gradeId": 4,
+            "gradeNm": "심야고속"
+          },
+          {
+            "gradeId": 5,
+            "gradeNm": "일반"
+          },
+          {
+            "gradeId": 6,
+            "gradeNm": "일반심야"
+          },
+          {
+            "gradeId": 7,
+            "gradeNm": "프리미엄"
+          },
+          {
+            "gradeId": 8,
+            "gradeNm": "심야프리미엄"
+          }
+        ]
+      }
+    }
+  }
+}

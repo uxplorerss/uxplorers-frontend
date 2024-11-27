@@ -25,6 +25,8 @@ export const Route = createRootRoute({
             <br />
             <Link to="/booking">예매하기</Link>
             <br />
+            <Link to="/booking/tickets">가는날 / 오는 날 버스 선택</Link>
+            <br />
             <Link to="/account">마이페이지</Link>
           </div>
           <hr />
