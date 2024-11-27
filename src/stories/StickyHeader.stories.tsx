@@ -1,96 +1,29 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import ActionBar from '../common/components/ActionBar';
-import { css } from '@emotion/react';
-import theme from '../theme';
-import { Typography } from '../common/components';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { Button, TopBar, Typography } from '../common/components';
 import Flex from '../common/components/Flex';
-import MainButton from '../common/components/MainButton';
-import StickyFooter from '../common/components/StickyFooter';
+import StikcyHeader from '../common/components/StickyHeader';
+import LeftArrowIcon from '../assets/LeftArrowIcon.svg?react';
+import theme from '../theme';
+import ViewportContainer from '../common/components/ViewportContainer';
 
 const meta = {
-  title: 'common/ActionBar',
-  component: ActionBar,
+  title: 'common/StikcyHeader',
+  component: StikcyHeader,
 } satisfies Meta;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const PaymentAction: Story = {
-  args: {
-    bodySlot: (
-      <Flex
-        justify="space-between"
-        align="start"
-        boxSizing="border-box"
-        cx={css({ width: '100%' })}
-      >
-        <Flex direction="column" justify="start" align="start">
-          <Typography
-            variant="title4"
-            cx={{
-              color: theme.colors.gray.black,
-            }}
-          >
-            총 결제금액
-          </Typography>
-          <Typography
-            variant="body3"
-            cx={{
-              color: theme.colors.gray[4],
-            }}
-          >
-            일반 1, 초등생 1
-          </Typography>
-        </Flex>
-        <Typography
-          variant="title1"
-          cx={{
-            color: theme.colors.gray.black,
-          }}
-        >
-          32,200원
-        </Typography>
-      </Flex>
-    ),
-    actionSlot: <MainButton>결제하기</MainButton>,
-  },
-};
-
-export const PaymentActionWithQuantity: Story = {
-  args: {
-    actionSlot: (
-      <MainButton>
-        <Flex gap="20px">
-          <span>30,200원 결제하기</span>
-          <Flex
-            cx={css({
-              borderRadius: theme.radii.circle,
-              width: '27px',
-              height: '27px',
-              backgroundColor: theme.colors.gray.white,
-              color: theme.colors.gray.black,
-            })}
-          >
-            <Typography variant="body3">3</Typography>
-          </Flex>
-        </Flex>
-      </MainButton>
-    ),
-  },
-};
-
-export const PaymentActionWithQuantityOnBottom: Story = {
+export const Default: Story = {
   parameters: {
     layout: 'fullscreen',
   },
   decorators: (Story) => (
-    <Flex
-      direction="column"
-      justify="start"
-      align="center"
-      cx={{ minHeight: '100vh' }}
-    >
-      <Typography variant="body3" cx={{ flex: 1 }}>
+    <ViewportContainer>
+      <Story />
+      <Typography variant="body3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -138,31 +71,29 @@ export const PaymentActionWithQuantityOnBottom: Story = {
         Malesuada bibendum arcu vitae elementum curabitur vitae nunc.
         Suspendisse sed nisi lacus sed viverra tellus. Ut placerat orci nulla
         pellentesque dignissim enim sit amet venenatis. Sed lectus vestibulum
-        mattis ullamcorper velit sed ullamcorper morbi tincidunt.
+        mattis ullamcorper velit sed ullamcorper morbi tincidunt.s
       </Typography>
-      <StickyFooter>
-        <Story />
-      </StickyFooter>
-    </Flex>
+    </ViewportContainer>
   ),
   args: {
-    actionSlot: (
-      <MainButton>
-        <Flex gap="20px">
-          <span>30,200원 결제하기</span>
-          <Flex
-            cx={css({
-              borderRadius: theme.radii.circle,
-              width: '27px',
-              height: '27px',
-              backgroundColor: theme.colors.gray.white,
-              color: theme.colors.gray.black,
-            })}
-          >
-            <Typography variant="body3">3</Typography>
-          </Flex>
-        </Flex>
-      </MainButton>
+    children: (
+      <TopBar
+        leftSlot={
+          <Button>
+            <LeftArrowIcon />
+          </Button>
+        }
+        centerSlot={
+          <Typography variant="body2" cx={{ fontSize: '1.125rem' }}>
+            결제하기
+          </Typography>
+        }
+        rightSlot={
+          <Button cx={{ color: theme.colors.primary.base }}>
+            <Typography variant="title4">결제수단</Typography>
+          </Button>
+        }
+      />
     ),
   },
 };
