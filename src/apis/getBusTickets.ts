@@ -25,7 +25,7 @@ export const getBusNowTimeAPI = async (fromTmnId: string, toTmnId: string) => {
 };
 
 // ===
-interface BusTicket {
+export interface BusTicket {
   arrPlaceNm: string;
   arrPlandTime: number;
   charge: number;
