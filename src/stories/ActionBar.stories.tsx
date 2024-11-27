@@ -20,7 +20,8 @@ export const PaymentAction: Story = {
       <Flex
         justify="space-between"
         align="start"
-        cx={css({ width: '100%', boxSizing: 'border-box' })}
+        boxSizing="border-box"
+        cx={css({ width: '100%' })}
       >
         <Flex direction="column" justify="start" align="start">
           <Typography
