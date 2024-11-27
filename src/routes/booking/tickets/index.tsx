@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Card, TopBar, Typography } from '../../../common/components';
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
 import { useEffect, useState } from 'react';
@@ -9,6 +9,14 @@ import {
   getBusNowTimeAPI,
   getBusTicketsAPI,
 } from '../../../apis/getBusTickets';
+
+const container = (theme: Theme) => css`
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${theme.colors.gray[3]};
+`;
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -21,7 +29,7 @@ function RouteComponent() {
 
   useEffect(() => {
     //console.log(selectTime);
-    getBusNowTimeAPI('010', '700').then((data) => console.log(data));
+    //getBusNowTimeAPI('010', '700').then((data) => console.log(data));
     getBusTicketsAPI('NAEK032', 'NAEK700', '20241128').then((data) => {
       console.log(data);
       setBusTickets(data.response.body.items.item);
@@ -49,31 +57,36 @@ function RouteComponent() {
         }
         rightSlot={<img src={FavIcon} />}
       />
-      <Typography variant="title1" as="p" cx={{ textAlign: 'center' }}>
-        버스를 선택하세요
-      </Typography>
 
-      <div css={css({ display: 'flex', justifyContent: 'space-between' })}>
-        <button>시간: 오전 9:00 이후</button>
-        <button>검색조건</button>
-      </div>
+      <section css={(theme) => container(theme)}>
+        <Typography variant="title1" as="p" cx={{ textAlign: 'center' }}>
+          버스를 선택하세요
+        </Typography>
 
-      {busTickets &&
-        busTickets.map((busTicket, index) => (
-          <Card
-            key={index}
-            body={
-              <>
-                <div>{busTicket.arrPlaceNm}</div>
-                <div>{busTicket.depPlaceNm}</div>
-                <div>{busTicket.gradeNm}</div>
-                <div>{busTicket.charge}</div>
-                <div>{busTicket.depPlandTime}</div>
-                <div>{busTicket.arrPlandTime}</div>
-              </>
-            }
-          ></Card>
-        ))}
+        <div css={css({ display: 'flex', justifyContent: 'space-between' })}>
+          <button>시간: 오전 9:00 이후</button>
+          <button>검색조건</button>
+        </div>
+
+        {busTickets &&
+          busTickets.map((busTicket, index) => (
+            <>
+              <Card
+                key={index}
+                body={
+                  <>
+                    <div>{busTicket.arrPlaceNm}</div>
+                    <div>{busTicket.depPlaceNm}</div>
+                    <div>{busTicket.gradeNm}</div>
+                    <div>{busTicket.charge}</div>
+                    <div>{busTicket.depPlandTime}</div>
+                    <div>{busTicket.arrPlandTime}</div>
+                  </>
+                }
+              />
+            </>
+          ))}
+      </section>
     </>
   );
 }
