@@ -23,7 +23,6 @@ import { buildTypography } from '../../common/components/Typography/index.styles
 import { container as buttonContainer } from '../../common/components/Button/index.styles';
 import theme from '../../theme';
 import { css } from '@emotion/react';
-import { TERMINAL_REGIONS } from '../../constants/terminal_region';
 
 function BookingPage() {
   const navigate = useNavigate();
@@ -81,7 +80,7 @@ function BookingPage() {
             });
           }}
           onClick={() => {
-            navigate({ to: '/booking/location' });
+            navigate({ to: '/booking/departLocation' });
           }}
         />
         <Input
@@ -95,7 +94,7 @@ function BookingPage() {
             });
           }}
           onClick={() => {
-            navigate({ to: '/booking/location' });
+            navigate({ to: '/booking/arrivalLocation' });
           }}
         />
         <div css={dateSelector}>
