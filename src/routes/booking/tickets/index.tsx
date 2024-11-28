@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { Card, TopBar, Typography } from '../../../common/components';
+import { Button, TopBar, Typography } from '../../../common/components';
 import { css, Theme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
@@ -31,7 +31,6 @@ function RouteComponent() {
   const { searchQuery } = useSearchQueryStore((state) => state);
 
   useEffect(() => {
-    //console.log(selectTime);
     //getBusNowTimeAPI('010', '700').then((data) => console.log(data));
     getBusTicketsAPI(
       searchQuery.startId || 'NAEK032',
@@ -78,12 +77,18 @@ function RouteComponent() {
         {busTickets &&
           busTickets.map((busTicket, index) => (
             <>
-              <Card
+              <Button
                 key={index}
-                body={Object.values(busTicket).map((value, index) => (
+                cx={(theme) => css`
+                  background-color: ${theme.colors.gray.white};
+                  padding: 16px;
+                  border-radius: 20px;
+                `}
+              >
+                {Object.values(busTicket).map((value, index) => (
                   <div key={index}>{value}</div>
                 ))}
-              />
+              </Button>
             </>
           ))}
       </section>

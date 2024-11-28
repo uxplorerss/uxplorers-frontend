@@ -77,7 +77,6 @@ export const getBusTicketsAPI = async (
   };
 
   const queryString = new URLSearchParams(queryStringParams).toString();
-  console.log(queryString);
 
   const response = await fetch(
     `/uxplorers-frontend/api/ExpBusInfoService/getStrtpntAlocFndExpbusInfo?${queryString}`,
