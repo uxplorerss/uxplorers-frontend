@@ -1,6 +1,7 @@
 import TopBar from '../../common/components/TopBar';
 import BottomBar from '../../common/components/BottomBar';
 import Input from '../../common/components/Input';
+import MainButton from '../../common/components/MainButton';
 import {
   container,
   mainContent,
@@ -14,6 +15,15 @@ import { useNavigate } from '@tanstack/react-router';
 import LogoIcon from '../../common/components/LogoIcon';
 import Button from '../../common/components/Button';
 import Typography from '../../common/components/Typography';
+import QRIcon from '../../assets/QRIcon.svg?react';
+import TicketIcon from '../../assets/TicketIcon.svg?react';
+import PersonIcon from '../../assets/PersonIcon.svg?react';
+import { useTheme } from '@emotion/react';
+import { buildTypography } from '../../common/components/Typography/index.styles';
+import { container as buttonContainer } from '../../common/components/Button/index.styles';
+import theme from '../../theme';
+import { css } from '@emotion/react';
+import { TERMINAL_REGIONS } from '../../constants/terminal_region';
 
 function BookingPage() {
   const navigate = useNavigate();
@@ -50,9 +60,14 @@ function BookingPage() {
         }
       />
 
-         <Typography variant="title1" as="p">
-           어디로 갈까요?
-         </Typography>
+      <div css={css`
+        text-align: center;
+        margin: 24px 0;
+      `}>
+        <Typography variant="title1" as="p">
+          어디로 갈까요?
+        </Typography>
+      </div>
 
       <main css={mainContent}>
         <Input
@@ -107,22 +122,36 @@ function BookingPage() {
             }}
           />
         </div>
-        <button
-          css={searchButton}
+        <MainButton 
+          children="조회하기"
+          disabled={!isSearchable()} 
           onClick={() => {
             if (isSearchable()) {
               navigate({ to: '/booking/tickets' });
             }
           }}
-        >
-          조회하기
-        </button>
+        />
       </main>
 
       <BottomBar
-        leftSlot={<span>승차권 확인</span>}
-        centerSlot={<span>예매하기</span>}
-        rightSlot={<span>마이페이지</span>}
+        leftSlot={
+          <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <QRIcon />
+            <span>내 티켓</span>
+          </Button>
+        }
+        centerSlot={
+          <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <TicketIcon />
+            <span>예매하기</span>
+          </Button>
+        }
+        rightSlot={
+          <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <PersonIcon />
+            <span>마이페이지</span>
+          </Button>
+        }
       />
     </div>
   );
