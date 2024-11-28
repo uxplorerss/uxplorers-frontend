@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { seat } from '../../../common/components/Seats/SelectSeat/types';
 import { SelectSeat } from '../../../common/components/Seats/SelectSeat';

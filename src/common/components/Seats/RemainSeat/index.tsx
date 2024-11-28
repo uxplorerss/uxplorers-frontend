@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-
 import { remainSeatPropsType } from './types';
 import RefreshIcon from '../../../../assets/refresh.svg?react';
 

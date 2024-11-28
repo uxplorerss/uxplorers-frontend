@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-
 import OccupiedIcon from '../../../../assets/occupied_seat.svg?react';
 import NormalIcon from '../../../../assets/normal_seat.svg?react';
 import SelectedIcon from '../../../../assets/selected_seat.svg?react';
