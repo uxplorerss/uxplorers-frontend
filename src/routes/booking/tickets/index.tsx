@@ -10,7 +10,8 @@ import {
   getBusTicketsAPI,
 } from '../../../apis/getBusTickets';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
-import { convertYYYYMMDD } from '../../../utils/convertYYYYMMDD';
+import { convertMMDDday, convertYYYYMMDD } from '../../../utils/convertDate';
+import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -57,8 +58,11 @@ function RouteComponent() {
         }
         centerSlot={
           <div>
-            <div>동서울 → 부산해운대</div>
-            <div>11월 27일 (수)</div>
+            <div>
+              {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
+              {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+            </div>
+            <div>{convertMMDDday(searchQuery.startDate)}</div>
           </div>
         }
         rightSlot={<img src={FavIcon} />}
