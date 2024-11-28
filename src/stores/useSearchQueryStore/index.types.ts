@@ -1,7 +1,12 @@
-import { SearchQuery } from '../../types';
+export interface SearchQuery {
+  startId?: string;
+  destId?: string;
+  startDate?: Date;
+  destDate?: Date;
+}
 
 export interface SearchQueryState {
   searchQuery: SearchQuery;
-  setSearchQuery: (query: SearchQuery) => void;
+  setSearchQuery: (query: Partial<SearchQuery>) => void;
   resetSearchQuery: () => void;
 }
