@@ -9,6 +9,7 @@ export default function Flex({
   gap = '0',
   wrap = 'nowrap',
   width = 'auto',
+  boxSizing = 'content-box',
   as: Component = 'div',
   cx,
   ...rest
@@ -23,6 +24,7 @@ export default function Flex({
           gap,
           wrap,
           width,
+          boxSizing,
         }),
         cx,
       ]}
