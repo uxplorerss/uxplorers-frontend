@@ -8,6 +8,7 @@ export const buildFlex = ({
   wrap,
   gap,
   width,
+  boxSizing,
 }: FlexPropsType) =>
   css({
     display: 'flex',
@@ -17,4 +18,5 @@ export const buildFlex = ({
     flexWrap: wrap,
     gap,
     width,
+    boxSizing,
   });

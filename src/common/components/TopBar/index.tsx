@@ -1,6 +1,7 @@
 import React from 'react';
 import type { TopBarPropsType } from './types';
 import { container } from './index.styles';
+import Flex from '../Flex';
 
 export default function TopBar({
   exitButton,
@@ -9,13 +10,18 @@ export default function TopBar({
   rightSlot,
 }: TopBarPropsType) {
   return (
-    <div css={container}>
+    <Flex
+      boxSizing="border-box"
+      justify="space-between"
+      width="100%"
+      css={container}
+    >
       <div>
         {!!exitButton && exitButton}
         {leftSlot}
       </div>
       <div>{centerSlot}</div>
       <div>{rightSlot}</div>
-    </div>
+    </Flex>
   );
 }

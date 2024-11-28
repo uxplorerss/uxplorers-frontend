@@ -1,4 +1,5 @@
-import type { ElementType, ReactNode } from 'react';
+import type { Interpolation, Theme } from '@emotion/react';
+import type { CSSProperties, ElementType, ReactNode } from 'react';
 
 export type TypographyVariant =
   | 'title1'
@@ -16,4 +17,6 @@ export interface TypographyPropsType {
   variant: TypographyVariant;
   children: ReactNode;
   as?: ElementType;
+  textAlign?: CSSProperties['textAlign'];
+  cx?: Interpolation<Theme>;
 }
