@@ -9,6 +9,8 @@ import {
   getBusNowTimeAPI,
   getBusTicketsAPI,
 } from '../../../apis/getBusTickets';
+import useSearchQueryStore from '../../../stores/useSearchQueryStore';
+import { convertYYYYMMDD } from '../../../utils/convertYYYYMMDD';
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -24,14 +26,19 @@ export const Route = createFileRoute('/booking/tickets/')({
 
 function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
-  //const selectTime = new Date(`AM 9:00`);
   const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
+
+  const { searchQuery } = useSearchQueryStore((state) => state);
 
   useEffect(() => {
     //console.log(selectTime);
     //getBusNowTimeAPI('010', '700').then((data) => console.log(data));
-    getBusTicketsAPI('NAEK032', 'NAEK700', '20241128').then((data) => {
-      console.log(data);
+    getBusTicketsAPI(
+      searchQuery.startId || 'NAEK032',
+      searchQuery.destId || 'NAEK300',
+      convertYYYYMMDD(searchQuery.startDate)
+    ).then((data) => {
+      // console.log(data);
       setBusTickets(data.response.body.items.item);
     });
   }, []);
@@ -39,14 +46,14 @@ function RouteComponent() {
   return (
     <>
       <TopBar
-        exitButton={
+        leftSlot={
           <Link
             onClick={(e) => {
               e.preventDefault();
               history.go(-1);
             }}
           >
-            <img src={LeftArrowIcon} />
+            <img src={LeftArrowIcon} alt="back button" />
           </Link>
         }
         centerSlot={
@@ -73,16 +80,9 @@ function RouteComponent() {
             <>
               <Card
                 key={index}
-                body={
-                  <>
-                    <div>{busTicket.arrPlaceNm}</div>
-                    <div>{busTicket.depPlaceNm}</div>
-                    <div>{busTicket.gradeNm}</div>
-                    <div>{busTicket.charge}</div>
-                    <div>{busTicket.depPlandTime}</div>
-                    <div>{busTicket.arrPlandTime}</div>
-                  </>
-                }
+                body={Object.values(busTicket).map((value, index) => (
+                  <div key={index}>{value}</div>
+                ))}
               />
             </>
           ))}
