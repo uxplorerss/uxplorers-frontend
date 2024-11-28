@@ -7,5 +7,5 @@ export interface seat {
 
 export interface selectSeatPropType {
   seats: seat[];
-  seatClickHandler: Function;
+  onSelectSeat: Function;
 }

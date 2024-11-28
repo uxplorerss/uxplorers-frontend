@@ -1,9 +1,8 @@
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
-
+// export type SeatVariant = 'occupied' | 'seleceted' | 'normal' | 'none';
 export type SeatVariant = 'OCCUPIED' | 'SELECTED' | 'NORMAL' | 'NONE';
 
 export interface SeatPropsType {
   attr: SeatVariant;
   num?: number;
-  onSelectSeat: Function;
+  handleSelectSeat: Function;
 }

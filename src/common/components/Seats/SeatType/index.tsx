@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Flex from '../../components/Flex';
+import Flex from '../../../components/Flex';
 
 const SeatType = () => {
   return (

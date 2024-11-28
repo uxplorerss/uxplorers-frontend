@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { selectSeatPropType } from './types';
-import Seat from '../../components/Seat';
+import Seat from '../Seat';
 
-export const SelectSeat = ({ seats, seatClickHandler }: selectSeatPropType) => {
+export const SelectSeat = ({ seats, onSelectSeat }: selectSeatPropType) => {
   return (
     <>
       <div
@@ -30,8 +30,8 @@ export const SelectSeat = ({ seats, seatClickHandler }: selectSeatPropType) => {
                   key={index}
                   attr={value.status}
                   num={value.id}
-                  onSelectSeat={(num: number) => {
-                    seatClickHandler(num);
+                  handleSelectSeat={(num: number) => {
+                    onSelectSeat(num);
                   }}
                 ></Seat>
               );

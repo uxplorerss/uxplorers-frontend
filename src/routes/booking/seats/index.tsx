@@ -2,19 +2,18 @@ import { createFileRoute } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
 import { useState, useEffect } from 'react';
 
-import { seat } from '../../../common/Seats/SelectSeat/types';
-import { SelectSeat } from '../../../common/Seats/SelectSeat';
+import { seat } from '../../../common/components/Seats/SelectSeat/types';
+import { SelectSeat } from '../../../common/components/Seats/SelectSeat';
 import Flex from '../../../common/components/Flex';
-import SeatType from '../../../common/Seats/SeatType';
-import ReaminSeat from '../../../common/Seats/RemainSeat';
+import SeatType from '../../../common/components/Seats/SeatType';
+import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
 });
 
 function IndexComponent() {
-  const [available, setAvailable] = useState<number>(0);
-  const seatClickHandler = (num: number) => {
+  const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
       if (now.status === 'SELECTED') {
@@ -27,14 +26,16 @@ function IndexComponent() {
   };
 
   //TODO GET /seats/${bus}
-  const initSeats = () => {
+  const initSeats = (): seat[] => {
+    const tmp: seat[] = [];
     seatMap.forEach((value) => {
       if (value !== -1) {
-        setSeats((prev) => [...prev, { id: value, status: 'NORMAL' }]);
+        tmp.push({ id: value, status: 'NORMAL' });
       } else {
-        setSeats((prev) => [...prev, { id: value, status: 'NONE' }]);
+        tmp.push({ id: value, status: 'NONE' });
       }
     });
+    return tmp;
   };
 
   const seatMap: (number | undefined)[] = [
@@ -42,28 +43,16 @@ function IndexComponent() {
     17, -1, 18, 19, 20, -1, 21, 22, 23, -1, 24, 25, 26, 27, 28,
   ];
 
-  const [seats, setSeats] = useState<seat[]>([]);
-
-  //TODO GET /seats/${bus}
-  useEffect(() => {
-    setSeats([]);
-    initSeats();
-  }, []);
-
-  useEffect(() => {
-    setAvailable(
-      seats.filter(
-        (value) => value.status === 'NORMAL' || value.status === 'SELECTED'
-      ).length
-    );
-  }, [seats]);
-
+  const [seats, setSeats] = useState<seat[]>(initSeats());
+  const available = seats.filter(
+    (value) => value.status === 'NORMAL' || value.status === 'SELECTED'
+  ).length;
   return (
     <>
       <TopBar />
       <Flex children={<ReaminSeat num={available} />}></Flex>
       <Flex direction={'column'} children={<SeatType />}></Flex>
-      <SelectSeat seats={seats} seatClickHandler={seatClickHandler} />
+      <SelectSeat seats={seats} onSelectSeat={handleSelectSeat} />
     </>
   );
 }
