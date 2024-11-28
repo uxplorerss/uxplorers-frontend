@@ -10,8 +10,19 @@ export const SearchBox = css({
 });
 
 export const LocationList = css({
+  display: 'grid',
+  gridTemplateColumns: '1fr 2fr',
+  gap: '16px',
   padding: '0 16px',
 });
+
+export const RegionColumn = css`
+  border-right: 1px solid';  // 구분선 추가
+`;
+
+export const TerminalColumn = css`
+  overflow-y: auto;
+`;
 
 export const LocationItem = css({
   display: 'flex',
