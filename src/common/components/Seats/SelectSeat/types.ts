@@ -7,5 +7,5 @@ export interface seat {
 
 export interface selectSeatPropType {
   seats: seat[];
-  onSelectSeat: Function;
+  onSelectSeat: (seatNum: number) => void;
 }

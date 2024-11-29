@@ -4,10 +4,11 @@ import SelectedIcon from '../../../../assets/selected_seat.svg?react';
 import { SeatPropsType } from './types';
 import { seatContainer, seatContent } from './index.styled';
 
-const Seat = ({ attr, num, handleSelectSeat }: SeatPropsType) => {
+const Seat = ({ attr, num, onSelectSeat }: SeatPropsType) => {
   const handleClick = () => {
-    handleSelectSeat(num);
+    onSelectSeat(num!);
   };
+
   switch (attr) {
     case 'OCCUPIED':
       return (

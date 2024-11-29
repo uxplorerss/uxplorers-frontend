@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { selectSeatPropType } from './types';
 import Seat from '../Seat';
 
-export const SelectSeat = ({ seats, onSelectSeat }: selectSeatPropType) => {
+export const SelectSeat = ({ seats, ...props }: selectSeatPropType) => {
   return (
     <>
       <div
@@ -30,10 +30,8 @@ export const SelectSeat = ({ seats, onSelectSeat }: selectSeatPropType) => {
                   key={index}
                   attr={value.status}
                   num={value.id}
-                  handleSelectSeat={(num: number) => {
-                    onSelectSeat(num);
-                  }}
-                ></Seat>
+                  {...props}
+                />
               );
             }
             return <div key={index}>{value.id !== -1 ? value.id : ' '}</div>;
