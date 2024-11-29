@@ -19,4 +19,5 @@ export interface TypographyPropsType {
   as?: ElementType;
   textAlign?: CSSProperties['textAlign'];
   cx?: Interpolation<Theme>;
+  backgroundColor: 'none' | 'primary' | 'gray';
 }
