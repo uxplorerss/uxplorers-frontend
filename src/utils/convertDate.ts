@@ -35,3 +35,10 @@ export function convertAMPMHHMM(datetime: number): string {
     hour12: true,
   });
 }
+
+export function convertMinutesToHHMM(minutes: number): string {
+  const hour = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+
+  return `${hour}시간 ${minute}분`;
+}
