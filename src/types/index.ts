@@ -2,7 +2,7 @@ export interface SearchQuery {
   startId: string;
   destId: string;
   startDate: Date;
-  destDate: Date;
+  destDate?: Date | null;
 }
 
 interface Fee {
