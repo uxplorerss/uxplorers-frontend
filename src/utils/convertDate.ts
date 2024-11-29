@@ -20,3 +20,18 @@ export function convertMMDDday(Date: Date): string {
 
   return `${month}월 ${date}일 (${korDay(day)})`;
 }
+
+export function convertAMPMHHMM(datetime: number): string {
+  const date = new Date(
+    Math.trunc(datetime / 100000000),
+    Math.trunc(datetime / 1000000) % 100,
+    Math.trunc(datetime / 10000) % 100,
+    Math.trunc(datetime / 100) % 100,
+    datetime % 100
+  );
+  return date.toLocaleString('ko-KR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+}

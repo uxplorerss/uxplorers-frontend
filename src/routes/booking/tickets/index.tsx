@@ -10,8 +10,13 @@ import {
   getBusTicketsAPI,
 } from '../../../apis/getBusTickets';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
-import { convertMMDDday, convertYYYYMMDD } from '../../../utils/convertDate';
+import {
+  convertAMPMHHMM,
+  convertMMDDday,
+  convertYYYYMMDD,
+} from '../../../utils/convertDate';
 import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
+import useForwardBusListStore from '../../../stores/useTowardBusListStore';
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -30,6 +35,7 @@ function RouteComponent() {
   const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
 
   const { searchQuery } = useSearchQueryStore((state) => state);
+  const { forwardBusList, concat } = useForwardBusListStore((state) => state);
 
   useEffect(() => {
     //getBusNowTimeAPI('010', '700').then((data) => console.log(data));
@@ -37,14 +43,22 @@ function RouteComponent() {
       searchQuery.startId || 'NAEK032',
       searchQuery.destId || 'NAEK300',
       convertYYYYMMDD(searchQuery.startDate)
-    ).then((data) => {
-      // console.log(data);
-      setBusTickets(data.response.body.items.item);
-    });
+    )
+      .then((data) => {
+        // console.log(data);
+        setBusTickets(data.response.body.items.item);
+
+        // TODO: 전역 상태에 넣기
+        //concat(data.response.body.items.item);
+        // 기본 adults 요금, teens 요금은 20% 할인, children 요금은 50% 할인
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
-    <>
+    <div style={{ userSelect: 'none' }}>
       <TopBar
         leftSlot={
           <Link
@@ -87,15 +101,33 @@ function RouteComponent() {
                   background-color: ${theme.colors.gray.white};
                   padding: 16px;
                   border-radius: 20px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
                 `}
               >
-                {Object.values(busTicket).map((value, index) => (
-                  <div key={index}>{value}</div>
-                ))}
+                <div className="departureTime">
+                  {convertAMPMHHMM(busTicket.depPlandTime)}
+                </div>
+                <div className="charge-time__container">
+                  <span>무정차</span>
+                  <span>경기고속</span>
+                  <div className="charge">
+                    {busTicket.charge.toLocaleString()} 원
+                  </div>
+                  <div className="time">
+                    {busTicket.arrPlandTime - busTicket.depPlandTime} 예상
+                  </div>
+                </div>
+                <div className="busInfo">
+                  <div>좌석 수</div>
+                  <div>{busTicket.gradeNm}</div>
+                  <div>info_btn</div>
+                </div>
               </Button>
             </>
           ))}
       </section>
-    </>
+    </div>
   );
 }
