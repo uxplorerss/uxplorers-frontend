@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import theme from '../../../theme';
 
 export const Container = css({
   height: '100vh',
@@ -11,25 +12,34 @@ export const SearchBox = css({
 
 export const LocationList = css({
   display: 'grid',
-  gridTemplateColumns: '1fr 2fr',
+  gridTemplateColumns: '1fr 3fr',
   gap: '16px',
-  padding: '0 16px',
+  padding: '16px',
 });
 
-export const RegionColumn = css`
-  border-right: 1px solid';  // 구분선 추가
-`;
+export const RegionColumn = css({
+  borderRight: `1px solid ${theme.colors.gray[3]}`,
+});
 
-export const TerminalColumn = css`
-  overflow-y: auto;
-`;
+export const TerminalColumn = css({
+  overflowY: 'auto',
+});
 
 export const LocationItem = css({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '16px 0',
-  borderBottom: '1px solid #eee',
+  borderRight: `1px solid #eee`
+});
+
+export const LocationItemSelected = css({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '16px 0',
+  borderRight: `1px solid ${theme.colors.primary.base}`,
+  color: theme.colors.primary.base,
 });
 
 export  const LocationName = css({
