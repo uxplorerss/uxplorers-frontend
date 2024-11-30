@@ -1,8 +1,8 @@
 export interface SearchQuery {
-  startId?: string;
-  destId?: string;
-  startDate?: Date;
-  destDate?: Date;
+  startId: string;
+  destId: string;
+  startDate: Date;
+  destDate: Date;
 }
 
 export interface SearchQueryState {
