@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 export const container = css({
   display: 'flex',
   flexDirection: 'column',
-  height: '100vh',
+  minHeight: '100vh',
 });
 
 export const mainContent = css({
-    flex: 1,
+    flex: '0 1 auto',
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
@@ -67,4 +67,23 @@ export const searchButton = css({
   borderRadius: '8px',
   fontSize: '16px',
   fontWeight: 'bold',
+});
+
+export const DatePickerWrapper = css({
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  background: 'white',
+  padding: '20px',
+  boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
+  zIndex: 1000,
+  height: '70%',
+});
+
+export const bottomBarWrapper = css({
+  marginTop: 'auto',  // 남은 공간을 위쪽에 배치
+  position: 'sticky',
+  bottom: 0,
+  background: 'white',
 });
