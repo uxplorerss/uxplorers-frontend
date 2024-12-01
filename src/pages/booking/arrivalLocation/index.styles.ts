@@ -30,7 +30,7 @@ export const LocationItem = css({
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '16px 0',
-  borderRight: `1px solid #eee`
+  cursor: 'pointer',
 });
 
 export const LocationItemSelected = css({
@@ -46,14 +46,4 @@ export  const LocationName = css({
   fontSize: '16px',
 });
 
-export const InfoIcon = css({
-  width: '20px',
-  height: '20px',
-  borderRadius: '50%',
-  border: '1px solid #ccc',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '12px',
-  color: '#666',
-});
+

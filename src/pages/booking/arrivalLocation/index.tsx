@@ -12,13 +12,19 @@ import {
 } from '../arrivalLocation/index.styles';
 import TopBar from '../../../common/components/TopBar';
 import Input from '../../../common/components/Input';
+import Button from '../../../common/components/Button';
 import terminalData from '../../../constants/terminal.json';
 import terminalRegionData from '../../../constants/terminal_region.json';
 import terminal2Data from '../../../constants/terminal2.json';
 
+import CloseIcon from '../../../assets/CloseIcon.svg?react';
+import TerminalMapIcon from '../../../assets/booking/btn_terminalMap.svg?react';
+
 import { useNavigate } from '@tanstack/react-router';
 
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
+import { css } from '@emotion/react';
+import Typography from '../../../common/components/Typography';
 
 interface Terminal {
   tmnCd: number | string;
@@ -42,7 +48,7 @@ function LocationSelectPage() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTerminal, setSelectedTerminal] = useState<string | null>(null);
 
-  const terminals: Terminal[] = terminalData.response.body.items.item;
+  const terminals: Terminal[] = terminal2Data.response.body.items.item['000'];
   const terminals2: Terminal2Data = terminal2Data.response.body.items.item;
   const terminalRegion: TerminalRegion[] = Object.entries(terminalRegionData)
     .sort(([a], [b]) => a.localeCompare(b))
@@ -69,11 +75,20 @@ function LocationSelectPage() {
 
   return (
     <div css={Container}>
-      <TopBar
-        leftSlot={null}
-        centerSlot={<h1>도착지를 선택하세요</h1>}
+      <TopBar   
+        leftSlot={<Button onClick={() => navigate({ to: '/booking' })}><CloseIcon /></Button>}
+        centerSlot={null}
         rightSlot={null}
       />
+
+<div css={css`
+            text-align: center;
+            margin: 24px 0;
+          `}>
+            <Typography variant="title1" as="p">
+              도착지를 선택하세요
+            </Typography>
+          </div>
 
       <div css={SearchBox}>
         <Input
@@ -107,7 +122,7 @@ function LocationSelectPage() {
               onClick={() => handleTerminalClick(terminal)}
             >
               <div css={LocationName}>{terminal.tmnNm}</div>
-              <div css={InfoIcon}>i</div>
+              <TerminalMapIcon />
             </div>
           ))}
         </div>
