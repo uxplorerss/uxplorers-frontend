@@ -77,12 +77,14 @@ export const buildTypoBackground = (
     primary: css({
       backgroundColor: theme.colors.primary.sub,
       padding: '3px 8px',
+      borderRadius: '10px',
     }),
     gray: css({
       backgroundColor: theme.colors.gray[2],
-      padding: '3px 8px',
+      padding: '7px 10px',
+      borderRadius: '50px',
     }),
   };
 
-  return styles[backgroundColor];
+  return styles[backgroundColor ?? 'none'];
 };

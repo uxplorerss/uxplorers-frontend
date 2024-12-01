@@ -3,6 +3,7 @@ import { Button, TopBar, Typography } from '../../../common/components';
 import { css, Theme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
+import InfoIcon from '../../../assets/InfoIcon.svg?react';
 import { useEffect, useState } from 'react';
 import {
   BusTicket,
@@ -18,6 +19,7 @@ import {
 } from '../../../utils/convertDate';
 import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 import useForwardBusListStore from '../../../stores/useTowardBusListStore';
+import { Tooltip } from 'react-tooltip';
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -42,15 +44,25 @@ const buttonCSS = (theme: Theme) => css`
 
   .charge-time__container {
     text-align: left;
-    .charge {
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
 
-    .time {
+    .tags {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
     }
   }
 
   .busInfo {
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
   }
 `;
 
@@ -61,8 +73,26 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
         {convertAMPMHHMM(busTicket.depPlandTime)}
       </Typography>
       <div className="charge-time__container">
-        <span>무정차</span>
-        <span>경기고속</span>
+        <div className="tags">
+          <Typography
+            variant="body3"
+            cx={(theme) => css`
+              color: ${theme.colors.primary.base};
+            `}
+            backgroundColor="primary"
+          >
+            무정차
+          </Typography>
+          <Typography
+            variant="body4"
+            cx={(theme) => css`
+              color: ${theme.colors.gray[0]};
+            `}
+            as="span"
+          >
+            경기고속
+          </Typography>
+        </div>
         <Typography variant="title3" as="div">
           {busTicket.charge.toLocaleString()} 원
         </Typography>
@@ -90,7 +120,11 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
         >
           {busTicket.gradeNm}
         </Typography>
-        <div>info_btn</div>
+        <InfoIcon
+          data-tooltip-id="bus-ticket-tooltip"
+          data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
+        />
+        <Tooltip id="bus-ticket-tooltip" style={{ backgroundColor: 'gray' }} />
       </div>
     </Button>
   );
@@ -153,8 +187,28 @@ function RouteComponent() {
         </Typography>
 
         <div css={css({ display: 'flex', justifyContent: 'space-between' })}>
-          <button>{convertAMPMHHMM(busSearchTime)} 이후</button>
-          <button>검색조건</button>
+          <Button>
+            <Typography
+              variant="body4"
+              backgroundColor="gray"
+              cx={(theme) => css`
+                color: ${theme.colors.gray[4]};
+              `}
+            >
+              {convertAMPMHHMM(busSearchTime)} 이후
+            </Typography>
+          </Button>
+          <Button>
+            <Typography
+              variant="body4"
+              backgroundColor="gray"
+              cx={(theme) => css`
+                color: ${theme.colors.gray[4]};
+              `}
+            >
+              검색조건
+            </Typography>
+          </Button>
         </div>
 
         {busTickets &&
