@@ -13,7 +13,6 @@ import {
 import TopBar from '../../../common/components/TopBar';
 import Input from '../../../common/components/Input';
 import Button from '../../../common/components/Button';
-import terminalData from '../../../constants/terminal.json';
 import terminalRegionData from '../../../constants/terminal_region.json';
 import terminal2Data from '../../../constants/terminal2.json';
 

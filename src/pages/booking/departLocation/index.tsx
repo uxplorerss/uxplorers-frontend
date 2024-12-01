@@ -14,7 +14,6 @@ import TopBar from '../../../common/components/TopBar';
 import Input from '../../../common/components/Input';
 import Typography from '../../../common/components/Typography';
 import Button from '../../../common/components/Button';
-import terminalData from '../../../constants/terminal.json';
 import terminalRegionData from '../../../constants/terminal_region.json';
 import terminal2Data from '../../../constants/terminal2.json';
 import { css } from '@emotion/react';
