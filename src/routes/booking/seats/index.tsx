@@ -7,6 +7,7 @@ import { SelectSeat } from '../../../common/components/Seats/SelectSeat';
 import Flex from '../../../common/components/Flex';
 import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
+import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
@@ -44,15 +45,15 @@ function IndexComponent() {
   ];
 
   const [seats, setSeats] = useState<seat[]>(initSeats());
-  const available = seats.filter(
-    (value) => value.status === 'NORMAL' || value.status === 'SELECTED'
-  ).length;
+  const available =
+    28 - seats.filter((value) => value.status === 'SELECTED').length;
   return (
     <>
       <TopBar />
       <Flex children={<ReaminSeat num={available} />}></Flex>
       <Flex direction={'column'} children={<SeatType />}></Flex>
       <SelectSeat seats={seats} onSelectSeat={handleSelectSeat} />
+      <SeatsPayInfo seats={seats} />
     </>
   );
 }

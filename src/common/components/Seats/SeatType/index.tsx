@@ -1,10 +1,17 @@
 import { css } from '@emotion/react';
 import Flex from '../../../components/Flex';
+import Typography from '../../Typography';
 
 const SeatType = () => {
   return (
     <>
-      <div>좌석을 선택하세요</div>
+      <div
+        css={css`
+          margin-top: 11px;
+        `}
+      >
+        <Typography variant="title1">좌석을 선택하세요</Typography>
+      </div>
       <Flex
         direction={'row'}
         css={css`
