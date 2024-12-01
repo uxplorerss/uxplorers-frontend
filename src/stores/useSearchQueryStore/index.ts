@@ -13,9 +13,9 @@ const initialState = {
 const useSearchQueryStore = create<SearchQueryState>()((set) => ({
   ...initialState,
   // setSearchQuery: (query) => set((state) => ({ ...state, ...query })),
-  setSearchQuery: (query) => 
+  setSearchQuery: (query) =>
     set((state) => ({
-      searchQuery: { ...state.searchQuery, ...query }
+      searchQuery: { ...state.searchQuery, ...query },
     })),
   resetSearchQuery: () => set({ ...initialState }),
 }));

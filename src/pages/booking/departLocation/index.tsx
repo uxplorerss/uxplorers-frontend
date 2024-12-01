@@ -40,11 +40,10 @@ interface Terminal2Data {
   [key: string]: Terminal[];
 }
 
-
 function LocationSelectPage() {
   const { setSearchQuery } = useSearchQueryStore();
   const navigate = useNavigate();
-  
+
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTerminal, setSelectedTerminal] = useState<string | null>(null);
 
@@ -57,14 +56,13 @@ function LocationSelectPage() {
       tmnNm: name,
     }));
 
-    const regionSelectedTerminals = selectedTerminal
+  const regionSelectedTerminals = selectedTerminal
     ? terminals2[selectedTerminal]
     : [];
 
-  const filteredTerminals = (selectedTerminal ? regionSelectedTerminals : terminals)
-  .filter((terminal) => terminal.tmnNm.includes(searchKeyword)
-  );
-
+  const filteredTerminals = (
+    selectedTerminal ? regionSelectedTerminals : terminals
+  ).filter((terminal) => terminal.tmnNm.includes(searchKeyword));
 
   const handleTerminalClick = (terminal: Terminal) => {
     setSearchQuery({
@@ -75,21 +73,25 @@ function LocationSelectPage() {
 
   return (
     <div css={Container}>
-      <TopBar   
-        leftSlot={<Button onClick={() => navigate({ to: '/booking' })}><CloseIcon /></Button>}
+      <TopBar
+        leftSlot={
+          <Button onClick={() => navigate({ to: '/booking' })}>
+            <CloseIcon />
+          </Button>
+        }
         centerSlot={null}
         rightSlot={null}
       />
-    <div css={css`
-            text-align: center;
-            margin: 24px 0;
-          `}>
-            <Typography variant="title1" as="p">
-              출발지를 선택하세요
-            </Typography>
-          </div>
-
-      
+      <div
+        css={css`
+          text-align: center;
+          margin: 24px 0;
+        `}
+      >
+        <Typography variant="title1" as="p">
+          출발지를 선택하세요
+        </Typography>
+      </div>
 
       <div css={SearchBox}>
         <Input
@@ -103,12 +105,16 @@ function LocationSelectPage() {
       <div css={LocationList}>
         <div css={RegionColumn}>
           {terminalRegion.map((terminal) => (
-            <div 
-            css={terminal.num === selectedTerminal ? LocationItemSelected : LocationItem}
-            key={terminal.num}
-            onClick={() => {
-              setSelectedTerminal(terminal.num);
-            }}
+            <div
+              css={
+                terminal.num === selectedTerminal
+                  ? LocationItemSelected
+                  : LocationItem
+              }
+              key={terminal.num}
+              onClick={() => {
+                setSelectedTerminal(terminal.num);
+              }}
             >
               <div css={LocationName}>{terminal.tmnNm}</div>
             </div>

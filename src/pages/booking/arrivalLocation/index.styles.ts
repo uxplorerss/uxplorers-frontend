@@ -42,8 +42,6 @@ export const LocationItemSelected = css({
   color: theme.colors.primary.base,
 });
 
-export  const LocationName = css({
+export const LocationName = css({
   fontSize: '16px',
 });
-
-

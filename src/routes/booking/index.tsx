@@ -47,99 +47,99 @@ export const Route = createFileRoute('/booking/')({
 // `;
 
 function RouteComponent() {
-//   const [origin, setOrigin] = useState('');
-//   const [destination, setDestination] = useState('');
+  //   const [origin, setOrigin] = useState('');
+  //   const [destination, setDestination] = useState('');
 
-//   const handleChange = (
-//     handleName: 'origin' | 'destination' | 'time' | '왕복',
-//     e: string
-//   ) => {
-//     console.log(handleName);
-//     switch (handleName) {
-//       case 'origin':
-//         setOrigin(e);
-//         break;
-//       case 'destination':
-//         setDestination(e);
-//         break;
-//       case 'time':
-//         break;
-//       case '왕복':
-//         break;
-//       default:
-//         break;
-//     }
-//   };
+  //   const handleChange = (
+  //     handleName: 'origin' | 'destination' | 'time' | '왕복',
+  //     e: string
+  //   ) => {
+  //     console.log(handleName);
+  //     switch (handleName) {
+  //       case 'origin':
+  //         setOrigin(e);
+  //         break;
+  //       case 'destination':
+  //         setDestination(e);
+  //         break;
+  //       case 'time':
+  //         break;
+  //       case '왕복':
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   };
 
-//   const handleSearchBus = () => {};
+  //   const handleSearchBus = () => {};
 
-//   const handleTransfer = () => {
-//     const temp = origin;
-//     setOrigin(destination);
-//     setDestination(temp);
-//   };
+  //   const handleTransfer = () => {
+  //     const temp = origin;
+  //     setOrigin(destination);
+  //     setDestination(temp);
+  //   };
 
-//   return (
-//     <>
-//       <TopBar
-//         leftSlot={
-//           <Button>
-//             <LogoIcon />
-//           </Button>
-//         }
-//         rightSlot={<LanguageSwitchButton language="Korean" />}
-//       />
-//       <form
-//         style={{
-//           padding: '0 20px',
-//           justifyItems: 'center',
-//           position: 'relative',
-//         }}
-//         onSubmit={(e) => e.preventDefault()}
-//       >
-//         <Typography variant="title1" as="p">
-//           어디로 갈까요?
-//         </Typography>
+  //   return (
+  //     <>
+  //       <TopBar
+  //         leftSlot={
+  //           <Button>
+  //             <LogoIcon />
+  //           </Button>
+  //         }
+  //         rightSlot={<LanguageSwitchButton language="Korean" />}
+  //       />
+  //       <form
+  //         style={{
+  //           padding: '0 20px',
+  //           justifyItems: 'center',
+  //           position: 'relative',
+  //         }}
+  //         onSubmit={(e) => e.preventDefault()}
+  //       >
+  //         <Typography variant="title1" as="p">
+  //           어디로 갈까요?
+  //         </Typography>
 
-//         <IconButton
-//           src={TransferBtn}
-//           alt="transfer btn"
-//           onClick={handleTransfer}
-//           style={{ position: 'absolute', right: '10%', top: '33%' }}
-//         />
-//         <StyledInputContainer>
-//           <Input
-//             value={origin}
-//             onValueChange={(e) => handleChange('origin', e)}
-//             placeholder="출발지 선택"
-//           />
-//           <Input
-//             value={destination}
-//             onValueChange={(e) => handleChange('destination', e)}
-//             placeholder="도착지 선택"
-//           />
+  //         <IconButton
+  //           src={TransferBtn}
+  //           alt="transfer btn"
+  //           onClick={handleTransfer}
+  //           style={{ position: 'absolute', right: '10%', top: '33%' }}
+  //         />
+  //         <StyledInputContainer>
+  //           <Input
+  //             value={origin}
+  //             onValueChange={(e) => handleChange('origin', e)}
+  //             placeholder="출발지 선택"
+  //           />
+  //           <Input
+  //             value={destination}
+  //             onValueChange={(e) => handleChange('destination', e)}
+  //             placeholder="도착지 선택"
+  //           />
 
-//           <div className="date_type">
-//             <Input
-//               value={new Date().toDateString()}
-//               onValueChange={(e) => handleChange('time', e)}
-//               placeholder="날짜 선택"
-//             />
-//             <Input
-//               value=""
-//               onValueChange={(e) => handleChange('왕복', e)}
-//               placeholder="+ 왕복 날짜 선택"
-//             />
-//           </div>
-//         </StyledInputContainer>
+  //           <div className="date_type">
+  //             <Input
+  //               value={new Date().toDateString()}
+  //               onValueChange={(e) => handleChange('time', e)}
+  //               placeholder="날짜 선택"
+  //             />
+  //             <Input
+  //               value=""
+  //               onValueChange={(e) => handleChange('왕복', e)}
+  //               placeholder="+ 왕복 날짜 선택"
+  //             />
+  //           </div>
+  //         </StyledInputContainer>
 
-//         <Button onClick={handleSearchBus} style={{ margin: '30px 0' }}>
-//           조회하기
-//         </Button>
-//       </form>
-//       <BookmarkList />
-//       <BottomBar />
-//     </>
-//   );
-return <BookingPage />;
- }
+  //         <Button onClick={handleSearchBus} style={{ margin: '30px 0' }}>
+  //           조회하기
+  //         </Button>
+  //       </form>
+  //       <BookmarkList />
+  //       <BottomBar />
+  //     </>
+  //   );
+  return <BookingPage />;
+}

@@ -34,7 +34,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
 
-import terminalData from "../../constants/terminal.json";
+import terminalData from '../../constants/terminal.json';
 
 import useSearchQueryStore from '../../stores/useSearchQueryStore';
 import LanguageSwitchButton from '../../common/components/LanguageSwitchButton';
@@ -42,17 +42,17 @@ import LanguageSwitchButton from '../../common/components/LanguageSwitchButton';
 function BookmarkList() {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: '0 20px', marginTop: '48px'  }}>
+    <div style={{ padding: '0 20px', marginTop: '48px' }}>
       <Typography variant="body1" as="p">
         즐겨찾기
       </Typography>
-      <Input 
-      value="서울 경부 → 구미" 
-      onClick={() => {
-        navigate({ to: '/booking/tickets' });
-      }}
-      style={{ cursor: 'pointer' }}
-      readOnly
+      <Input
+        value="서울 경부 → 구미"
+        onClick={() => {
+          navigate({ to: '/booking/tickets' });
+        }}
+        style={{ cursor: 'pointer' }}
+        readOnly
       />
     </div>
   );
@@ -62,8 +62,7 @@ function BookingPage() {
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery } = useSearchQueryStore();
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
-const [showEndDatePicker, setShowEndDatePicker] = useState(false);
-
+  const [showEndDatePicker, setShowEndDatePicker] = useState(false);
 
   const [roundTrip, setRoundTrip] = useState<boolean>(false);
 
@@ -72,7 +71,7 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
   const isSearchable = () => {
     return searchQuery.startId !== '' && searchQuery.destId !== '';
   };
-  
+
   const initialDate = () => {
     const today = new Date();
     const month = today.getMonth() + 1;
@@ -93,7 +92,9 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
   };
 
   const tmnCdToTmnNm = (tmnCd: string | number) => {
-    const terminal = terminalData.response.body.items.item.find((terminal) => terminal.tmnCd.toString() === tmnCd.toString());
+    const terminal = terminalData.response.body.items.item.find(
+      (terminal) => terminal.tmnCd.toString() === tmnCd.toString()
+    );
     return terminal?.tmnNm;
   };
 
@@ -108,10 +109,12 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
         rightSlot={<LanguageSwitchButton language="English" />}
       />
 
-      <div css={css`
-        text-align: center;
-        margin: 24px 0;
-      `}>
+      <div
+        css={css`
+          text-align: center;
+          margin: 24px 0;
+        `}
+      >
         <Typography variant="title1" as="p">
           어디로 갈까요?
         </Typography>
@@ -119,47 +122,47 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
 
       <main css={mainContent}>
         <div css={locationInputsWrapper}>
-        <Input
-          type="text"
-          placeholder="출발지 선택"
-          value={tmnCdToTmnNm(searchQuery.startId)}
-          onValueChange={(value: string) => {
-            setSearchQuery({
-              startId: value,
-            });
-          }}
-          onClick={() => {
-            navigate({ to: '/booking/departLocation' });
-          }}
-          style={{ cursor: 'pointer' }}
-          readOnly
-        />
-
-          <div css={transferButtonWrapper}>
-            <TransferBtn 
-            onClick={() => {
+          <Input
+            type="text"
+            placeholder="출발지 선택"
+            value={tmnCdToTmnNm(searchQuery.startId)}
+            onValueChange={(value: string) => {
               setSearchQuery({
-                startId: searchQuery.destId,
-                destId: searchQuery.startId,
+                startId: value,
               });
             }}
+            onClick={() => {
+              navigate({ to: '/booking/departLocation' });
+            }}
+            style={{ cursor: 'pointer' }}
+            readOnly
+          />
+
+          <div css={transferButtonWrapper}>
+            <TransferBtn
+              onClick={() => {
+                setSearchQuery({
+                  startId: searchQuery.destId,
+                  destId: searchQuery.startId,
+                });
+              }}
             />
           </div>
 
-        <Input
-          type="text"
-          placeholder="도착지 선택"
-          value={tmnCdToTmnNm(searchQuery.destId)}
-          onValueChange={(value: string) => {
-            setSearchQuery({
-              destId: value,
-            });
-          }}
-          onClick={() => {
-            navigate({ to: '/booking/arrivalLocation' });
-          }}
-          style={{ cursor: 'pointer' }}
-          readOnly
+          <Input
+            type="text"
+            placeholder="도착지 선택"
+            value={tmnCdToTmnNm(searchQuery.destId)}
+            onValueChange={(value: string) => {
+              setSearchQuery({
+                destId: value,
+              });
+            }}
+            onClick={() => {
+              navigate({ to: '/booking/arrivalLocation' });
+            }}
+            style={{ cursor: 'pointer' }}
+            readOnly
           />
         </div>
 
@@ -171,7 +174,7 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
             onValueChange={(value: Date) => {
               setSearchQuery({
                 startDate: value,
-              })
+              });
             }}
             onClick={() => {
               setShowStartDatePicker(true);
@@ -184,23 +187,23 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
             placeholder="+왕복 선택"
             value={roundTrip ? formatDate(searchQuery.destDate) : ''}
             onClick={() => {
-                setShowEndDatePicker(true);
-              }}
-              style={{ cursor: 'pointer' }}
-              readOnly
+              setShowEndDatePicker(true);
+            }}
+            style={{ cursor: 'pointer' }}
+            readOnly
           />
         </div>
 
         <div css={searchButton}>
-          <MainButton 
+          <MainButton
             children="조회하기"
-            disabled={!isSearchable()} 
+            disabled={!isSearchable()}
             onClick={() => {
               if (isSearchable()) {
                 navigate({ to: '/booking/tickets' });
               }
             }}
-            />
+          />
         </div>
       </main>
       <BookmarkList />
@@ -208,104 +211,122 @@ const [showEndDatePicker, setShowEndDatePicker] = useState(false);
       <div css={bottomBarWrapper}>
         <BottomBar
           leftSlot={
-            <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <Button
+              css={[
+                buttonContainer,
+                buildTypography(theme, 'caption1'),
+                { color: theme.colors.gray[1] },
+              ]}
+            >
               <QRIcon />
               <span>내 티켓</span>
             </Button>
           }
           centerSlot={
-            <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <Button
+              css={[
+                buttonContainer,
+                buildTypography(theme, 'caption1'),
+                { color: theme.colors.gray[1] },
+              ]}
+            >
               <TicketIcon />
               <span>예매하기</span>
             </Button>
           }
           rightSlot={
-            <Button css={[buttonContainer, buildTypography(theme, 'caption1'), { color: theme.colors.gray[1] }]}>
+            <Button
+              css={[
+                buttonContainer,
+                buildTypography(theme, 'caption1'),
+                { color: theme.colors.gray[1] },
+              ]}
+            >
               <PersonIcon />
               <span>마이페이지</span>
             </Button>
           }
-      />
+        />
       </div>
-      
-{showStartDatePicker && (
-  <div css={DatePickerWrapper}>
-    <DatePicker
-      selected={searchQuery.startDate}
-      onChange={(date: Date) => {
-        setSearchQuery({ startDate: date });
-        setShowStartDatePicker(false);
-      }}
-      maxDate={searchQuery.destDate}
-      locale={ko}
-      formatWeekday={(nameofDay: string) => {return nameofDay.substring(0, 1)}}
-      renderCustomHeader={({
-        date,
-        decreaseMonth,
-        increaseMonth,
-      }) => (
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '20px',
-          gap: '10px',
-          fontSize: theme.fontSize.body3,
-          lineHeight: theme.lineHeight.body3,
-          fontWeight: theme.fontWeight.body3,
-        }}>
-          <LeftArrowMonthIcon onClick={decreaseMonth} />
-          <span>
-            {`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}
-          </span>
-          <RightArrowMonthIcon onClick={increaseMonth} />
-        </div>
-      )}
-      inline
-    />
-  </div>
-)}
 
-{showEndDatePicker && (
-  <div css={DatePickerWrapper}>
-    <DatePicker
-      selected={searchQuery.destDate}
-      onChange={(date: Date) => {
-        setSearchQuery({ destDate: date });
-        setShowEndDatePicker(false);
-        setRoundTrip(true);
-      }}
-      minDate={searchQuery.startDate}
-      locale={ko}
-      formatWeekday={(nameofDay: string) => {return nameofDay.substring(0, 1)}}
-      renderCustomHeader={({
-        date,
-        decreaseMonth,
-        increaseMonth,
-      }) => (
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '20px',
-          gap: '10px',
-          fontSize: theme.fontSize.body3,
-          lineHeight: theme.lineHeight.body3,
-          fontWeight: theme.fontWeight.body3,
-        }}>
-          <LeftArrowMonthIcon onClick={decreaseMonth} />
-          <span>
-            {`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}
-          </span>
-          <RightArrowMonthIcon onClick={increaseMonth} />
+      {showStartDatePicker && (
+        <div css={DatePickerWrapper}>
+          <DatePicker
+            selected={searchQuery.startDate}
+            onChange={(date: Date) => {
+              setSearchQuery({ startDate: date });
+              setShowStartDatePicker(false);
+            }}
+            maxDate={searchQuery.destDate}
+            locale={ko}
+            formatWeekday={(nameofDay: string) => {
+              return nameofDay.substring(0, 1);
+            }}
+            renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '20px',
+                  gap: '10px',
+                  fontSize: theme.fontSize.body3,
+                  lineHeight: theme.lineHeight.body3,
+                  fontWeight: theme.fontWeight.body3,
+                }}
+              >
+                <LeftArrowMonthIcon onClick={decreaseMonth} />
+                <span>
+                  {`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}
+                </span>
+                <RightArrowMonthIcon onClick={increaseMonth} />
+              </div>
+            )}
+            inline
+          />
         </div>
       )}
-      inline
-    />
-      </div>
-    )}
-    </div>    
-  );  
+
+      {showEndDatePicker && (
+        <div css={DatePickerWrapper}>
+          <DatePicker
+            selected={searchQuery.destDate}
+            onChange={(date: Date) => {
+              setSearchQuery({ destDate: date });
+              setShowEndDatePicker(false);
+              setRoundTrip(true);
+            }}
+            minDate={searchQuery.startDate}
+            locale={ko}
+            formatWeekday={(nameofDay: string) => {
+              return nameofDay.substring(0, 1);
+            }}
+            renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '20px',
+                  gap: '10px',
+                  fontSize: theme.fontSize.body3,
+                  lineHeight: theme.lineHeight.body3,
+                  fontWeight: theme.fontWeight.body3,
+                }}
+              >
+                <LeftArrowMonthIcon onClick={decreaseMonth} />
+                <span>
+                  {`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}
+                </span>
+                <RightArrowMonthIcon onClick={increaseMonth} />
+              </div>
+            )}
+            inline
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default BookingPage;

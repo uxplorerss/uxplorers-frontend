@@ -8,11 +8,11 @@ export const container = css({
 });
 
 export const mainContent = css({
-    flex: '0 1 auto',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
+  flex: '0 1 auto',
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
 });
 
 export const locationSelector = css({
@@ -25,12 +25,12 @@ export const locationSelector = css({
 export const locationBox = css({
   display: 'flex',
   gap: '8px',
-  
+
   '& span': {
     fontSize: '14px',
     color: '#666',
   },
-  
+
   '& input': {
     padding: '12px',
     border: '1px solid #ddd',
@@ -54,10 +54,10 @@ export const transferButtonWrapper = css({
 });
 
 export const dateSelector = css({
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '12px',
-    marginTop: '8px',
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '12px',
+  marginTop: '8px',
 });
 
 export const dateBox = css({
@@ -65,13 +65,13 @@ export const dateBox = css({
 });
 
 export const addDateButton = css({
-    padding: '8px 16px',
-    border: '1px solid #ddd',
-    borderRadius: '20px',
-    background: 'white',
-    color: '#666',
-    fontSize: '14px',
-    whiteSpace: 'nowrap',
+  padding: '8px 16px',
+  border: '1px solid #ddd',
+  borderRadius: '20px',
+  background: 'white',
+  color: '#666',
+  fontSize: '14px',
+  whiteSpace: 'nowrap',
 });
 
 export const searchButton = css({
@@ -79,7 +79,7 @@ export const searchButton = css({
 });
 
 export const bottomBarWrapper = css({
-  marginTop: 'auto',  // 남은 공간을 위쪽에 배치
+  marginTop: 'auto', // 남은 공간을 위쪽에 배치
   position: 'sticky',
   bottom: 0,
   background: 'white',
@@ -98,8 +98,8 @@ export const customDatePicker = css({
   },
 
   '.react-datepicker__month-container': {
-    float: 'none',  // 기본 float 제거
-    width: '100%',  // 전체 너비 사용
+    float: 'none', // 기본 float 제거
+    width: '100%', // 전체 너비 사용
     height: '100%',
   },
 
@@ -132,33 +132,32 @@ export const customDatePicker = css({
     margin: '0',
     width: 'auto',
     aspectRatio: '1/1',
-    display: 'flex',  
+    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center', 
+    justifyContent: 'center',
   },
 
   '.react-datepicker__day--selected': {
     backgroundColor: theme.colors.primary.base,
     color: 'white',
     borderRadius: '50%',
-    
-  }
+  },
 });
 
 export const DatePickerWrapper = css([
   {
-  position: 'fixed',
-  bottom: 0,
-  left: 0,
-  right: 0,
-  height: '63%', 
-  background: 'white',
-  padding: '20px',
-  boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
-  zIndex: 1000,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '63%',
+    background: 'white',
+    padding: '20px',
+    boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
+    zIndex: 1000,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  customDatePicker
+  customDatePicker,
 ]);
