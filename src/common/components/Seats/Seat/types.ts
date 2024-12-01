@@ -4,5 +4,5 @@ export type SeatVariant = 'OCCUPIED' | 'SELECTED' | 'NORMAL' | 'NONE';
 export interface SeatPropsType {
   attr: SeatVariant;
   num?: number;
-  handleSelectSeat: Function;
+  onSelectSeat: (num: number) => void;
 }

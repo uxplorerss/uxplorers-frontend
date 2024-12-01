@@ -8,7 +8,7 @@ export interface seat {
 
 export interface selectSeatPropType {
   seats: seat[];
-  onSelectSeat: Function;
+  onSelectSeat: (seatNum: number) => void;
 }
 
 type SeatTypeVariant = 'children' | 'teens' | 'adults';
