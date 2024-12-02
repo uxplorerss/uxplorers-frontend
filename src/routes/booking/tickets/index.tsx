@@ -13,13 +13,14 @@ import {
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
 import {
   convertAMPMHHMM,
-  convertMinutesToHHMM,
+  getDifferenceInMinutes,
   convertMMDDday,
   convertYYYYMMDD,
 } from '../../../utils/convertDate';
 import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 import useForwardBusListStore from '../../../stores/useTowardBusListStore';
 import { Tooltip } from 'react-tooltip';
+import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -102,8 +103,9 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
             color: ${theme.colors.gray[4]};
           `}
         >
-          {convertMinutesToHHMM(
-            busTicket.arrPlandTime - busTicket.depPlandTime
+          {getDifferenceInMinutes(
+            busTicket.arrPlandTime.toString(),
+            busTicket.depPlandTime.toString()
           )}{' '}
           예상
         </Typography>
@@ -148,7 +150,6 @@ function RouteComponent() {
       convertYYYYMMDD(searchQuery.startDate)
     )
       .then((data) => {
-        console.log(data);
         setBusTickets(data.response.body.items.item);
 
         // TODO: 전역 상태에 넣기
@@ -157,6 +158,8 @@ function RouteComponent() {
       })
       .catch((error) => {
         console.error(error);
+        //error인 경우, mock data로 초기화
+        setBusTickets(MOCK_busTickets.response.body.items.item);
       });
   }, []);
 

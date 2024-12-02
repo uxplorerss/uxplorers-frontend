@@ -32,7 +32,7 @@ export interface BusTicket {
   depPlaceNm: string;
   depPlandTime: number;
   gradeNm: string;
-  routeId: number;
+  routeId: number | string;
 }
 
 interface ResponseBusTickets {

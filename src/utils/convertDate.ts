@@ -36,7 +36,26 @@ export function convertAMPMHHMM(datetime: number): string {
   });
 }
 
-export function convertMinutesToHHMM(minutes: number): string {
+function parseYYYYMMDDHHMM(datetime: string): Date {
+  const year = parseInt(datetime.substring(0, 4), 10);
+  const month = parseInt(datetime.substring(4, 6), 10) - 1; // Month is 0-indexed
+  const day = parseInt(datetime.substring(6, 8), 10);
+  const hour = parseInt(datetime.substring(8, 10), 10);
+  const minute = parseInt(datetime.substring(10, 12), 10);
+
+  return new Date(year, month, day, hour, minute);
+}
+
+export function getDifferenceInMinutes(
+  datetime1: string,
+  datetime2: string
+): string {
+  const date1 = parseYYYYMMDDHHMM(datetime1);
+  const date2 = parseYYYYMMDDHHMM(datetime2);
+
+  const diffInMs = Math.abs(date2.getTime() - date1.getTime());
+  const minutes = Math.floor(diffInMs / 60000); // Convert milliseconds to minutes
+
   const hour = Math.floor(minutes / 60);
   const minute = minutes % 60;
 
