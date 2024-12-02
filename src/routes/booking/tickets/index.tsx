@@ -123,6 +123,9 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
         <InfoIcon
           data-tooltip-id="bus-ticket-tooltip"
           data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
+          css={css`
+            margin-top: 7px;
+          `}
         />
         <Tooltip id="bus-ticket-tooltip" style={{ backgroundColor: 'gray' }} />
       </div>
@@ -145,6 +148,7 @@ function RouteComponent() {
       convertYYYYMMDD(searchQuery.startDate)
     )
       .then((data) => {
+        console.log(data);
         setBusTickets(data.response.body.items.item);
 
         // TODO: 전역 상태에 넣기
