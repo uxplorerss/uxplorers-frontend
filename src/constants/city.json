@@ -1,0 +1,454 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL SERVICE."
+    },
+    "body": {
+      "items": {
+        "item": [
+          {
+            "cityCode": 11,
+            "cityName": "서울특별시"
+          },
+          {
+            "cityCode": 12,
+            "cityName": "세종특별시"
+          },
+          {
+            "cityCode": 21,
+            "cityName": "부산광역시"
+          },
+          {
+            "cityCode": 22,
+            "cityName": "대구광역시"
+          },
+          {
+            "cityCode": 23,
+            "cityName": "인천광역시"
+          },
+          {
+            "cityCode": 24,
+            "cityName": "광주광역시"
+          },
+          {
+            "cityCode": 25,
+            "cityName": "대전광역시"
+          },
+          {
+            "cityCode": 26,
+            "cityName": "울산광역시"
+          },
+          {
+            "cityCode": 31010,
+            "cityName": "수원시"
+          },
+          {
+            "cityCode": 31020,
+            "cityName": "성남시"
+          },
+          {
+            "cityCode": 31030,
+            "cityName": "의정부시"
+          },
+          {
+            "cityCode": 31050,
+            "cityName": "부천시"
+          },
+          {
+            "cityCode": 31060,
+            "cityName": "광명시"
+          },
+          {
+            "cityCode": 31070,
+            "cityName": "평택시"
+          },
+          {
+            "cityCode": 31090,
+            "cityName": "안산시"
+          },
+          {
+            "cityCode": 31100,
+            "cityName": "고양시"
+          },
+          {
+            "cityCode": 31120,
+            "cityName": "구리시"
+          },
+          {
+            "cityCode": 31140,
+            "cityName": "오산시"
+          },
+          {
+            "cityCode": 31150,
+            "cityName": "시흥시"
+          },
+          {
+            "cityCode": 31190,
+            "cityName": "용인시"
+          },
+          {
+            "cityCode": 31210,
+            "cityName": "이천시"
+          },
+          {
+            "cityCode": 31220,
+            "cityName": "안성시"
+          },
+          {
+            "cityCode": 31270,
+            "cityName": "포천시"
+          },
+          {
+            "cityCode": 31320,
+            "cityName": "여주시"
+          },
+          {
+            "cityCode": 31370,
+            "cityName": "가평군"
+          },
+          {
+            "cityCode": 32010,
+            "cityName": "춘천시"
+          },
+          {
+            "cityCode": 32020,
+            "cityName": "원주시"
+          },
+          {
+            "cityCode": 32030,
+            "cityName": "강릉시"
+          },
+          {
+            "cityCode": 32040,
+            "cityName": "동해시"
+          },
+          {
+            "cityCode": 32060,
+            "cityName": "속초시"
+          },
+          {
+            "cityCode": 32070,
+            "cityName": "삼척시"
+          },
+          {
+            "cityCode": 32310,
+            "cityName": "홍천군"
+          },
+          {
+            "cityCode": 32320,
+            "cityName": "횡성군"
+          },
+          {
+            "cityCode": 32330,
+            "cityName": "영월군"
+          },
+          {
+            "cityCode": 32360,
+            "cityName": "철원군"
+          },
+          {
+            "cityCode": 32370,
+            "cityName": "화천군"
+          },
+          {
+            "cityCode": 32410,
+            "cityName": "양양군"
+          },
+          {
+            "cityCode": 33010,
+            "cityName": "청주시"
+          },
+          {
+            "cityCode": 33020,
+            "cityName": "충주시"
+          },
+          {
+            "cityCode": 33030,
+            "cityName": "제천시"
+          },
+          {
+            "cityCode": 33310,
+            "cityName": "청원군"
+          },
+          {
+            "cityCode": 33320,
+            "cityName": "보은군"
+          },
+          {
+            "cityCode": 33340,
+            "cityName": "영동군"
+          },
+          {
+            "cityCode": 33360,
+            "cityName": "괴산군"
+          },
+          {
+            "cityCode": 33390,
+            "cityName": "증평군"
+          },
+          {
+            "cityCode": 34010,
+            "cityName": "천안시"
+          },
+          {
+            "cityCode": 34020,
+            "cityName": "공주시"
+          },
+          {
+            "cityCode": 34030,
+            "cityName": "보령시"
+          },
+          {
+            "cityCode": 34040,
+            "cityName": "아산시"
+          },
+          {
+            "cityCode": 34050,
+            "cityName": "서산시"
+          },
+          {
+            "cityCode": 34060,
+            "cityName": "논산시"
+          },
+          {
+            "cityCode": 34310,
+            "cityName": "금산군"
+          },
+          {
+            "cityCode": 34320,
+            "cityName": "연기군"
+          },
+          {
+            "cityCode": 34350,
+            "cityName": "청양군"
+          },
+          {
+            "cityCode": 34360,
+            "cityName": "홍성군"
+          },
+          {
+            "cityCode": 34370,
+            "cityName": "예산군"
+          },
+          {
+            "cityCode": 34380,
+            "cityName": "태안군"
+          },
+          {
+            "cityCode": 34390,
+            "cityName": "당진시"
+          },
+          {
+            "cityCode": 35010,
+            "cityName": "전주시"
+          },
+          {
+            "cityCode": 35020,
+            "cityName": "군산시"
+          },
+          {
+            "cityCode": 35030,
+            "cityName": "익산시"
+          },
+          {
+            "cityCode": 35040,
+            "cityName": "정읍시"
+          },
+          {
+            "cityCode": 35050,
+            "cityName": "남원시"
+          },
+          {
+            "cityCode": 35060,
+            "cityName": "김제시"
+          },
+          {
+            "cityCode": 35310,
+            "cityName": "완주군"
+          },
+          {
+            "cityCode": 35320,
+            "cityName": "진안군"
+          },
+          {
+            "cityCode": 35340,
+            "cityName": "장수군"
+          },
+          {
+            "cityCode": 35350,
+            "cityName": "임실군"
+          },
+          {
+            "cityCode": 35360,
+            "cityName": "순창군"
+          },
+          {
+            "cityCode": 35370,
+            "cityName": "고창군"
+          },
+          {
+            "cityCode": 35380,
+            "cityName": "부안군"
+          },
+          {
+            "cityCode": 36010,
+            "cityName": "목포시"
+          },
+          {
+            "cityCode": 36020,
+            "cityName": "여수시"
+          },
+          {
+            "cityCode": 36030,
+            "cityName": "순천시"
+          },
+          {
+            "cityCode": 36040,
+            "cityName": "나주시"
+          },
+          {
+            "cityCode": 36060,
+            "cityName": "광양시"
+          },
+          {
+            "cityCode": 36310,
+            "cityName": "담양군"
+          },
+          {
+            "cityCode": 36320,
+            "cityName": "곡성군"
+          },
+          {
+            "cityCode": 36330,
+            "cityName": "구례군"
+          },
+          {
+            "cityCode": 36350,
+            "cityName": "고흥군"
+          },
+          {
+            "cityCode": 36360,
+            "cityName": "보성군"
+          },
+          {
+            "cityCode": 36370,
+            "cityName": "화순군"
+          },
+          {
+            "cityCode": 36380,
+            "cityName": "장흥군"
+          },
+          {
+            "cityCode": 36390,
+            "cityName": "강진군"
+          },
+          {
+            "cityCode": 36400,
+            "cityName": "해남군"
+          },
+          {
+            "cityCode": 36410,
+            "cityName": "영암군"
+          },
+          {
+            "cityCode": 36420,
+            "cityName": "무안군"
+          },
+          {
+            "cityCode": 36430,
+            "cityName": "함평군"
+          },
+          {
+            "cityCode": 36440,
+            "cityName": "영광군"
+          },
+          {
+            "cityCode": 36450,
+            "cityName": "장성군"
+          },
+          {
+            "cityCode": 36460,
+            "cityName": "완도군"
+          },
+          {
+            "cityCode": 36470,
+            "cityName": "진도군"
+          },
+          {
+            "cityCode": 36480,
+            "cityName": "신안군"
+          },
+          {
+            "cityCode": 37010,
+            "cityName": "포항시"
+          },
+          {
+            "cityCode": 37020,
+            "cityName": "경주시"
+          },
+          {
+            "cityCode": 37030,
+            "cityName": "김천시"
+          },
+          {
+            "cityCode": 37040,
+            "cityName": "안동시"
+          },
+          {
+            "cityCode": 37050,
+            "cityName": "구미시"
+          },
+          {
+            "cityCode": 37060,
+            "cityName": "영주시"
+          },
+          {
+            "cityCode": 37070,
+            "cityName": "영천시"
+          },
+          {
+            "cityCode": 37080,
+            "cityName": "상주시"
+          },
+          {
+            "cityCode": 37090,
+            "cityName": "문경시"
+          },
+          {
+            "cityCode": 37320,
+            "cityName": "의성군"
+          },
+          {
+            "cityCode": 37350,
+            "cityName": "영덕군"
+          },
+          {
+            "cityCode": 37400,
+            "cityName": "예천군"
+          },
+          {
+            "cityCode": 37420,
+            "cityName": "울진군"
+          },
+          {
+            "cityCode": 38010,
+            "cityName": "창원시"
+          },
+          {
+            "cityCode": 38030,
+            "cityName": "진주시"
+          },
+          {
+            "cityCode": 38050,
+            "cityName": "통영시"
+          },
+          {
+            "cityCode": 38070,
+            "cityName": "김해시"
+          }
+        ]
+      }
+    }
+  }
+}
