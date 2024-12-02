@@ -1,9 +1,4 @@
-export interface SearchQuery {
-  startId: string;
-  destId: string;
-  startDate: Date;
-  destDate: Date;
-}
+import { SearchQuery } from '../../types';
 
 export interface SearchQueryState {
   searchQuery: SearchQuery;
