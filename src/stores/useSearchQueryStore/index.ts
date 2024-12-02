@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { SearchQueryState, SearchQuery } from './index.types';
+import type { SearchQueryState } from './index.types';
 
 const initialState = {
   searchQuery: {
@@ -12,7 +12,6 @@ const initialState = {
 
 const useSearchQueryStore = create<SearchQueryState>()((set) => ({
   ...initialState,
-  // setSearchQuery: (query) => set((state) => ({ ...state, ...query })),
   setSearchQuery: (query) =>
     set((state) => ({
       searchQuery: { ...state.searchQuery, ...query },
