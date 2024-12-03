@@ -12,22 +12,20 @@ import { seat } from '../SelectSeat/types';
 
 export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
   const selected: seat[] = [];
-  const textBuilder = () => {
-    let str = '';
-    let adult,
-      teen,
-      children = 0;
+  // const textBuilder = () => {
+  //   let str = '';
+  //   let adult,
+  //     teen,
+  //     children = 0;
 
-    // selected.forEach((value) => {});
-    return str;
-  };
+  // selected.forEach((value) => {});
+  //   return str;
+  // };
   useEffect(() => {
     selected.length = 0;
 
     seats
-      .filter((value) => {
-        value.status == 'SELECTED';
-      })
+      .filter((value) => value.status === 'SELECTED')
       .forEach((value) => {
         selected.push(value);
       });
