@@ -1,5 +1,9 @@
 import React from 'react';
-import { buildTextPosition, buildTypography } from './index.styles';
+import {
+  buildTextPosition,
+  buildTypoBackground,
+  buildTypography,
+} from './index.styles';
 import { useTheme } from '@emotion/react';
 import type { TypographyPropsType } from './index.types';
 
@@ -9,12 +13,18 @@ export default function Typography({
   as: Component = 'span',
   textAlign,
   cx,
+  backgroundColor = 'none',
 }: TypographyPropsType) {
   const theme = useTheme();
 
   return (
     <Component
-      css={[buildTypography(theme, variant), buildTextPosition(textAlign), cx]}
+      css={[
+        buildTypography(theme, variant),
+        buildTextPosition(textAlign),
+        buildTypoBackground(theme, backgroundColor),
+        cx,
+      ]}
     >
       {children}
     </Component>

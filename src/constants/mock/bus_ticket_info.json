@@ -1,0 +1,107 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL SERVICE."
+    },
+    "body": {
+      "items": {
+        "item": [
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411270400,
+            "charge": 48200,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270000,
+            "gradeNm": "심야프리미엄",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411270500,
+            "charge": 43600,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270100,
+            "gradeNm": "심야우등",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411270600,
+            "charge": 48200,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270200,
+            "gradeNm": "심야프리미엄",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271000,
+            "charge": 39700,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270600,
+            "gradeNm": "우등",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271040,
+            "charge": 43900,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270640,
+            "gradeNm": "프리미엄",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271120,
+            "charge": 39700,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270720,
+            "gradeNm": "우등",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271200,
+            "charge": 43900,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270800,
+            "gradeNm": "프리미엄",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271240,
+            "charge": 39700,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270840,
+            "gradeNm": "우등",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271320,
+            "charge": 43900,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411270920,
+            "gradeNm": "프리미엄",
+            "routeId": "NAEK010700"
+          },
+          {
+            "arrPlaceNm": "부산",
+            "arrPlandTime": 202411271400,
+            "charge": 39700,
+            "depPlaceNm": "서울경부",
+            "depPlandTime": 202411271000,
+            "gradeNm": "우등",
+            "routeId": "NAEK010700"
+          }
+        ]
+      },
+      "numOfRows": 10,
+      "pageNo": 1,
+      "totalCount": 32
+    }
+  }
+}
