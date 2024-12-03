@@ -6,7 +6,6 @@ import {
   LocationItem,
   LocationItemSelected,
   LocationName,
-  InfoIcon,
   RegionColumn,
   TerminalColumn,
 } from '../arrivalLocation/index.styles';
