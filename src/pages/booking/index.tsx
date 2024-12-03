@@ -265,7 +265,7 @@ function BookingPage() {
           <DatePicker
             selected={searchQuery.startDate}
             onChange={(date: Date | null) => {
-              if (date) return;
+              if (!date) return;
               setSearchQuery({ startDate: date });
               setShowStartDatePicker(false);
             }}
