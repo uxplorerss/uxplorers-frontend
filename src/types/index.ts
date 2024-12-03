@@ -25,8 +25,8 @@ interface Bus {
   destIdList: string[];
   company: string;
   fee: Fee;
-  eta: number;
-  class: Class;
+  eta: string; // n시간 n분
+  class: Class | string; // string으로 '우등' | '고속' | '프리미엄' | '심야프리미엄' 등으로 넘김
   seats: Seat[];
   distance: number;
   isExpress: boolean;

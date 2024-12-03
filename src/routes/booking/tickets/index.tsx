@@ -5,11 +5,7 @@ import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
 import InfoIcon from '../../../assets/InfoIcon.svg?react';
 import { useEffect, useState } from 'react';
-import {
-  BusTicket,
-  getBusNowTimeAPI,
-  getBusTicketsAPI,
-} from '../../../apis/getBusTickets';
+import { BusTicket, getBusTicketsAPI } from '../../../apis/getBusTickets';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
 import {
   convertAMPMHHMM,
@@ -21,6 +17,11 @@ import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 import useForwardBusListStore from '../../../stores/useTowardBusListStore';
 import { Tooltip } from 'react-tooltip';
 import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
+import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
+
+export const Route = createFileRoute('/booking/tickets/')({
+  component: RouteComponent,
+});
 
 const container = (theme: Theme) => css`
   padding: 15px 20px;
@@ -29,10 +30,6 @@ const container = (theme: Theme) => css`
   gap: 20px;
   background-color: ${theme.colors.gray[3]};
 `;
-
-export const Route = createFileRoute('/booking/tickets/')({
-  component: RouteComponent,
-});
 
 const buttonCSS = (theme: Theme) => css`
   background-color: ${theme.colors.gray.white};
@@ -153,9 +150,9 @@ function RouteComponent() {
         setBusTickets(data.response.body.items.item);
 
         // TODO: 전역 상태에 넣기
-        // 기본 adults 요금, teens 요금은 20% 할인, children 요금은 50% 할인
-
-        // concat(data.response.body.items.item);
+        concat(
+          convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
+        );
 
         // throw new Error('dd');
       })
@@ -163,6 +160,12 @@ function RouteComponent() {
         console.error(error);
         //error인 경우, mock data로 초기화
         setBusTickets(MOCK_busTickets.response.body.items.item);
+        concat(
+          convertBusTicketsToBusList(
+            MOCK_busTickets.response.body.items.item,
+            searchQuery
+          )
+        );
       });
   }, []);
 

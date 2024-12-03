@@ -36,7 +36,7 @@ export function convertAMPMHHMM(datetime: number): string {
   });
 }
 
-function parseYYYYMMDDHHMM(datetime: string): Date {
+export function parseYYYYMMDDHHMM(datetime: string): Date {
   const year = parseInt(datetime.substring(0, 4), 10);
   const month = parseInt(datetime.substring(4, 6), 10) - 1; // Month is 0-indexed
   const day = parseInt(datetime.substring(6, 8), 10);
