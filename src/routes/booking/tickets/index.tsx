@@ -153,8 +153,10 @@ function RouteComponent() {
         setBusTickets(data.response.body.items.item);
 
         // TODO: 전역 상태에 넣기
-        //concat(data.response.body.items.item);
+        // concat(data.response.body.items.item);
+
         // 기본 adults 요금, teens 요금은 20% 할인, children 요금은 50% 할인
+        // throw new Error('dd');
       })
       .catch((error) => {
         console.error(error);
