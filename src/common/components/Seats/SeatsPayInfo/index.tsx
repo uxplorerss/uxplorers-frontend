@@ -18,7 +18,7 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
       teen,
       children = 0;
 
-    selected.forEach((value) => {});
+    // selected.forEach((value) => {});
     return str;
   };
   useEffect(() => {
