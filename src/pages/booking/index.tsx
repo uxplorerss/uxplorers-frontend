@@ -28,8 +28,7 @@ import RightArrowMonthIcon from '../../assets/booking/btn_rightArrowMonth.svg?re
 
 import { buildTypography } from '../../common/components/Typography/index.styles';
 import { container as buttonContainer } from '../../common/components/Button/index.styles';
-import theme from '../../theme';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
@@ -38,22 +37,25 @@ import terminalData from '../../constants/terminal.json';
 
 import useSearchQueryStore from '../../stores/useSearchQueryStore';
 import LanguageSwitchButton from '../../common/components/LanguageSwitchButton';
+import { buildInput } from '../../common/components/Input/index.styles';
 
 function BookmarkList() {
   const navigate = useNavigate();
+  const theme = useTheme();
   return (
     <div style={{ padding: '0 20px', marginTop: '48px' }}>
       <Typography variant="body1" as="p">
         즐겨찾기
       </Typography>
-      <Input
-        value="서울 경부 → 구미"
+      <Button
+        cx={buildInput(theme)}
         onClick={() => {
           navigate({ to: '/booking/tickets' });
         }}
         style={{ cursor: 'pointer' }}
-        readOnly
-      />
+      >
+        서울 경부 → 구미
+      </Button>
     </div>
   );
 }
@@ -82,7 +84,10 @@ function BookingPage() {
     return `${month}. ${date} (${day})`;
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date?: Date | null) => {
+    if (!date) {
+      return '';
+    }
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
@@ -98,6 +103,7 @@ function BookingPage() {
     return terminal?.tmnNm;
   };
 
+  const theme = useTheme();
   return (
     <div css={container}>
       <TopBar
@@ -122,21 +128,23 @@ function BookingPage() {
 
       <main css={mainContent}>
         <div css={locationInputsWrapper}>
-          <Input
-            type="text"
-            placeholder="출발지 선택"
-            value={tmnCdToTmnNm(searchQuery.startId)}
-            onValueChange={(value: string) => {
-              setSearchQuery({
-                startId: value,
-              });
-            }}
+          <Button
+            css={[
+              buildInput(theme),
+              {
+                color: searchQuery.startId
+                  ? theme.colors.gray.black
+                  : theme.colors.gray[1],
+              },
+            ]}
             onClick={() => {
               navigate({ to: '/booking/departLocation' });
             }}
-            style={{ cursor: 'pointer' }}
-            readOnly
-          />
+          >
+            {searchQuery.startId
+              ? tmnCdToTmnNm(searchQuery.startId)
+              : '출발지 선택'}
+          </Button>
 
           <div css={transferButtonWrapper}>
             <TransferBtn
@@ -148,32 +156,32 @@ function BookingPage() {
               }}
             />
           </div>
-
-          <Input
-            type="text"
-            placeholder="도착지 선택"
-            value={tmnCdToTmnNm(searchQuery.destId)}
-            onValueChange={(value: string) => {
-              setSearchQuery({
-                destId: value,
-              });
-            }}
+          <Button
+            css={[
+              buildInput(theme),
+              {
+                color: searchQuery.destId
+                  ? theme.colors.gray.black
+                  : theme.colors.gray[1],
+              },
+            ]}
             onClick={() => {
               navigate({ to: '/booking/arrivalLocation' });
             }}
-            style={{ cursor: 'pointer' }}
-            readOnly
-          />
+          >
+            {searchQuery.startId
+              ? tmnCdToTmnNm(searchQuery.destId)
+              : '도착지 선택'}
+          </Button>
         </div>
 
         <div css={dateSelector}>
           <Input
             css={dateBox}
-            initialValue={initialDate()}
             value={formatDate(searchQuery.startDate)}
-            onValueChange={(value: Date) => {
+            onValueChange={(value: string) => {
               setSearchQuery({
-                startDate: value,
+                startDate: new Date(value),
               });
             }}
             onClick={() => {
@@ -191,6 +199,9 @@ function BookingPage() {
             }}
             style={{ cursor: 'pointer' }}
             readOnly
+            onValueChange={function (): void {
+              throw new Error('Function not implemented.');
+            }}
           />
         </div>
 
@@ -253,13 +264,14 @@ function BookingPage() {
         <div css={DatePickerWrapper}>
           <DatePicker
             selected={searchQuery.startDate}
-            onChange={(date: Date) => {
+            onChange={(date: Date | null) => {
+              if (!date) return;
               setSearchQuery({ startDate: date });
               setShowStartDatePicker(false);
             }}
-            maxDate={searchQuery.destDate}
+            maxDate={searchQuery.destDate ?? undefined}
             locale={ko}
-            formatWeekday={(nameofDay: string) => {
+            formatWeekDay={(nameofDay: string) => {
               return nameofDay.substring(0, 1);
             }}
             renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
@@ -291,14 +303,14 @@ function BookingPage() {
         <div css={DatePickerWrapper}>
           <DatePicker
             selected={searchQuery.destDate}
-            onChange={(date: Date) => {
+            onChange={(date: Date | null) => {
               setSearchQuery({ destDate: date });
               setShowEndDatePicker(false);
               setRoundTrip(true);
             }}
             minDate={searchQuery.startDate}
             locale={ko}
-            formatWeekday={(nameofDay: string) => {
+            formatWeekDay={(nameofDay: string) => {
               return nameofDay.substring(0, 1);
             }}
             renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
