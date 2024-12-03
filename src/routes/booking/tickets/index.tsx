@@ -32,6 +32,7 @@ const container = (theme: Theme) => css`
 `;
 
 const buttonCSS = (theme: Theme) => css`
+  width: 100%;
   background-color: ${theme.colors.gray.white};
   padding: 16px;
   border-radius: 20px;
@@ -66,69 +67,74 @@ const buttonCSS = (theme: Theme) => css`
 
 function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
   return (
-    <Button cx={(theme) => buttonCSS(theme)}>
-      <Typography variant="title3">
-        {convertAMPMHHMM(busTicket.depPlandTime)}
-      </Typography>
-      <div className="charge-time__container">
-        <div className="tags">
-          <Typography
-            variant="body3"
-            cx={(theme) => css`
-              color: ${theme.colors.primary.base};
-            `}
-            backgroundColor="primary"
-          >
-            무정차
+    <Link to="/booking/seats">
+      <Button cx={(theme) => buttonCSS(theme)}>
+        <Typography variant="title3">
+          {convertAMPMHHMM(busTicket.depPlandTime)}
+        </Typography>
+        <div className="charge-time__container">
+          <div className="tags">
+            <Typography
+              variant="body3"
+              cx={(theme) => css`
+                color: ${theme.colors.primary.base};
+              `}
+              backgroundColor="primary"
+            >
+              무정차
+            </Typography>
+            <Typography
+              variant="body4"
+              cx={(theme) => css`
+                color: ${theme.colors.gray[0]};
+              `}
+              as="span"
+            >
+              경기고속
+            </Typography>
+          </div>
+          <Typography variant="title3" as="div">
+            {busTicket.charge.toLocaleString()} 원
           </Typography>
           <Typography
             variant="body4"
             cx={(theme) => css`
-              color: ${theme.colors.gray[0]};
+              color: ${theme.colors.gray[4]};
             `}
-            as="span"
           >
-            경기고속
+            {getDifferenceInMinutes(
+              busTicket.arrPlandTime.toString(),
+              busTicket.depPlandTime.toString()
+            )}{' '}
+            예상
           </Typography>
         </div>
-        <Typography variant="title3" as="div">
-          {busTicket.charge.toLocaleString()} 원
-        </Typography>
-        <Typography
-          variant="body4"
-          cx={(theme) => css`
-            color: ${theme.colors.gray[4]};
-          `}
-        >
-          {getDifferenceInMinutes(
-            busTicket.arrPlandTime.toString(),
-            busTicket.depPlandTime.toString()
-          )}{' '}
-          예상
-        </Typography>
-      </div>
-      <div className="busInfo">
-        <Typography variant="title3" as="div">
-          좌석 수
-        </Typography>
-        <Typography
-          variant="body4"
-          cx={(theme) => css`
-            color: ${theme.colors.primary.base};
-          `}
-        >
-          {busTicket.gradeNm}
-        </Typography>
-        <InfoIcon
-          data-tooltip-id="bus-ticket-tooltip"
-          data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
-          css={css`
-            margin-top: 7px;
-          `}
-        />
-        <Tooltip id="bus-ticket-tooltip" style={{ backgroundColor: 'gray' }} />
-      </div>
-    </Button>
+        <div className="busInfo">
+          <Typography variant="title3" as="div">
+            좌석 수
+          </Typography>
+          <Typography
+            variant="body4"
+            cx={(theme) => css`
+              color: ${theme.colors.primary.base};
+            `}
+          >
+            {busTicket.gradeNm}
+          </Typography>
+          <InfoIcon
+            data-tooltip-id="bus-ticket-tooltip"
+            data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
+            css={css`
+              margin-top: 7px;
+            `}
+          />
+          <Tooltip
+            id="bus-ticket-tooltip"
+            style={{ backgroundColor: 'gray' }}
+          />
+        </div>
+      </Button>
+    </Link>
   );
 }
 
