@@ -6,7 +6,7 @@ const initialState = {
     startId: '',
     destId: '',
     startDate: new Date(),
-    destDate: new Date(),
+    destDate: null,
   },
 };
 
