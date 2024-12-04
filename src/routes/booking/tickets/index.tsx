@@ -18,6 +18,7 @@ import useForwardBusListStore from '../../../stores/useTowardBusListStore';
 import { Tooltip } from 'react-tooltip';
 import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
 import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
+import { Bus } from '../../../types';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -65,12 +66,12 @@ const buttonCSS = (theme: Theme) => css`
   }
 `;
 
-function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
+function ButtonComponent({ bus }: { bus: Bus }) {
   return (
     <Link to="/booking/seats">
       <Button cx={(theme) => buttonCSS(theme)}>
         <Typography variant="title3">
-          {convertAMPMHHMM(busTicket.depPlandTime)}
+          {convertAMPMHHMM(bus.startDate)}
         </Typography>
         <div className="charge-time__container">
           <div className="tags">
@@ -94,7 +95,7 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
             </Typography>
           </div>
           <Typography variant="title3" as="div">
-            {busTicket.charge.toLocaleString()} 원
+            {bus.fee.adults.toLocaleString()} 원
           </Typography>
           <Typography
             variant="body4"
@@ -102,16 +103,12 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
               color: ${theme.colors.gray[4]};
             `}
           >
-            {getDifferenceInMinutes(
-              busTicket.arrPlandTime.toString(),
-              busTicket.depPlandTime.toString()
-            )}{' '}
-            예상
+            {bus.eta} 예상
           </Typography>
         </div>
         <div className="busInfo">
           <Typography variant="title3" as="div">
-            좌석 수
+            {`${bus.seats.length || 28}석`}
           </Typography>
           <Typography
             variant="body4"
@@ -119,11 +116,11 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
               color: ${theme.colors.primary.base};
             `}
           >
-            {busTicket.gradeNm}
+            {bus.class}
           </Typography>
           <InfoIcon
             data-tooltip-id="bus-ticket-tooltip"
-            data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
+            data-tooltip-content="좌석수는 부정확할 수 있습니다. 터미널에서 확인해 주세요."
             css={css`
               margin-top: 7px;
             `}
@@ -140,7 +137,7 @@ function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
 
 function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
-  const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
+  // const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
   const [busSearchTime, setBusSearchTime] = useState<number>(202411290500);
 
   const { searchQuery } = useSearchQueryStore((state) => state);
@@ -153,8 +150,7 @@ function RouteComponent() {
       convertYYYYMMDD(searchQuery.startDate)
     )
       .then((data) => {
-        setBusTickets(data.response.body.items.item);
-
+        //setBusTickets(data.response.body.items.item);
         // TODO: 전역 상태에 넣기
         concat(
           convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
@@ -165,7 +161,7 @@ function RouteComponent() {
       .catch((error) => {
         console.error(error);
         //error인 경우, mock data로 초기화
-        setBusTickets(MOCK_busTickets.response.body.items.item);
+        //setBusTickets(MOCK_busTickets.response.body.items.item);
         concat(
           convertBusTicketsToBusList(
             MOCK_busTickets.response.body.items.item,
@@ -230,9 +226,9 @@ function RouteComponent() {
           </Button>
         </div>
 
-        {busTickets &&
-          busTickets.map((busTicket, index) => (
-            <ButtonComponent key={index} busTicket={busTicket} />
+        {forwardBusList &&
+          forwardBusList.map((bus, index) => (
+            <ButtonComponent key={index} bus={bus} />
           ))}
       </section>
     </div>

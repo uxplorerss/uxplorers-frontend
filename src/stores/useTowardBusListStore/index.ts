@@ -11,7 +11,7 @@ const useForwardBusListStore = create<ForwardBusListState>((set) => ({
   concat: (newforwardBusList) =>
     set((state) => ({
       ...state,
-      forwardBusList: [...state.forwardBusList, ...newforwardBusList],
+      forwardBusList: [...newforwardBusList],
     })),
   deleteByStartId: (targetStartId) =>
     set((state) => ({

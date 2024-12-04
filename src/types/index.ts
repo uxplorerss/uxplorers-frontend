@@ -19,7 +19,7 @@ export interface Seat {
 
 type Class = 'economy' | 'first' | 'premium';
 
-interface Bus {
+export interface Bus {
   startDate: Date;
   startId: string;
   destIdList: string[];
