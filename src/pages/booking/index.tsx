@@ -29,6 +29,7 @@ import RightArrowMonthIcon from '../../assets/booking/btn_rightArrowMonth.svg?re
 import { buildTypography } from '../../common/components/Typography/index.styles';
 import { container as buttonContainer } from '../../common/components/Button/index.styles';
 import { css, useTheme } from '@emotion/react';
+import theme from '../../theme/index';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
@@ -41,7 +42,6 @@ import { buildInput } from '../../common/components/Input/index.styles';
 
 function BookmarkList() {
   const navigate = useNavigate();
-  const theme = useTheme();
   return (
     <div style={{ padding: '0 20px', marginTop: '48px' }}>
       <Typography variant="body1" as="p">
@@ -103,7 +103,7 @@ function BookingPage() {
     return terminal?.tmnNm;
   };
 
-  const theme = useTheme();
+
   return (
     <div css={container}>
       <TopBar
