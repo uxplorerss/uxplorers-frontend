@@ -1,15 +1,12 @@
-import React from 'react';
 import Typography from '../Typography';
-import { Divider } from '../Divider';
 import Flex from '../Flex';
 import { useTheme } from '@emotion/react';
-import Button from '../Button';
 import SeatIcon from '../../../assets/SeatIcon.svg?react';
 import SmallPersonIcon from '../../../assets/SmallPersonIcon.svg?react';
 import { SeatDetailsTablePropsType } from './index.types';
 import { Fee, Seat } from '../../../types';
+import CompanyRow from '../CompanyRow';
 
-const checkHasStops = (destIds: string[]) => !destIds.length;
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
 
@@ -18,7 +15,6 @@ export default function SeatDetailsTable({
   destId,
   seats,
 }: SeatDetailsTablePropsType) {
-  const hasStops = checkHasStops(destId);
   const [adultSeats, childrenSeats] = [
     filterSeatsByType(seats, 'adults'),
     filterSeatsByType(seats, 'children'),
@@ -31,49 +27,16 @@ export default function SeatDetailsTable({
       justify="start"
       align="start"
       width="100%"
-      gap="17px"
-      cx={{
-        padding: '17px',
-      }}
       boxSizing="border-box"
     >
-      <Flex justify="space-between" width="100%" boxSizing="border-box">
-        <Flex direction="row" justify="start" gap="8px">
-          <Typography
-            variant="body3"
-            as="div"
-            cx={{
-              padding: '3.5px 8px',
-              backgroundColor: theme.colors.gray[3],
-              color: theme.colors.gray[4],
-              borderRadius: '9px',
-            }}
-          >
-            {hasStops ? '무정차' : '경유'}
-          </Typography>
-
-          <Typography
-            variant="title4"
-            cx={{
-              color: theme.colors.gray.black,
-            }}
-          >
-            {company}
-          </Typography>
-          <Divider orientation="vertical" />
-          <Typography
-            variant="body3"
-            cx={{
-              color: theme.colors.gray[0],
-            }}
-          >
-            우등
-          </Typography>
-        </Flex>
-        <Button cx={{ color: theme.colors.primary.base }}>
-          <Typography variant="title4">수정</Typography>
-        </Button>
-      </Flex>
+      <CompanyRow
+        company={company}
+        destId={destId}
+        cx={{
+          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
+          padding: '17px 0',
+        }}
+      />
       <div
         css={{
           display: 'grid',
@@ -86,6 +49,9 @@ export default function SeatDetailsTable({
           width: '100%',
           gridTemplateColumns: 'repeat(3, auto) 1fr',
           alignItems: 'center',
+          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
+          paddingBottom: '17px',
+          paddingTop: '17px',
         }}
       >
         <SeatIcon
