@@ -10,7 +10,7 @@ const useBackwardBusListStore = create<BackwardBusListState>((set) => ({
   concat: (newBackwardBusList) =>
     set((state) => ({
       ...state,
-      backwardBusList: [...state.backwardBusList, ...newBackwardBusList],
+      backwardBusList: [...newBackwardBusList],
     })),
   deleteByStartId: (targetStartId) =>
     set((state) => ({
