@@ -95,6 +95,7 @@ export const customDatePicker = css({
 
   '.react-datepicker__header': {
     backgroundColor: 'white',
+    border: 'none',
   },
 
   '.react-datepicker__month-container': {
@@ -135,6 +136,7 @@ export const customDatePicker = css({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '10px',
   },
 
   '.react-datepicker__day--selected': {
@@ -150,7 +152,7 @@ export const DatePickerWrapper = css([
     bottom: 0,
     left: 0,
     right: 0,
-    height: '63%',
+    height: '68%',
     background: 'white',
     padding: '20px',
     boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
