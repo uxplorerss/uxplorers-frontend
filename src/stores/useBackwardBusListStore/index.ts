@@ -5,21 +5,23 @@ const initialState = {
   backwardBusList: [],
 };
 
-const useBackwardBusListStore = create<BackwardBusListState>((set) => ({
-  ...initialState,
-  concat: (newBackwardBusList) =>
-    set((state) => ({
-      ...state,
-      backwardBusList: [...state.backwardBusList, ...newBackwardBusList],
-    })),
-  deleteByStartId: (targetStartId) =>
-    set((state) => ({
-      ...state,
-      backwardBusList: state.backwardBusList.filter(
-        (backwardBus) => backwardBus.startId !== targetStartId
-      ),
-    })),
-  reset: () => set({ ...initialState }),
-}));
+const useBackwardBusListStore = create<BackwardBusListState>(
+  devtools((set) => ({
+    ...initialState,
+    concat: (newBackwardBusList) =>
+      set((state) => ({
+        ...state,
+        backwardBusList: [...state.backwardBusList, ...newBackwardBusList],
+      })),
+    deleteByStartId: (targetStartId) =>
+      set((state) => ({
+        ...state,
+        backwardBusList: state.backwardBusList.filter(
+          (backwardBus) => backwardBus.startId !== targetStartId
+        ),
+      })),
+    reset: () => set({ ...initialState }),
+  }))
+);
 
 export default useBackwardBusListStore;
