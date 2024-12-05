@@ -1,11 +1,12 @@
 import { create } from 'zustand';
 import type { BackwardBusListState } from './index.types';
+import { devtools } from 'zustand/middleware';
 
 const initialState = {
   backwardBusList: [],
 };
 
-const useBackwardBusListStore = create<BackwardBusListState>(
+const useBackwardBusListStore = create<BackwardBusListState>()(
   devtools((set) => ({
     ...initialState,
     concat: (newBackwardBusList) =>
