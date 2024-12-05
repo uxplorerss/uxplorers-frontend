@@ -186,6 +186,7 @@ function BookingPage() {
             }}
             onClick={() => {
               setShowStartDatePicker(true);
+              setShowEndDatePicker(false);
             }}
             style={{ cursor: 'pointer' }}
             readOnly
@@ -196,6 +197,7 @@ function BookingPage() {
             value={roundTrip ? formatDate(searchQuery.destDate) : ''}
             onClick={() => {
               setShowEndDatePicker(true);
+              setShowStartDatePicker(false);
             }}
             style={{ cursor: 'pointer' }}
             readOnly
