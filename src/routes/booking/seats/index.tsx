@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
 import { useEffect, useState } from 'react';
 
@@ -37,6 +37,12 @@ function IndexComponent() {
     setSelectedType(type);
   };
 
+  const handleNavigate = () => {
+    pageType
+      ? navigate({ to: '/booking/payment' })
+      : navigate({ to: '/booking/tickets' });
+  };
+
   //TODO GET /seats/${bus}
   const initSeats = (): seat[] => {
     const tmp: seat[] = [];
@@ -58,9 +64,9 @@ function IndexComponent() {
   const [selectedType, setSelectedType] = useState<SeatTypeVariant>('adults');
   const [seats, setSeats] = useState<seat[]>(initSeats());
   const { searchQuery } = useSearchQueryStore();
-  const { backwardBusList } = useBackwardBusListStore();
 
-  const pageType = searchQuery.destId === ''; // true면 예약확인페이지 이동, false면 오는 길 버스 리스트 페이지로 네비게이팅
+  const navigate = useNavigate();
+  const pageType = searchQuery.destId === ''; // true면 예약확인페이지, false면 오는 길 버스 리스트 페이지
   const available =
     28 - seats.filter((value) => value.status === 'SELECTED').length;
   return (
@@ -76,7 +82,11 @@ function IndexComponent() {
         onSelectSeat={handleSelectSeat}
         selectedType={selectedType}
       />
-      <SeatsPayInfo seats={seats} pageType={pageType} />
+      <SeatsPayInfo
+        seats={seats}
+        pageType={pageType}
+        onClick={handleNavigate}
+      />
     </>
   );
 }

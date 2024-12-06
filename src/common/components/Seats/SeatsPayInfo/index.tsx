@@ -13,6 +13,7 @@ import { seat } from '../SelectSeat/types';
 export default function SeatsPayInfo({
   seats,
   pageType,
+  onClick,
 }: SeatsPayInfoPropsType) {
   const adults: seat[] = [];
   const teens: seat[] = [];
@@ -98,7 +99,7 @@ export default function SeatsPayInfo({
                   </Typography>
                 </Flex>
               </Flex>
-              <MainButton>
+              <MainButton onClick={onClick}>
                 <Flex gap="20px">
                   <span>{pageType ? '결제하기' : '다음'}</span>
                 </Flex>
