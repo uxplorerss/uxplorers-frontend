@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import PrimaryCard from '../common/components/PrimaryCard';
-import RouteRow from '../common/components/RouteRow';
+import RouteOptionRow from '../common/components/RouteOptionRow';
 import SeatDetailsTable from '../common/components/SeatDetailsTable';
 import FeeSumRow from '../common/components/FeeSumRow';
 import { Ticket } from '../types';
 import { ticket } from '../mock/ticket/fixture';
 import { seats } from '../mock/seats/fixture';
+import RouteRow from '../common/components/RouteRow';
 
 const meta = {
   title: 'common/PrimaryCard',
@@ -26,14 +27,28 @@ const totalFee = ticketDetails.seats.reduce(
   0
 );
 
-export const Default: Story = {
+export const ActiveOption: Story = {
+  args: {
+    headerSlot: <RouteOptionRow {...ticketDetails} />,
+    children: <SeatDetailsTable {...ticketDetails} />,
+  },
+};
+
+export const InactiveOption: Story = {
+  args: {
+    headerSlot: <RouteOptionRow {...ticketDetails} inactive={true} />,
+    children: <SeatDetailsTable {...ticketDetails} inactive={true} />,
+  },
+};
+
+export const Active: Story = {
   args: {
     headerSlot: <RouteRow {...ticketDetails} />,
     children: <SeatDetailsTable {...ticketDetails} />,
   },
 };
 
-export const Inactive: Story = {
+export const InActive: Story = {
   args: {
     headerSlot: <RouteRow {...ticketDetails} inactive={true} />,
     children: <SeatDetailsTable {...ticketDetails} inactive={true} />,

@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RouteRow from '../common/components/RouteRow';
+import RouteOptionRow from '../common/components/RouteOptionRow';
 
 const meta = {
-  title: 'common/RouteRow',
-  component: RouteRow,
+  title: 'common/RouteOptionRow',
+  component: RouteOptionRow,
 } satisfies Meta;
 
 export default meta;

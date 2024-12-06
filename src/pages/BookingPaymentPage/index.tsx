@@ -2,7 +2,7 @@ import React from 'react';
 import Flex from '../../common/components/Flex';
 import { Typography } from '../../common/components';
 import PrimaryCard from '../../common/components/PrimaryCard';
-import RouteRow from '../../common/components/RouteRow';
+import RouteOptionRow from '../../common/components/RouteOptionRow';
 import SeatDetailsTable from '../../common/components/SeatDetailsTable';
 import FeeSumRow from '../../common/components/FeeSumRow';
 import useTicketListStore from '../../stores/useTicketListStore';
@@ -32,7 +32,11 @@ export default function BookingPaymentPage() {
           <PrimaryCard
             {...props}
             headerSlot={
-              <RouteRow {...props} startName="부산해운대" destName="동서울" />
+              <RouteOptionRow
+                {...props}
+                startName="부산해운대"
+                destName="동서울"
+              />
             }
             children={<SeatDetailsTable {...props} />}
           />
