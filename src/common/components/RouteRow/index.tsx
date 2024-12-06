@@ -31,9 +31,9 @@ export default function RouteRow({
       >
         <CheckCircleOutlinedIcon />
       </Flex>
-      <Typography variant="button1">{startName}</Typography>
+      <Typography variant="title2">{startName}</Typography>
       <ArrowRightLongIcon />
-      <Typography variant="button1">{destName}</Typography>
+      <Typography variant="title2">{destName}</Typography>
     </Flex>
   );
 }
