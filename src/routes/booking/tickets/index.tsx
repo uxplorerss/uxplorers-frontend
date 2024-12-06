@@ -57,8 +57,8 @@ export default function RouteComponent() {
 
   useEffect(() => {
     getBusTicketsAPI(
-      searchQuery.startId || 'NAEK032',
-      searchQuery.destId || 'NAEK300',
+      searchQuery.startId,
+      searchQuery.destId,
       convertYYYYMMDD(new Date(searchQuery.startDate))
     )
       .then((data) => {
@@ -153,7 +153,7 @@ export default function RouteComponent() {
 
         {forwardBusList &&
           forwardBusList.map((bus, index) => (
-            <ButtonComponent key={index} bus={bus} />
+            <ButtonComponent key={index} bus={bus} direction="outbound" />
           ))}
       </section>
     </div>
