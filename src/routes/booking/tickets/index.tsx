@@ -150,18 +150,14 @@ export default function RouteComponent() {
       convertYYYYMMDD(searchQuery.startDate)
     )
       .then((data) => {
-        //setBusTickets(data.response.body.items.item);
         // TODO: 전역 상태에 넣기
         concat(
           convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
         );
-
-        // throw new Error('dd');
       })
       .catch((error) => {
         console.error(error);
         //error인 경우, mock data로 초기화
-        //setBusTickets(MOCK_busTickets.response.body.items.item);
         concat(
           convertBusTicketsToBusList(
             MOCK_busTickets.response.body.items.item,

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { SearchQueryState } from './index.types';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 const initialState = {
   searchQuery: {
@@ -12,14 +12,19 @@ const initialState = {
 };
 
 const useSearchQueryStore = create<SearchQueryState>()(
-  devtools((set) => ({
-    ...initialState,
-    setSearchQuery: (query) =>
-      set((state) => ({
-        searchQuery: { ...state.searchQuery, ...query },
-      })),
-    resetSearchQuery: () => set({ ...initialState }),
-  }))
+  persist(
+    devtools((set) => ({
+      ...initialState,
+      setSearchQuery: (query) =>
+        set((state) => ({
+          searchQuery: { ...state.searchQuery, ...query },
+        })),
+      resetSearchQuery: () => set({ ...initialState }),
+    })),
+    {
+      name: 'search-query',
+    }
+  )
 );
 
 export default useSearchQueryStore;
