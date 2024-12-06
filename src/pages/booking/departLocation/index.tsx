@@ -39,7 +39,7 @@ interface Terminal2Data {
 }
 
 function LocationSelectPage() {
-  const { setSearchQuery } = useSearchQueryStore();
+  const setSearchQuery = useSearchQueryStore((state) => state.setSearchQuery);
   const navigate = useNavigate();
 
   const [searchKeyword, setSearchKeyword] = useState('');
