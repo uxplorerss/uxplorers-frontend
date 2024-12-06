@@ -19,6 +19,7 @@ import { Tooltip } from 'react-tooltip';
 import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
 import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
 import { Bus } from '../../../types';
+import StikcyHeader from '../../../common/components/StickyHeader';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -169,28 +170,30 @@ export default function RouteComponent() {
 
   return (
     <div style={{ userSelect: 'none' }}>
-      <TopBar
-        leftSlot={
-          <Link
-            onClick={(e) => {
-              e.preventDefault();
-              history.go(-1);
-            }}
-          >
-            <img src={LeftArrowIcon} alt="back button" />
-          </Link>
-        }
-        centerSlot={
-          <div>
+      <StikcyHeader>
+        <TopBar
+          leftSlot={
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                history.go(-1);
+              }}
+            >
+              <img src={LeftArrowIcon} alt="back button" />
+            </Link>
+          }
+          centerSlot={
             <div>
-              {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
-              {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+              <div>
+                {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
+                {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+              </div>
+              <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
             </div>
-            <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
-          </div>
-        }
-        rightSlot={<img src={FavIcon} />}
-      />
+          }
+          rightSlot={<img src={FavIcon} />}
+        />
+      </StikcyHeader>
 
       <section css={(theme) => container(theme)}>
         <Typography variant="title1" as="p" cx={{ textAlign: 'center' }}>
