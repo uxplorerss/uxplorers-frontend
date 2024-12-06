@@ -4,8 +4,7 @@ import type { ElementType } from 'react';
 
 export interface PrimaryCardPropsType {
   headerSlot?: ReactNode;
-  bodySlot: ReactNode;
-  footerSlot?: ReactNode;
+  children: ReactNode;
   as?: ElementType;
   cx?: Interpolation<Theme>;
 }

@@ -34,8 +34,7 @@ export default function BookingPaymentPage() {
             headerSlot={
               <RouteRow {...props} startName="부산해운대" destName="동서울" />
             }
-            bodySlot={<SeatDetailsTable {...props} />}
-            footerSlot={<FeeSumRow totalFee={12345} />}
+            children={<SeatDetailsTable {...props} />}
           />
         );
       })}

@@ -7,6 +7,11 @@ import { SeatDetailsTablePropsType } from './index.types';
 import { Fee, Seat } from '../../../types';
 import CompanyRow from '../CompanyRow';
 import TicketDateRow from '../TicketDateRow';
+import FeeSumRow from '../FeeSumRow';
+import {
+  buildDashedVerticalBorderStyles,
+  verticalPaddingStyles,
+} from './index.styles';
 
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
@@ -24,136 +29,127 @@ export default function SeatDetailsTable({
 
   const theme = useTheme();
   return (
-    <Flex
-      direction="column"
-      justify="start"
-      align="start"
-      width="100%"
-      boxSizing="border-box"
-    >
-      <TicketDateRow
-        startDate={startDate}
-        cx={{
-          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
-          paddingBottom: '17px',
-        }}
-      />
-      <CompanyRow
-        company={company}
-        destIdList={destIdList}
-        cx={{
-          paddingTop: '17px',
-        }}
-      />
-      <div
-        css={{
-          display: 'grid',
-          gridTemplateAreas: `"seat-icon seat-label seat-value ."
+    <>
+      <TicketDateRow startDate={startDate} cx={[verticalPaddingStyles]} />
+      <Flex
+        direction="column"
+        width="100%"
+        justify="start"
+        align="start"
+        gap="17px"
+        cx={[verticalPaddingStyles, buildDashedVerticalBorderStyles]}
+      >
+        <CompanyRow company={company} destIdList={destIdList} />
+        <div
+          css={[
+            {
+              display: 'grid',
+              gridTemplateAreas: `"seat-icon seat-label seat-value ."
           "person-icon person-label person-value ."
           ". . adult-label adult-price"
           ". . child-label child-price"
           `,
-          rowGap: '6px',
-          width: '100%',
-          gridTemplateColumns: 'repeat(3, auto) 1fr',
-          alignItems: 'center',
-          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
-          paddingBottom: '17px',
-          paddingTop: '17px',
-        }}
-      >
-        <SeatIcon
-          css={{
-            gridArea: 'seat-icon',
-          }}
-        />
-        <Typography
-          variant="body3"
-          as="div"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'seat-label',
-            marginLeft: '5px',
-            marginRight: '22px',
-          }}
+              rowGap: '6px',
+              width: '100%',
+              gridTemplateColumns: 'repeat(3, auto) 1fr',
+              alignItems: 'center',
+            },
+          ]}
         >
-          좌석
-        </Typography>
+          <SeatIcon
+            css={{
+              gridArea: 'seat-icon',
+            }}
+          />
+          <Typography
+            variant="body3"
+            as="div"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'seat-label',
+              marginLeft: '5px',
+              marginRight: '22px',
+            }}
+          >
+            좌석
+          </Typography>
 
-        <Typography
-          variant="title4"
-          cx={{
-            gridArea: 'seat-value',
-          }}
-        >
-          {seats.length}
-        </Typography>
+          <Typography
+            variant="title4"
+            cx={{
+              gridArea: 'seat-value',
+            }}
+          >
+            {seats.length}
+          </Typography>
 
-        <SmallPersonIcon
-          css={{
-            gridArea: 'person-icon',
-          }}
-        />
+          <SmallPersonIcon
+            css={{
+              gridArea: 'person-icon',
+            }}
+          />
 
-        <Typography
-          variant="body3"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'person-label',
-            marginLeft: '5px',
-            marginRight: '22px',
-          }}
-        >
-          매수
-        </Typography>
+          <Typography
+            variant="body3"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'person-label',
+              marginLeft: '5px',
+              marginRight: '22px',
+            }}
+          >
+            매수
+          </Typography>
 
-        <Typography
-          variant="title4"
-          cx={{
-            gridArea: 'person-value',
-          }}
-        >
-          총 {seats.length}장
-        </Typography>
-        <Typography
-          variant="body3"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'adult-label',
-          }}
-        >
-          일반 {adultSeats.length}명
-        </Typography>
-        <Typography
-          variant="body3"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'adult-price',
-            justifySelf: 'end',
-          }}
-        >
-          {adultSeats.length * adultSeats[0].fee}원
-        </Typography>
-        <Typography
-          variant="body3"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'child-label',
-          }}
-        >
-          초등생 {childrenSeats.length}명
-        </Typography>
-        <Typography
-          variant="body3"
-          cx={{
-            color: theme.colors.gray[4],
-            gridArea: 'child-price',
-            justifySelf: 'end',
-          }}
-        >
-          {childrenSeats.length * childrenSeats[0].fee}원
-        </Typography>
-      </div>
-    </Flex>
+          <Typography
+            variant="title4"
+            cx={{
+              gridArea: 'person-value',
+            }}
+          >
+            총 {seats.length}장
+          </Typography>
+          <Typography
+            variant="body3"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'adult-label',
+            }}
+          >
+            일반 {adultSeats.length}명
+          </Typography>
+          <Typography
+            variant="body3"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'adult-price',
+              justifySelf: 'end',
+            }}
+          >
+            {adultSeats.length * adultSeats[0].fee}원
+          </Typography>
+          <Typography
+            variant="body3"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'child-label',
+            }}
+          >
+            초등생 {childrenSeats.length}명
+          </Typography>
+          <Typography
+            variant="body3"
+            cx={{
+              color: theme.colors.gray[4],
+              gridArea: 'child-price',
+              justifySelf: 'end',
+            }}
+          >
+            {childrenSeats.length * childrenSeats[0].fee}원
+          </Typography>
+        </div>
+      </Flex>
+      <FeeSumRow totalFee={123} cx={verticalPaddingStyles} />
+    </>
   );
 }

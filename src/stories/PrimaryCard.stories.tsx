@@ -29,7 +29,6 @@ const totalFee = ticketDetails.seats.reduce(
 export const Default: Story = {
   args: {
     headerSlot: <RouteRow {...ticketDetails} />,
-    bodySlot: <SeatDetailsTable {...ticketDetails} />,
-    footerSlot: <FeeSumRow totalFee={totalFee} />,
+    children: <SeatDetailsTable {...ticketDetails} />,
   },
 };
