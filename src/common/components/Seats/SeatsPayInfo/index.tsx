@@ -10,20 +10,17 @@ import { SeatsPayInfoPropsType } from './types';
 import { useEffect, useState } from 'react';
 import { seat } from '../SelectSeat/types';
 
-export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
+export default function SeatsPayInfo({
+  seats,
+  pageType,
+}: SeatsPayInfoPropsType) {
   const adults: seat[] = [];
   const teens: seat[] = [];
   const children: seat[] = [];
-  // const textBuilder = () => {
-  //   let str = '';
-  //   let adult,
-  //     teen,
-  //     children = 0;
 
-  // selected.forEach((value) => {});
-  //   return str;
-  // };
   const [content, setContent] = useState<string[]>([]);
+  const [fee, setFee] = useState<Number>(0);
+
   const pushString = (str: string) => {
     setContent((prev) => {
       return [...prev, str];
@@ -64,7 +61,10 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
     if (children.length > 0) {
       pushString('아동 ' + children.length);
     }
-    console.log(adults, teens, children);
+    //TODO
+    setFee(
+      10000 * adults.length + 7000 * teens.length + 5000 * children.length
+    );
   }, [seats]);
 
   return (
@@ -84,7 +84,6 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
 
                   <div>
                     {content.map((value, index) => {
-                      console.log(value);
                       if (content.length - 1 === index) {
                         return value;
                       }
@@ -94,13 +93,14 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
                 </Flex>
                 <Flex style={{ flexGrow: 1 }} justify="end">
                   <Typography variant="title1" textAlign="right">
-                    30,200원
+                    {/* TODO */}
+                    {fee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
                   </Typography>
                 </Flex>
               </Flex>
               <MainButton>
                 <Flex gap="20px">
-                  <span>다음</span>
+                  <span>{pageType ? '결제하기' : '다음'}</span>
                 </Flex>
               </MainButton>
             </>

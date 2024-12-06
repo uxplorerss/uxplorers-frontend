@@ -11,6 +11,8 @@ import Flex from '../../../common/components/Flex';
 import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
+import useSearchQueryStore from '../../../stores/useSearchQueryStore';
+import useBackwardBusListStore from '../../../stores/useBackwardBusListStore';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
@@ -55,10 +57,10 @@ function IndexComponent() {
 
   const [selectedType, setSelectedType] = useState<SeatTypeVariant>('adults');
   const [seats, setSeats] = useState<seat[]>(initSeats());
+  const { searchQuery } = useSearchQueryStore();
+  const { backwardBusList } = useBackwardBusListStore();
 
-  useEffect(() => {
-    console.log(seats);
-  }, [seats]);
+  const pageType = searchQuery.destId === ''; // true면 예약확인페이지 이동, false면 오는 길 버스 리스트 페이지로 네비게이팅
   const available =
     28 - seats.filter((value) => value.status === 'SELECTED').length;
   return (
@@ -74,7 +76,7 @@ function IndexComponent() {
         onSelectSeat={handleSelectSeat}
         selectedType={selectedType}
       />
-      <SeatsPayInfo seats={seats} />
+      <SeatsPayInfo seats={seats} pageType={pageType} />
     </>
   );
 }
