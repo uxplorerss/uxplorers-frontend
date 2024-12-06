@@ -4,10 +4,10 @@ import SelectedIcon from '../../../../assets/selected_seat.svg?react';
 import { SeatPropsType } from './types';
 import { seatContainer, seatContent } from './index.styled';
 
-const Seat = ({ attr, num, onSelectSeat }: SeatPropsType) => {
+const Seat = ({ attr, num, onSelectSeat, selectedType }: SeatPropsType) => {
   const handleClick = () => {
     //TODO : type 설정
-    onSelectSeat(num!, 'adults');
+    onSelectSeat(num!, selectedType);
   };
 
   switch (attr) {

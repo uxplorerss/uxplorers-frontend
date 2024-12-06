@@ -6,5 +6,6 @@ export type SeatVariant = 'OCCUPIED' | 'SELECTED' | 'NORMAL' | 'NONE';
 export interface SeatPropsType {
   attr: SeatVariant;
   num?: number;
+  selectedType: SeatTypeVariant;
   onSelectSeat: (num: number, type: SeatTypeVariant) => void;
 }

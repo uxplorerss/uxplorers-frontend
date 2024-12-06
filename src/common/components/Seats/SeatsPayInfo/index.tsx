@@ -11,7 +11,9 @@ import { useEffect, useState } from 'react';
 import { seat } from '../SelectSeat/types';
 
 export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
-  const selected: seat[] = [];
+  const adults: seat[] = [];
+  const teens: seat[] = [];
+  const children: seat[] = [];
   // const textBuilder = () => {
   //   let str = '';
   //   let adult,
@@ -21,15 +23,49 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
   // selected.forEach((value) => {});
   //   return str;
   // };
+  const [content, setContent] = useState<string[]>([]);
+  const pushString = (str: string) => {
+    setContent((prev) => {
+      return [...prev, str];
+    });
+  };
+  const resetString = () => {
+    content.length = 0;
+  };
   useEffect(() => {
-    selected.length = 0;
-
+    resetString();
+    adults.length = 0;
+    teens.length = 0;
+    children.length = 0;
     seats
       .filter((value) => value.status === 'SELECTED')
       .forEach((value) => {
-        selected.push(value);
+        switch (value.type) {
+          case 'adults':
+            adults.push(value);
+            break;
+          case 'teens':
+            teens.push(value);
+            break;
+          case 'children':
+            children.push(value);
+            break;
+          default:
+            break;
+        }
       });
-  }, []);
+
+    if (adults.length > 0) {
+      pushString('일반 ' + adults.length);
+    }
+    if (teens.length > 0) {
+      pushString('초등학생 ' + teens.length);
+    }
+    if (children.length > 0) {
+      pushString('아동 ' + children.length);
+    }
+    console.log(adults, teens, children);
+  }, [seats]);
 
   return (
     <StickyFooter
@@ -44,8 +80,17 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
                   align="left"
                   style={{ flexGrow: 1 }}
                 >
-                  <div>총 결제 금액</div>
-                  <div>일반 1, 초등생 1</div>
+                  <Typography variant="title4">총 결제 금액</Typography>
+
+                  <div>
+                    {content.map((value, index) => {
+                      console.log(value);
+                      if (content.length - 1 === index) {
+                        return value;
+                      }
+                      return value + ', ';
+                    })}
+                  </div>
                 </Flex>
                 <Flex style={{ flexGrow: 1 }} justify="end">
                   <Typography variant="title1" textAlign="right">

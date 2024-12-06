@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   seat,
@@ -11,24 +11,28 @@ import Flex from '../../../common/components/Flex';
 import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
-import { SeatVariant } from '../../../common/components/Seats/Seat/types';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
 });
 
 function IndexComponent() {
-  const handleSelectSeat = (num: number, type: SeatTypeVariant) => {
-    console.log(type);
+  const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
       if (now.status === 'SELECTED') {
         now.status = 'NORMAL';
+        now.type = undefined;
       } else {
         now.status = 'SELECTED';
+        now.type = selectedType;
       }
     }
     setSeats([...seats]);
+  };
+
+  const handleSelectType = (type: SeatTypeVariant) => {
+    setSelectedType(type);
   };
 
   //TODO GET /seats/${bus}
@@ -49,15 +53,27 @@ function IndexComponent() {
     17, -1, 18, 19, 20, -1, 21, 22, 23, -1, 24, 25, 26, 27, 28,
   ];
 
+  const [selectedType, setSelectedType] = useState<SeatTypeVariant>('adults');
   const [seats, setSeats] = useState<seat[]>(initSeats());
+
+  useEffect(() => {
+    console.log(seats);
+  }, [seats]);
   const available =
     28 - seats.filter((value) => value.status === 'SELECTED').length;
   return (
     <>
       <TopBar />
       <Flex children={<ReaminSeat num={available} />}></Flex>
-      <Flex direction={'column'} children={<SeatType />}></Flex>
-      <SelectSeat seats={seats} onSelectSeat={handleSelectSeat} />
+      <Flex
+        direction={'column'}
+        children={<SeatType onSelectType={handleSelectType} />}
+      ></Flex>
+      <SelectSeat
+        seats={seats}
+        onSelectSeat={handleSelectSeat}
+        selectedType={selectedType}
+      />
       <SeatsPayInfo seats={seats} />
     </>
   );
