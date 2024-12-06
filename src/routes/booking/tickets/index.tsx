@@ -74,7 +74,7 @@ function ButtonComponent({ bus }: { bus: Bus }) {
     <Link to="/booking/seats">
       <Button cx={(theme) => buttonCSS(theme)}>
         <Typography variant="title3">
-          {convertAMPMHHMM(bus.startDate)}
+          {convertAMPMHHMM(new Date(bus.startDate))}
         </Typography>
         <div className="charge-time__container">
           <div className="tags">
@@ -94,7 +94,7 @@ function ButtonComponent({ bus }: { bus: Bus }) {
               `}
               as="span"
             >
-              경기고속
+              {bus.company}
             </Typography>
           </div>
           <Typography variant="title3" as="div">
