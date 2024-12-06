@@ -12,7 +12,7 @@ const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
 
 export default function SeatDetailsTable({
   company,
-  destId,
+  destIdList,
   seats,
 }: SeatDetailsTablePropsType) {
   const [adultSeats, childrenSeats] = [
@@ -31,7 +31,7 @@ export default function SeatDetailsTable({
     >
       <CompanyRow
         company={company}
-        destId={destId}
+        destIdList={destIdList}
         cx={{
           borderBottom: `1px dashed ${theme.colors.gray[1]}`,
           padding: '17px 0',
