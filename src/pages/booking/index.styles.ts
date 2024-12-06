@@ -7,6 +7,12 @@ export const container = css({
   minHeight: '100vh',
 });
 
+export const topBarWrapper = css({
+  position: 'sticky',
+  top: 0,
+  zIndex: 1000,
+});
+
 export const mainContent = css({
   flex: '0 1 auto',
   padding: '20px',

@@ -15,6 +15,7 @@ import {
   bottomBarWrapper,
   transferButtonWrapper,
   locationInputsWrapper,
+  topBarWrapper,
 } from './index.styles';
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
@@ -107,14 +108,16 @@ function BookingPage() {
 
   return (
     <div css={container}>
-      <TopBar
-        leftSlot={
-          <Button>
-            <LogoIcon />
-          </Button>
-        }
-        rightSlot={<LanguageSwitchButton language="English" />}
-      />
+      <div css={topBarWrapper}>
+        <TopBar
+          leftSlot={
+            <Button>
+              <LogoIcon />
+            </Button>
+          }
+          rightSlot={<LanguageSwitchButton language="English" />}
+        />
+      </div>
 
       <div
         css={css`
