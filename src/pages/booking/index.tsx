@@ -39,24 +39,51 @@ import terminalData from '../../constants/terminal.json';
 import useSearchQueryStore from '../../stores/useSearchQueryStore';
 import LanguageSwitchButton from '../../common/components/LanguageSwitchButton';
 import { buildInput } from '../../common/components/Input/index.styles';
+import useFavoriteRouteStore from '../../stores/useFavoriteRouteStore';
+
+const tmnCdToTmnNm = (tmnCd: string | number) => {
+  const terminal = terminalData.response.body.items.item.find(
+    (terminal) => terminal.tmnCd.toString() === tmnCd.toString()
+  );
+  return terminal?.tmnNm;
+};
 
 function BookmarkList() {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  const { favoriteRouteList } = useFavoriteRouteStore();
+  const { setSearchQuery } = useSearchQueryStore();
+
   return (
-    <div style={{ padding: '0 20px', marginTop: '48px' }}>
+    <div
+      css={css`
+        padding: 0px 20px;
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      `}
+    >
       <Typography variant="body1" as="p">
         즐겨찾기
       </Typography>
-      <Button
-        cx={buildInput(theme)}
-        onClick={() => {
-          navigate({ to: '/booking/tickets' });
-        }}
-        style={{ cursor: 'pointer' }}
-      >
-        서울 경부 → 구미
-      </Button>
+      {favoriteRouteList.map((route, index) => (
+        <Button
+          key={index}
+          cx={buildInput(theme)}
+          onClick={() => {
+            setSearchQuery({
+              startId: route.startId,
+              destId: route.destId,
+            });
+            navigate({ to: '/booking/tickets' });
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          {tmnCdToTmnNm(route.startId)} → {tmnCdToTmnNm(route.destId)}
+        </Button>
+      ))}
     </div>
   );
 }
@@ -96,13 +123,6 @@ function BookingPage() {
     const weekday = dayNames[date.getDay()];
 
     return `${month}. ${day} (${weekday})`;
-  };
-
-  const tmnCdToTmnNm = (tmnCd: string | number) => {
-    const terminal = terminalData.response.body.items.item.find(
-      (terminal) => terminal.tmnCd.toString() === tmnCd.toString()
-    );
-    return terminal?.tmnNm;
   };
 
   return (

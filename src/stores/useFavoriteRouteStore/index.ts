@@ -16,7 +16,7 @@ interface FavoriteRouteState {
 const useFavoriteRouteStore = create<FavoriteRouteState>()(
   persist(
     devtools((set) => ({
-      favoriteRouteList: [],
+      favoriteRouteList: [{ startId: '032', destId: '300' }],
       addRoute: (newFavoriteRoute) =>
         set((state) => ({
           favoriteRouteList: state.favoriteRouteList.some(
