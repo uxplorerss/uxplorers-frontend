@@ -7,11 +7,11 @@ import { Divider } from '../Divider';
 import Button from '../Button';
 
 export default function CompanyRow({
-  destId,
+  destIdList,
   company,
   cx,
 }: CompanyRowPropsType) {
-  const hasStops = destId.length > 1;
+  const hasStops = destIdList.length > 1;
   const theme = useTheme();
   return (
     <Flex justify="space-between" width="100%" boxSizing="border-box" cx={cx}>

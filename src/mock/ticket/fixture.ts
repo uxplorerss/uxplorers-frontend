@@ -7,7 +7,7 @@ export const ticket: Ticket = {
   company: '중앙고속',
   class: 'economy',
   startId: 'something',
-  destId: ['해운대'],
+  destIdList: ['해운대'],
   seats,
 };
 
@@ -18,7 +18,7 @@ export const tickets: Ticket[] = [
     company: '중앙고속',
     class: 'economy',
     startId: '동서울',
-    destId: ['부산해운대'],
+    destIdList: ['부산해운대'],
     seats,
   },
   {
@@ -27,7 +27,7 @@ export const tickets: Ticket[] = [
     company: '중앙고속',
     class: 'economy',
     startId: '부산해운대',
-    destId: ['동서울'],
+    destIdList: ['동서울'],
     seats,
   },
 ];
