@@ -4,24 +4,21 @@ import { css, Theme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
 import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
-import InfoIcon from '../../../assets/InfoIcon.svg?react';
 import { useEffect, useState } from 'react';
-import { BusTicket, getBusTicketsAPI } from '../../../apis/getBusTickets';
+import { getBusTicketsAPI } from '../../../apis/getBusTickets';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
 import {
   convertAMPMHHMM,
-  getDifferenceInMinutes,
   convertMMDDday,
   convertYYYYMMDD,
 } from '../../../utils/convertDate';
 import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 import useForwardBusListStore from '../../../stores/useTowardBusListStore';
-import { Tooltip } from 'react-tooltip';
 import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
 import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
-import { Bus } from '../../../types';
 import StikcyHeader from '../../../common/components/StickyHeader';
 import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
+import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -34,109 +31,6 @@ const container = (theme: Theme) => css`
   gap: 20px;
   background-color: ${theme.colors.gray[3]};
 `;
-
-const buttonCSS = (theme: Theme) => css`
-  width: 100%;
-  background-color: ${theme.colors.gray.white};
-  padding: 16px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  .charge-time__container {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 5px;
-
-    .tags {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 5px;
-    }
-  }
-
-  .busInfo {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-  }
-`;
-
-function ButtonComponent({ bus }: { bus: Bus }) {
-  return (
-    <Link to="/booking/seats">
-      <Button cx={(theme) => buttonCSS(theme)}>
-        <Typography variant="title3">
-          {convertAMPMHHMM(new Date(bus.startDate))}
-        </Typography>
-        <div className="charge-time__container">
-          <div className="tags">
-            <Typography
-              variant="body3"
-              cx={(theme) => css`
-                color: ${theme.colors.primary.base};
-              `}
-              backgroundColor="primary"
-            >
-              무정차
-            </Typography>
-            <Typography
-              variant="body4"
-              cx={(theme) => css`
-                color: ${theme.colors.gray[0]};
-              `}
-              as="span"
-            >
-              {bus.company}
-            </Typography>
-          </div>
-          <Typography variant="title3" as="div">
-            {bus.fee.adults.toLocaleString()} 원
-          </Typography>
-          <Typography
-            variant="body4"
-            cx={(theme) => css`
-              color: ${theme.colors.gray[4]};
-            `}
-          >
-            {bus.eta} 예상
-          </Typography>
-        </div>
-        <div className="busInfo">
-          <Typography variant="title3" as="div">
-            {`${bus.seats.length || 28}석`}
-          </Typography>
-          <Typography
-            variant="body4"
-            cx={(theme) => css`
-              color: ${theme.colors.primary.base};
-            `}
-          >
-            {bus.class}
-          </Typography>
-          <InfoIcon
-            data-tooltip-id="bus-ticket-tooltip"
-            data-tooltip-content="좌석수는 부정확할 수 있습니다. 터미널에서 확인해 주세요."
-            css={css`
-              margin-top: 7px;
-            `}
-          />
-          <Tooltip
-            id="bus-ticket-tooltip"
-            style={{ backgroundColor: 'gray' }}
-          />
-        </div>
-      </Button>
-    </Link>
-  );
-}
 
 export default function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
