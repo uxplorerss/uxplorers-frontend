@@ -32,3 +32,10 @@ export const Default: Story = {
     children: <SeatDetailsTable {...ticketDetails} />,
   },
 };
+
+export const Inactive: Story = {
+  args: {
+    headerSlot: <RouteRow {...ticketDetails} inactive={true} />,
+    children: <SeatDetailsTable {...ticketDetails} inactive={true} />,
+  },
+};

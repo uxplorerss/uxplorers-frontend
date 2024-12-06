@@ -1,16 +1,18 @@
 import React from 'react';
 import { RouteRowPropsType } from './index.types';
 import Flex from '../Flex';
-import ArrowRightLongIcon from '../../../assets/ArrowRightLongIcon.svg?react';
+import ArrowRightPrimaryIcon from '../../../assets/ArrowRightPrimaryIcon.svg?react';
+import ArrowRightGrayIcon from '../../../assets/ArrowRightGrayIcon.svg?react';
 import { buildContainerStyles } from './index.styles';
 import { useTheme } from '@emotion/react';
 import CheckCircleOutlinedIcon from '../../../assets/CheckCircleOutlinedIcon.svg?react';
+import CheckboxEmptyCircleIcon from '../../../assets/CheckboxEmptyCircleIcon.svg?react';
 import Typography from '../Typography';
 
 export default function RouteRow({
   startName,
   destName,
-  isActivated = true,
+  inactive = false,
 }: RouteRowPropsType) {
   const theme = useTheme();
   return (
@@ -19,7 +21,7 @@ export default function RouteRow({
       justify="start"
       align="center"
       gap="9px"
-      css={buildContainerStyles(theme, isActivated)}
+      css={buildContainerStyles(theme, inactive)}
     >
       <Flex
         justify="center"
@@ -29,10 +31,10 @@ export default function RouteRow({
           height: '36px',
         }}
       >
-        <CheckCircleOutlinedIcon />
+        {inactive ? <CheckboxEmptyCircleIcon /> : <CheckCircleOutlinedIcon />}
       </Flex>
       <Typography variant="title2">{startName}</Typography>
-      <ArrowRightLongIcon />
+      {inactive ? <ArrowRightGrayIcon /> : <ArrowRightPrimaryIcon />}
       <Typography variant="title2">{destName}</Typography>
     </Flex>
   );

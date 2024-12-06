@@ -10,8 +10,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Active: Story = {
   args: {
     ...ticket,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...ticket,
+    inactive: true,
   },
 };

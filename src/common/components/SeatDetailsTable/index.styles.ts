@@ -9,3 +9,17 @@ export const buildDashedVerticalBorderStyles = (theme: Theme) =>
     borderTop: `1px dashed ${theme.colors.gray[1]}`,
     borderBottom: `1px dashed ${theme.colors.gray[1]}`,
   });
+
+export const buildGray1ChildrenStyles = (theme: Theme, inactive: boolean) =>
+  css({
+    '& *': {
+      color: inactive ? theme.colors.gray[1] : '',
+    },
+  });
+
+export const buildGray4Styles = (theme: Theme, inactive: boolean) =>
+  css({
+    '&&': {
+      color: inactive ? theme.colors.gray[4] : '',
+    },
+  });

@@ -10,6 +10,8 @@ import TicketDateRow from '../TicketDateRow';
 import FeeSumRow from '../FeeSumRow';
 import {
   buildDashedVerticalBorderStyles,
+  buildGray1ChildrenStyles,
+  buildGray4Styles,
   verticalPaddingStyles,
 } from './index.styles';
 
@@ -21,6 +23,7 @@ export default function SeatDetailsTable({
   destIdList,
   seats,
   startDate,
+  inactive = false,
 }: SeatDetailsTablePropsType) {
   const [adultSeats, childrenSeats] = [
     filterSeatsByType(seats, 'adults'),
@@ -29,7 +32,14 @@ export default function SeatDetailsTable({
 
   const theme = useTheme();
   return (
-    <>
+    <Flex
+      direction="column"
+      justify="start"
+      align="start"
+      width="100%"
+      boxSizing="border-box"
+      cx={[buildGray1ChildrenStyles(theme, inactive)]}
+    >
       <TicketDateRow startDate={startDate} cx={[verticalPaddingStyles]} />
       <Flex
         direction="column"
@@ -111,45 +121,57 @@ export default function SeatDetailsTable({
           </Typography>
           <Typography
             variant="body3"
-            cx={{
-              color: theme.colors.gray[4],
-              gridArea: 'adult-label',
-            }}
+            cx={[
+              {
+                color: theme.colors.gray[4],
+                gridArea: 'adult-label',
+              },
+              buildGray4Styles(theme, inactive),
+            ]}
           >
             일반 {adultSeats.length}명
           </Typography>
           <Typography
             variant="body3"
-            cx={{
-              color: theme.colors.gray[4],
-              gridArea: 'adult-price',
-              justifySelf: 'end',
-            }}
+            cx={[
+              {
+                color: theme.colors.gray[4],
+                gridArea: 'adult-price',
+                justifySelf: 'end',
+              },
+              buildGray4Styles(theme, inactive),
+            ]}
           >
             {adultSeats.length * adultSeats[0].fee}원
           </Typography>
           <Typography
             variant="body3"
-            cx={{
-              color: theme.colors.gray[4],
-              gridArea: 'child-label',
-            }}
+            cx={[
+              {
+                color: theme.colors.gray[4],
+                gridArea: 'child-label',
+              },
+              buildGray4Styles(theme, inactive),
+            ]}
           >
             초등생 {childrenSeats.length}명
           </Typography>
           <Typography
             variant="body3"
-            cx={{
-              color: theme.colors.gray[4],
-              gridArea: 'child-price',
-              justifySelf: 'end',
-            }}
+            cx={[
+              {
+                color: theme.colors.gray[4],
+                gridArea: 'child-price',
+                justifySelf: 'end',
+              },
+              buildGray4Styles(theme, inactive),
+            ]}
           >
             {childrenSeats.length * childrenSeats[0].fee}원
           </Typography>
         </div>
       </Flex>
       <FeeSumRow totalFee={123} cx={verticalPaddingStyles} />
-    </>
+    </Flex>
   );
 }

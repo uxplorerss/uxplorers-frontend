@@ -1,12 +1,6 @@
-import React from 'react';
 import { PrimaryCardPropsType } from './index.types';
 import { useTheme } from '@emotion/react';
-import Flex from '../Flex';
-import {
-  buildContainerStyles,
-  horizontalPaddingStyles,
-  paddingContainer,
-} from './index.styles';
+import { buildContainerStyles, horizontalPaddingStyles } from './index.styles';
 
 export default function PrimaryCard({
   headerSlot,
@@ -18,16 +12,7 @@ export default function PrimaryCard({
   return (
     <Component css={buildContainerStyles(theme)}>
       {headerSlot}
-      <Flex
-        direction="column"
-        justify="start"
-        align="start"
-        width="100%"
-        boxSizing="border-box"
-        cx={[horizontalPaddingStyles, cx]}
-      >
-        {children}
-      </Flex>
+      <div css={[horizontalPaddingStyles]}>{children}</div>
     </Component>
   );
 }

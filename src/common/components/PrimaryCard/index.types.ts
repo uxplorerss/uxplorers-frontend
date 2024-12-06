@@ -7,4 +7,5 @@ export interface PrimaryCardPropsType {
   children: ReactNode;
   as?: ElementType;
   cx?: Interpolation<Theme>;
+  inactive?: boolean;
 }

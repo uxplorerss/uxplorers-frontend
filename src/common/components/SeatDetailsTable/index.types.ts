@@ -5,4 +5,5 @@ export interface SeatDetailsTablePropsType {
   destIdList: string[];
   seats: Seat[];
   startDate: Date;
+  inactive?: boolean;
 }
