@@ -6,7 +6,8 @@ import { seatContainer, seatContent } from './index.styled';
 
 const Seat = ({ attr, num, onSelectSeat }: SeatPropsType) => {
   const handleClick = () => {
-    onSelectSeat(num!);
+    //TODO : type 설정
+    onSelectSeat(num!, 'adults');
   };
 
   switch (attr) {

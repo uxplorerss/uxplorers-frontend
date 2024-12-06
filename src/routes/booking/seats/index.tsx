@@ -2,19 +2,24 @@ import { createFileRoute } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
 import { useState } from 'react';
 
-import { seat } from '../../../common/components/Seats/SelectSeat/types';
+import {
+  seat,
+  SeatTypeVariant,
+} from '../../../common/components/Seats/SelectSeat/types';
 import { SelectSeat } from '../../../common/components/Seats/SelectSeat';
 import Flex from '../../../common/components/Flex';
 import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
+import { SeatVariant } from '../../../common/components/Seats/Seat/types';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
 });
 
 function IndexComponent() {
-  const handleSelectSeat = (num: number) => {
+  const handleSelectSeat = (num: number, type: SeatTypeVariant) => {
+    console.log(type);
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
       if (now.status === 'SELECTED') {
