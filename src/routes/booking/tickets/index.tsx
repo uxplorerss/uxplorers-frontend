@@ -147,7 +147,7 @@ export default function RouteComponent() {
     getBusTicketsAPI(
       searchQuery.startId || 'NAEK032',
       searchQuery.destId || 'NAEK300',
-      convertYYYYMMDD(searchQuery.startDate)
+      convertYYYYMMDD(new Date(searchQuery.startDate))
     )
       .then((data) => {
         // TODO: 전역 상태에 넣기
@@ -186,7 +186,7 @@ export default function RouteComponent() {
               {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
               {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
             </div>
-            <div>{convertMMDDday(searchQuery.startDate)}</div>
+            <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
           </div>
         }
         rightSlot={<img src={FavIcon} />}

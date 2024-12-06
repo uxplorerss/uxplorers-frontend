@@ -105,7 +105,6 @@ function BookingPage() {
     return terminal?.tmnNm;
   };
 
-
   return (
     <div css={container}>
       <div css={topBarWrapper}>
@@ -182,7 +181,7 @@ function BookingPage() {
         <div css={dateSelector}>
           <Input
             css={dateBox}
-            value={formatDate(searchQuery.startDate)}
+            value={formatDate(new Date(searchQuery.startDate))}
             onValueChange={(value: string) => {
               setSearchQuery({
                 startDate: new Date(value),
@@ -198,7 +197,11 @@ function BookingPage() {
           <Input
             css={dateBox}
             placeholder="+왕복 선택"
-            value={roundTrip ? formatDate(searchQuery.destDate) : ''}
+            value={
+              roundTrip && searchQuery.destDate
+                ? formatDate(new Date(searchQuery.destDate))
+                : ''
+            }
             onClick={() => {
               setShowEndDatePicker(true);
               setShowStartDatePicker(false);
