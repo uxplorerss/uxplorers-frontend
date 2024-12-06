@@ -3,6 +3,7 @@ import { Button, TopBar, Typography } from '../../../common/components';
 import { css, Theme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
+import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
 import InfoIcon from '../../../assets/InfoIcon.svg?react';
 import { useEffect, useState } from 'react';
 import { BusTicket, getBusTicketsAPI } from '../../../apis/getBusTickets';
@@ -20,6 +21,7 @@ import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.js
 import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
 import { Bus } from '../../../types';
 import StikcyHeader from '../../../common/components/StickyHeader';
+import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -142,7 +144,22 @@ export default function RouteComponent() {
   const [busSearchTime, setBusSearchTime] = useState<number>(202411290500);
 
   const { searchQuery } = useSearchQueryStore((state) => state);
-  const { forwardBusList, concat } = useForwardBusListStore((state) => state);
+  const { forwardBusList, concat } = useForwardBusListStore();
+  const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
+
+  const handleFavoriteRoute = () => {
+    if (
+      favoriteRouteList.some(
+        (route) =>
+          route.startId === searchQuery.startId &&
+          route.destId === searchQuery.destId
+      )
+    ) {
+      deleteRoute({ startId: searchQuery.startId, destId: searchQuery.destId });
+    } else {
+      addRoute({ startId: searchQuery.startId, destId: searchQuery.destId });
+    }
+  };
 
   useEffect(() => {
     getBusTicketsAPI(
@@ -191,7 +208,22 @@ export default function RouteComponent() {
               <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
             </div>
           }
-          rightSlot={<img src={FavIcon} />}
+          rightSlot={
+            <img
+              style={{ cursor: 'pointer' }}
+              onClick={handleFavoriteRoute}
+              src={
+                favoriteRouteList.some(
+                  (route) =>
+                    route.startId === searchQuery.startId &&
+                    route.destId === searchQuery.destId
+                )
+                  ? SelectedFavIcon
+                  : FavIcon
+              }
+              alt="favorite"
+            />
+          }
         />
       </StikcyHeader>
 

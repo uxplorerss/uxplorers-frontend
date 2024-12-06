@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface FavoriteRoute {
   startId: string; // NAEK 없는 ID
@@ -12,27 +13,34 @@ interface FavoriteRouteState {
   reset: () => void;
 }
 
-const useFavoriteRouteStore = create<FavoriteRouteState>((set) => ({
-  favoriteRouteList: [],
-  addRoute: (newFavoriteRoute) =>
-    set((state) => ({
-      favoriteRouteList: state.favoriteRouteList.some(
-        (favoriteRoute) =>
-          favoriteRoute.startId === newFavoriteRoute.startId &&
-          favoriteRoute.destId === newFavoriteRoute.destId
-      )
-        ? state.favoriteRouteList
-        : [...state.favoriteRouteList, newFavoriteRoute],
+const useFavoriteRouteStore = create<FavoriteRouteState>()(
+  persist(
+    devtools((set) => ({
+      favoriteRouteList: [],
+      addRoute: (newFavoriteRoute) =>
+        set((state) => ({
+          favoriteRouteList: state.favoriteRouteList.some(
+            (favoriteRoute) =>
+              favoriteRoute.startId === newFavoriteRoute.startId &&
+              favoriteRoute.destId === newFavoriteRoute.destId
+          )
+            ? state.favoriteRouteList
+            : [...state.favoriteRouteList, newFavoriteRoute],
+        })),
+      deleteRoute: (route) =>
+        set((state) => ({
+          favoriteRouteList: state.favoriteRouteList.filter(
+            (favoriteRoute) =>
+              favoriteRoute.startId !== route.startId &&
+              favoriteRoute.destId !== route.destId
+          ),
+        })),
+      reset: () => set({ favoriteRouteList: [] }),
     })),
-  deleteRoute: (route) =>
-    set((state) => ({
-      favoriteRouteList: state.favoriteRouteList.filter(
-        (favoriteRoute) =>
-          favoriteRoute.startId !== route.startId &&
-          favoriteRoute.destId !== route.destId
-      ),
-    })),
-  reset: () => set({ favoriteRouteList: [] }),
-}));
+    {
+      name: 'favorite-route',
+    }
+  )
+);
 
 export default useFavoriteRouteStore;
