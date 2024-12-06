@@ -20,7 +20,7 @@ export default function SeatsPayInfo({
   const children: seat[] = [];
 
   const [content, setContent] = useState<string[]>([]);
-  const [fee, setFee] = useState<Number>(0);
+  const [fee, setFee] = useState<number>(0);
 
   const pushString = (str: string) => {
     setContent((prev) => {

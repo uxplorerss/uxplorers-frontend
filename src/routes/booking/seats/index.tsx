@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import {
   seat,
@@ -12,7 +12,6 @@ import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
-import useBackwardBusListStore from '../../../stores/useBackwardBusListStore';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
@@ -37,11 +36,10 @@ function IndexComponent() {
     setSelectedType(type);
   };
 
-  const handleNavigate = () => {
+  const handleNavigate = () =>
     pageType
       ? navigate({ to: '/booking/payment' })
       : navigate({ to: '/booking/tickets' });
-  };
 
   //TODO GET /seats/${bus}
   const initSeats = (): seat[] => {
