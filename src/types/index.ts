@@ -38,7 +38,7 @@ export interface Ticket {
   startDate: Date;
   isExpress: boolean;
   company: string;
-  class: Class;
+  class: Class | string;
   startId: string;
   destIdList: string[];
   seats: Seat[];
