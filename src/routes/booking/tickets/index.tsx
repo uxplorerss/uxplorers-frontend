@@ -135,7 +135,7 @@ function ButtonComponent({ bus }: { bus: Bus }) {
   );
 }
 
-function RouteComponent() {
+export default function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
   // const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
   const [busSearchTime, setBusSearchTime] = useState<number>(202411290500);

@@ -5,7 +5,7 @@ export interface SearchQuery {
   destDate?: Date | null;
 }
 
-interface Fee {
+export interface Fee {
   children: number;
   teens: number;
   adults: number;
@@ -17,7 +17,7 @@ export interface Seat {
   fee: number;
 }
 
-type Class = 'economy' | 'first' | 'premium';
+export type Class = 'economy' | 'first' | 'premium';
 
 export interface Bus {
   startDate: Date;
@@ -40,7 +40,7 @@ export interface Ticket {
   company: string;
   class: Class;
   startId: string;
-  destId: string[];
+  destIdList: string[];
   seats: Seat[];
 }
 
