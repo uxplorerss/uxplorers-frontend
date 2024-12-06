@@ -20,12 +20,22 @@ const calculateDateStr = (date: Date) => {
   });
 };
 
-export default function TicketDateRow({ startDate }: TicketDateRowPropsType) {
+export default function TicketDateRow({
+  startDate,
+  cx,
+}: TicketDateRowPropsType) {
   const dateStr = calculateDateStr(startDate);
   const timeStr = calculateTimeStr(startDate);
 
   return (
-    <Flex justify="start" align="center" gap="8px">
+    <Flex
+      justify="start"
+      align="center"
+      gap="8px"
+      cx={cx}
+      width="100%"
+      boxSizing="border-box"
+    >
       <CalendarIcon />
       <Typography as="div" variant="button1">
         <Flex gap="8px" width="100%" align="stretch">

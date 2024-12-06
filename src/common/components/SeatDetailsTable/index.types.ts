@@ -4,4 +4,5 @@ export interface SeatDetailsTablePropsType {
   company: string;
   destIdList: string[];
   seats: Seat[];
+  startDate: Date;
 }

@@ -6,6 +6,7 @@ import SmallPersonIcon from '../../../assets/SmallPersonIcon.svg?react';
 import { SeatDetailsTablePropsType } from './index.types';
 import { Fee, Seat } from '../../../types';
 import CompanyRow from '../CompanyRow';
+import TicketDateRow from '../TicketDateRow';
 
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
@@ -14,6 +15,7 @@ export default function SeatDetailsTable({
   company,
   destIdList,
   seats,
+  startDate,
 }: SeatDetailsTablePropsType) {
   const [adultSeats, childrenSeats] = [
     filterSeatsByType(seats, 'adults'),
@@ -29,12 +31,18 @@ export default function SeatDetailsTable({
       width="100%"
       boxSizing="border-box"
     >
+      <TicketDateRow
+        startDate={startDate}
+        cx={{
+          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
+          paddingBottom: '17px',
+        }}
+      />
       <CompanyRow
         company={company}
         destIdList={destIdList}
         cx={{
-          borderBottom: `1px dashed ${theme.colors.gray[1]}`,
-          padding: '17px 0',
+          paddingTop: '17px',
         }}
       />
       <div
