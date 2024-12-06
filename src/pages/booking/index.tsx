@@ -192,7 +192,7 @@ function BookingPage() {
               navigate({ to: '/booking/arrivalLocation' });
             }}
           >
-            {searchQuery.startId
+            {searchQuery.destId
               ? tmnCdToTmnNm(searchQuery.destId)
               : '도착지 선택'}
           </Button>

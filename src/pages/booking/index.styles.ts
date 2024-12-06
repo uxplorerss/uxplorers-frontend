@@ -5,6 +5,7 @@ export const container = css({
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100vh',
+  userSelect: 'none',
 });
 
 export const topBarWrapper = css({
