@@ -309,7 +309,7 @@ function BookingPage() {
             selected={new Date(searchQuery.startDate)}
             onChange={(date: Date | null) => {
               if (!date) return;
-              const nowDate = new Date(Date.now());
+              const nowDate = new Date();
               date.setHours(nowDate.getHours(), nowDate.getMinutes(), 0, 0);
               setSearchQuery({ startDate: date });
               setShowStartDatePicker(false);

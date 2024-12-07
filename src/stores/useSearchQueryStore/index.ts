@@ -6,7 +6,7 @@ const initialState = {
   searchQuery: {
     startId: '',
     destId: '',
-    startDate: new Date(Date.now()),
+    startDate: new Date(),
     destDate: null,
   },
 };
