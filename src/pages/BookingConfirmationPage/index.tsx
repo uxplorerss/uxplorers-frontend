@@ -3,7 +3,6 @@ import { Typography } from '../../common/components';
 import PrimaryCard from '../../common/components/PrimaryCard';
 import RouteOptionRow from '../../common/components/RouteOptionRow';
 import SeatDetailsTable from '../../common/components/SeatDetailsTable';
-import useTicketListStore from '../../stores/useTicketListStore';
 import StickyFooter from '../../common/components/StickyFooter';
 import MainButton from '../../common/components/MainButton';
 import ActionBar from '../../common/components/ActionBar';
@@ -13,9 +12,10 @@ import { calculateTicketListFee } from '../../lib/tickets';
 import { getLocaleStringNumber } from '../../lib';
 import { getTerminalName } from '../../lib/terminal';
 import ContentSection from '../../common/components/ContentSection';
+import useReservationStore from '../../stores/useReservationStore';
 
 export default function BookingConfirmationPage() {
-  const ticketList = useTicketListStore((state) => state.ticketList);
+  const ticketList = useReservationStore((state) => state.pendingTicketList);
   const itineraries = ticketList.map(({ startId, destIdList }) => {
     return {
       startName: getTerminalName(startId)!,

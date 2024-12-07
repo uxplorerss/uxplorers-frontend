@@ -15,9 +15,17 @@ import ViewportContainer from '../../common/components/ViewportContainer';
 import ContentSection from '../../common/components/ContentSection';
 import CouponAndMileageCard from '../../common/components/payment/CouponAndMileageCard';
 import PaymentMethodCard from '../../common/components/payment/PaymentMethodCard';
+import { useNavigate } from '@tanstack/react-router';
+import { useShallow } from 'zustand/shallow';
+import useReservationStore from '../../stores/useReservationStore';
 
 export default function BookingPaymentPage() {
-  const ticketList = useTicketListStore((state) => state.ticketList);
+  const { ticketList, purchaseTicketList } = useReservationStore(
+    useShallow((state) => ({
+      ticketList: state.pendingTicketList,
+      purchaseTicketList: state.purchaseTicketList,
+    }))
+  );
   const itineraries = ticketList.map(({ startId, destIdList }) => {
     return {
       startName: getTerminalName(startId)!,
@@ -26,6 +34,8 @@ export default function BookingPaymentPage() {
   });
 
   const theme = useTheme();
+
+  const navigate = useNavigate();
 
   return (
     <ViewportContainer>
@@ -53,7 +63,14 @@ export default function BookingPaymentPage() {
       <StickyFooter>
         <ActionBar
           actionSlot={
-            <MainButton>
+            <MainButton
+              onClick={() => {
+                purchaseTicketList();
+                navigate({
+                  to: '/booking/paymentConfirmation',
+                });
+              }}
+            >
               <Flex gap="20px">
                 <span>
                   {getLocaleStringNumber(calculateTicketListFee(ticketList))}원

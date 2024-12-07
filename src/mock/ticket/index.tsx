@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { tickets } from './fixture';
 import useTicketListStore from '../../stores/useTicketListStore';
+import useReservationStore from '../../stores/useReservationStore';
 
 export default function TicketListProvider({
   children,
@@ -13,9 +14,15 @@ export default function TicketListProvider({
 
 function useSetTicketList() {
   useEffect(() => {
-    useTicketListStore.setState({ ticketList: tickets });
+    useReservationStore.setState((state) => ({
+      ...state,
+      pendingTicketList: tickets,
+    }));
     return () => {
-      useTicketListStore.setState({ ticketList: [] });
+      useTicketListStore.setState((state) => ({
+        ...state,
+        pendingTicketList: [],
+      }));
     };
   });
 }
