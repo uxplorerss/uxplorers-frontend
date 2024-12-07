@@ -16,41 +16,51 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ticketDetails = {
-  ...ticket,
-  startName: '동서울',
-  destName: '대구',
-};
-
-const totalFee = ticketDetails.seats.reduce(
+const totalFee = ticket.seats.reduce(
   (accumulator, seat) => accumulator + seat.fee,
   0
 );
 
 export const ActiveOption: Story = {
   args: {
-    headerSlot: <RouteOptionRow {...ticketDetails} />,
-    children: <SeatDetailsTable {...ticketDetails} />,
+    headerSlot: (
+      <RouteOptionRow {...ticket} startName="동서울" destName="동대구" />
+    ),
+    children: <SeatDetailsTable {...ticket} />,
   },
 };
 
 export const InactiveOption: Story = {
   args: {
-    headerSlot: <RouteOptionRow {...ticketDetails} inactive={true} />,
-    children: <SeatDetailsTable {...ticketDetails} inactive={true} />,
+    headerSlot: (
+      <RouteOptionRow
+        {...ticket}
+        startName="동서울"
+        destName="동대구"
+        inactive={true}
+      />
+    ),
+    children: <SeatDetailsTable {...ticket} inactive={true} />,
   },
 };
 
 export const Active: Story = {
   args: {
-    headerSlot: <RouteRow {...ticketDetails} />,
-    children: <SeatDetailsTable {...ticketDetails} />,
+    headerSlot: <RouteRow startName="동서울" destName="동대구" {...ticket} />,
+    children: <SeatDetailsTable {...ticket} />,
   },
 };
 
 export const InActive: Story = {
   args: {
-    headerSlot: <RouteRow {...ticketDetails} inactive={true} />,
-    children: <SeatDetailsTable {...ticketDetails} inactive={true} />,
+    headerSlot: (
+      <RouteRow
+        {...ticket}
+        startName="동서울"
+        destName="동대구"
+        inactive={true}
+      />
+    ),
+    children: <SeatDetailsTable {...ticket} inactive={true} />,
   },
 };
