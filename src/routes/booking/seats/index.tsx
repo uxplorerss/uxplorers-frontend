@@ -61,7 +61,6 @@ function IndexComponent() {
       : navigate({ to: '/booking/tickets' });
   };
 
-  //TODO GET /seats/${bus}
   const initSeats = () => {
     const tmp: seat[] = [];
     const originSeat: Seat[] | undefined =

@@ -7,5 +7,6 @@ export interface SeatPropsType {
   attr: SeatVariant;
   num?: number;
   selectedType: SeatTypeVariant;
+  type?: SeatTypeVariant;
   onSelectSeat: (num: number, type: SeatTypeVariant) => void;
 }
