@@ -194,7 +194,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                초등생 {childrenSeats.length}명
+                아동 {childrenSeats.length}명
               </Typography>
               <Typography
                 variant="body3"
