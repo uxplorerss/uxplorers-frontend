@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import BookingPaymentPage from '../pages/BookingPaymentPage';
+import BookingConfirmationPage from '../pages/BookingConfirmationPage';
 import { ReactNode, useEffect } from 'react';
 import useTicketListStore from '../stores/useTicketListStore';
 import { tickets } from '../mock/ticket/fixture';
@@ -19,8 +19,8 @@ function useSetTicketList() {
 }
 
 const meta = {
-  title: 'Pages/BookingPaymentPage',
-  component: BookingPaymentPage,
+  title: 'Pages/BookingConfirmationPage',
+  component: BookingConfirmationPage,
   decorators: (Story) => {
     return (
       <TicketListProvider>

@@ -22,7 +22,7 @@ const getTerminalName = (terminalId: string) => {
   return filteredTerminal?.terminalNm;
 };
 
-export default function BookingPaymentPage() {
+export default function BookingConfirmationPage() {
   const ticketList = useTicketListStore((state) => state.ticketList);
   const itineraries = ticketList.map(({ startId, destIdList }) => {
     return {
