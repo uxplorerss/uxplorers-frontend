@@ -1,9 +1,15 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Typography } from '../../common/components';
 import MainButton from '../../common/components/MainButton';
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
-function ErrorComponent({ needRebooking }: { needRebooking: boolean }) {
+function ErrorComponent({
+  needRebooking,
+  direction,
+}: {
+  needRebooking: boolean;
+  direction?: 'in' | 'out';
+}) {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +21,7 @@ function ErrorComponent({ needRebooking }: { needRebooking: boolean }) {
         `}
       >
         {needRebooking ? (
-          <p>이 경로와 날짜의 버스를 검색하지 못했어요.</p>
+          <p>이 경로나 날짜의 버스를 검색하지 못했어요.</p>
         ) : (
           <p>시간, 조건에 맞는 버스를 검색하지 못했어요.</p>
         )}
@@ -25,10 +31,24 @@ function ErrorComponent({ needRebooking }: { needRebooking: boolean }) {
           주세요.
         </p>
       </Typography>
+
+      {direction === 'in' && (
+        <MainButton
+          cx={(theme: Theme) => css`
+            margin-top: '50px';
+            background-color: ${theme.colors.primary.base};
+          `}
+          children="가는 길만 편도 예매하기"
+          onClick={() => {
+            navigate({ to: '/booking/payment' });
+          }}
+        />
+      )}
+
       {needRebooking && (
         <MainButton
           cx={{ marginTop: '50px' }}
-          children="다시 예매하기"
+          children="처음부터 다시 예매하기"
           onClick={() => {
             navigate({ to: '/booking' });
           }}

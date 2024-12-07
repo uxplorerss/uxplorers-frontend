@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { Button, TopBar, Typography } from '../../../common/components';
+import { TopBar, Typography } from '../../../common/components';
 import { css, Theme, useTheme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
@@ -236,14 +236,18 @@ export default function RouteComponent() {
               <ButtonComponent key={index} bus={bus} direction="outbound" />
             ))}
       </section>
-      {forwardBusList.length === 0 && <ErrorComponent needRebooking={true} />}
-      {forwardBusList.filter(
-        (bus) =>
-          bus.startDate >= busSearchTime.value &&
-          (busSearchOption.value === '전체' ||
-            busSearchOption.value === '무정차' ||
-            bus.class.includes(busSearchOption.value))
-      ).length === 0 && <ErrorComponent needRebooking={false} />}
+
+      {forwardBusList && forwardBusList.length === 0 ? (
+        <ErrorComponent needRebooking={true} />
+      ) : (
+        forwardBusList.filter(
+          (bus) =>
+            bus.startDate >= busSearchTime.value &&
+            (busSearchOption.value === '전체' ||
+              busSearchOption.value === '무정차' ||
+              bus.class.includes(busSearchOption.value))
+        ).length === 0 && <ErrorComponent needRebooking={false} />
+      )}
     </div>
   );
 }

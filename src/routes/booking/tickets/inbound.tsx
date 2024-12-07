@@ -232,15 +232,20 @@ export default function RouteComponent() {
               <ButtonComponent key={index} bus={bus} direction="inbound" />
             ))}
       </section>
-      {backwardBusList.length === 0 && <ErrorComponent needRebooking={true} />}
-      {backwardBusList &&
+
+      {backwardBusList && backwardBusList.length === 0 ? (
+        <ErrorComponent needRebooking={true} direction="in" />
+      ) : (
         backwardBusList.filter(
           (bus) =>
             bus.startDate >= busSearchTime.value &&
             (busSearchOption.value === '전체' ||
               busSearchOption.value === '무정차' ||
               bus.class.includes(busSearchOption.value))
-        ).length === 0 && <ErrorComponent needRebooking={false} />}
+        ).length === 0 && (
+          <ErrorComponent needRebooking={false} direction="in" />
+        )
+      )}
     </div>
   );
 }
