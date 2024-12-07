@@ -14,7 +14,8 @@ import {
   buildGray4Styles,
   verticalPaddingStyles,
 } from './index.styles';
-import { calculateTotalFee } from '../../../lib/seats';
+import { calculateSeatListFee } from '../../../lib/seats';
+import { getLocaleStringNumber } from '../../../lib';
 
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
@@ -143,7 +144,7 @@ export default function SeatDetailsTable({
               buildGray4Styles(theme, inactive),
             ]}
           >
-            {adultSeats.length * adultSeats[0].fee}원
+            {getLocaleStringNumber(adultSeats.length * adultSeats[0].fee)}원
           </Typography>
           <Typography
             variant="body3"
@@ -168,12 +169,13 @@ export default function SeatDetailsTable({
               buildGray4Styles(theme, inactive),
             ]}
           >
-            {childrenSeats.length * childrenSeats[0].fee}원
+            {getLocaleStringNumber(childrenSeats.length * childrenSeats[0].fee)}
+            원
           </Typography>
         </div>
       </Flex>
       <FeeSumRow
-        totalFee={calculateTotalFee(seats)}
+        totalFee={calculateSeatListFee(seats)}
         cx={verticalPaddingStyles}
       />
     </Flex>
