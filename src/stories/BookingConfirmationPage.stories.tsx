@@ -3,20 +3,7 @@ import BookingConfirmationPage from '../pages/BookingConfirmationPage';
 import { ReactNode, useEffect } from 'react';
 import useTicketListStore from '../stores/useTicketListStore';
 import { tickets } from '../mock/ticket/fixture';
-
-function TicketListProvider({ children }: { children: ReactNode }) {
-  useSetTicketList();
-  return <>{children}</>;
-}
-
-function useSetTicketList() {
-  useEffect(() => {
-    useTicketListStore.setState({ ticketList: tickets });
-    return () => {
-      useTicketListStore.setState({ ticketList: [] });
-    };
-  });
-}
+import TicketListProvider from '../mock/ticket';
 
 const meta = {
   title: 'Pages/BookingConfirmationPage',
