@@ -88,6 +88,10 @@ export default function RouteComponent() {
     )
       .then((data) => {
         // TODO: 전역 상태에 넣기
+        if (!data.response.body.items.item) {
+          concat([]);
+          return;
+        }
         concat(
           convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
         );
@@ -228,6 +232,7 @@ export default function RouteComponent() {
               <ButtonComponent key={index} bus={bus} direction="inbound" />
             ))}
       </section>
+      {backwardBusList.length === 0 && <ErrorComponent />}
     </div>
   );
 }

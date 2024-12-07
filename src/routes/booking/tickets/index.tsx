@@ -20,6 +20,7 @@ import StikcyHeader from '../../../common/components/StickyHeader';
 import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
 import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
 import Select from 'react-select';
+import ErrorComponent from '../../../pages/error';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -93,6 +94,10 @@ export default function RouteComponent() {
     )
       .then((data) => {
         // TODO: 전역 상태에 넣기
+        if (!data.response.body.items.item) {
+          concat([]);
+          return;
+        }
         concat(
           convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
         );
@@ -231,6 +236,7 @@ export default function RouteComponent() {
               <ButtonComponent key={index} bus={bus} direction="outbound" />
             ))}
       </section>
+      {forwardBusList.length === 0 && <ErrorComponent />}
     </div>
   );
 }
