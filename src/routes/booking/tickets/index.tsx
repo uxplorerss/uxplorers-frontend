@@ -1,27 +1,32 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button, TopBar, Typography } from '../../../common/components';
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
-import InfoIcon from '../../../assets/InfoIcon.svg?react';
+import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
 import { useEffect, useState } from 'react';
-import {
-  BusTicket,
-  getBusNowTimeAPI,
-  getBusTicketsAPI,
-} from '../../../apis/getBusTickets';
+import { getBusTicketsAPI } from '../../../apis/getBusTickets';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
 import {
   convertAMPMHHMM,
-  convertMinutesToHHMM,
   convertMMDDday,
   convertYYYYMMDD,
 } from '../../../utils/convertDate';
 import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
 import useForwardBusListStore from '../../../stores/useTowardBusListStore';
-import { Tooltip } from 'react-tooltip';
+import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
+import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
+import StikcyHeader from '../../../common/components/StickyHeader';
+import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
+import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
+import Select from 'react-select';
+import ErrorComponent from '../../../pages/error';
 
-const container = (theme: Theme) => css`
+export const Route = createFileRoute('/booking/tickets/')({
+  component: RouteComponent,
+});
+
+export const container = (theme: Theme) => css`
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
@@ -29,193 +34,216 @@ const container = (theme: Theme) => css`
   background-color: ${theme.colors.gray[3]};
 `;
 
-export const Route = createFileRoute('/booking/tickets/')({
-  component: RouteComponent,
-});
-
-const buttonCSS = (theme: Theme) => css`
-  background-color: ${theme.colors.gray.white};
-  padding: 16px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  .charge-time__container {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 5px;
-
-    .tags {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 5px;
-    }
-  }
-
-  .busInfo {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-  }
-`;
-
-function ButtonComponent({ busTicket }: { busTicket: BusTicket }) {
-  return (
-    <Button cx={(theme) => buttonCSS(theme)}>
-      <Typography variant="title3">
-        {convertAMPMHHMM(busTicket.depPlandTime)}
-      </Typography>
-      <div className="charge-time__container">
-        <div className="tags">
-          <Typography
-            variant="body3"
-            cx={(theme) => css`
-              color: ${theme.colors.primary.base};
-            `}
-            backgroundColor="primary"
-          >
-            무정차
-          </Typography>
-          <Typography
-            variant="body4"
-            cx={(theme) => css`
-              color: ${theme.colors.gray[0]};
-            `}
-            as="span"
-          >
-            경기고속
-          </Typography>
-        </div>
-        <Typography variant="title3" as="div">
-          {busTicket.charge.toLocaleString()} 원
-        </Typography>
-        <Typography
-          variant="body4"
-          cx={(theme) => css`
-            color: ${theme.colors.gray[4]};
-          `}
-        >
-          {convertMinutesToHHMM(
-            busTicket.arrPlandTime - busTicket.depPlandTime
-          )}{' '}
-          예상
-        </Typography>
-      </div>
-      <div className="busInfo">
-        <Typography variant="title3" as="div">
-          좌석 수
-        </Typography>
-        <Typography
-          variant="body4"
-          cx={(theme) => css`
-            color: ${theme.colors.primary.base};
-          `}
-        >
-          {busTicket.gradeNm}
-        </Typography>
-        <InfoIcon
-          data-tooltip-id="bus-ticket-tooltip"
-          data-tooltip-content="좌석수는 부정확할 수 있습니다.터미널에서 확인해 주세요."
-        />
-        <Tooltip id="bus-ticket-tooltip" style={{ backgroundColor: 'gray' }} />
-      </div>
-    </Button>
-  );
-}
-
 export default function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
-  const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
-  const [busSearchTime, setBusSearchTime] = useState<number>(202411290500);
-
+  // const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
+  const theme = useTheme();
   const { searchQuery } = useSearchQueryStore((state) => state);
-  const { forwardBusList, concat } = useForwardBusListStore((state) => state);
+  const { forwardBusList, concat } = useForwardBusListStore();
+  const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
+
+  const [busSearchTime, setBusSearchTime] = useState<{
+    value: Date;
+    label: string;
+  }>({
+    value: new Date(searchQuery.startDate),
+    label: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
+  });
+  const [busSearchOption, setBusSearchOption] = useState<{
+    value: string;
+    label: string;
+  }>({ value: '전체', label: '전체' });
+
+  const timeOptions = Array.from({ length: 24 }, (_, i) => {
+    const date = new Date(searchQuery.startDate);
+    date.setHours(i, 0, 0, 0);
+    return {
+      value: date,
+      label: `${convertAMPMHHMM(date)} 이후`,
+    };
+  });
+
+  const options = [
+    { value: '전체', label: '전체' },
+    { value: '무정차', label: '무정차' },
+    { value: '경유', label: '경유' },
+    { value: '고속', label: '고속' },
+    { value: '우등', label: '우등' },
+    { value: '심야', label: '심야' },
+  ];
+
+  const handleFavoriteRoute = () => {
+    if (
+      favoriteRouteList.some(
+        (route) =>
+          route.startId === searchQuery.startId &&
+          route.destId === searchQuery.destId
+      )
+    ) {
+      deleteRoute({ startId: searchQuery.startId, destId: searchQuery.destId });
+    } else {
+      addRoute({ startId: searchQuery.startId, destId: searchQuery.destId });
+    }
+  };
 
   useEffect(() => {
     getBusTicketsAPI(
-      searchQuery.startId || 'NAEK032',
-      searchQuery.destId || 'NAEK300',
-      convertYYYYMMDD(searchQuery.startDate)
+      searchQuery.startId,
+      searchQuery.destId,
+      convertYYYYMMDD(new Date(searchQuery.startDate))
     )
       .then((data) => {
-        setBusTickets(data.response.body.items.item);
-
         // TODO: 전역 상태에 넣기
-        //concat(data.response.body.items.item);
-        // 기본 adults 요금, teens 요금은 20% 할인, children 요금은 50% 할인
+        if (!data.response.body.items.item) {
+          concat([]);
+          return;
+        }
+        concat(
+          convertBusTicketsToBusList(data.response.body.items.item, searchQuery)
+        );
       })
       .catch((error) => {
         console.error(error);
+        //error인 경우, mock data로 초기화
+        concat(
+          convertBusTicketsToBusList(
+            MOCK_busTickets.response.body.items.item,
+            searchQuery
+          )
+        );
       });
   }, []);
 
   return (
     <div style={{ userSelect: 'none' }}>
-      <TopBar
-        leftSlot={
-          <Link
-            onClick={(e) => {
-              e.preventDefault();
-              history.go(-1);
-            }}
-          >
-            <img src={LeftArrowIcon} alt="back button" />
-          </Link>
-        }
-        centerSlot={
-          <div>
+      <StikcyHeader>
+        <TopBar
+          leftSlot={
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                history.go(-1);
+              }}
+            >
+              <img src={LeftArrowIcon} alt="back button" />
+            </Link>
+          }
+          centerSlot={
             <div>
-              {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
-              {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+              <div>
+                {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
+                {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+              </div>
+              <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
             </div>
-            <div>{convertMMDDday(searchQuery.startDate)}</div>
-          </div>
-        }
-        rightSlot={<img src={FavIcon} />}
-      />
+          }
+          rightSlot={
+            <img
+              style={{ cursor: 'pointer' }}
+              onClick={handleFavoriteRoute}
+              src={
+                favoriteRouteList.some(
+                  (route) =>
+                    route.startId === searchQuery.startId &&
+                    route.destId === searchQuery.destId
+                )
+                  ? SelectedFavIcon
+                  : FavIcon
+              }
+              alt="favorite"
+            />
+          }
+        />
+      </StikcyHeader>
 
       <section css={(theme) => container(theme)}>
         <Typography variant="title1" as="p" cx={{ textAlign: 'center' }}>
-          버스를 선택하세요
+          <div>
+            가는 길 <br></br> 버스를 선택하세요
+          </div>
         </Typography>
 
         <div css={css({ display: 'flex', justifyContent: 'space-between' })}>
-          <Button>
-            <Typography
-              variant="body4"
-              backgroundColor="gray"
-              cx={(theme) => css`
-                color: ${theme.colors.gray[4]};
-              `}
-            >
-              {convertAMPMHHMM(busSearchTime)} 이후
-            </Typography>
-          </Button>
-          <Button>
-            <Typography
-              variant="body4"
-              backgroundColor="gray"
-              cx={(theme) => css`
-                color: ${theme.colors.gray[4]};
-              `}
-            >
-              검색조건
-            </Typography>
-          </Button>
+          <Select
+            placeholder="시간 선택"
+            value={busSearchTime}
+            onChange={(newValue) =>
+              setBusSearchTime(newValue as { value: Date; label: string })
+            }
+            options={timeOptions}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: theme.colors.gray[2],
+                borderColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                borderRadius: '20px',
+                minWidth: '100px',
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                color: state.isFocused
+                  ? theme.colors.gray.white
+                  : theme.colors.gray[4],
+              }),
+            }}
+          />
+
+          <Select
+            placeholder="검색조건"
+            value={busSearchOption}
+            onChange={(newValue) =>
+              setBusSearchOption(newValue as { value: string; label: string })
+            }
+            options={options}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: theme.colors.gray[2],
+                borderColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                borderRadius: '20px',
+                minWidth: '100px',
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                color: state.isFocused
+                  ? theme.colors.gray.white
+                  : theme.colors.gray[4],
+              }),
+            }}
+          />
         </div>
 
-        {busTickets &&
-          busTickets.map((busTicket, index) => (
-            <ButtonComponent key={index} busTicket={busTicket} />
-          ))}
+        {forwardBusList &&
+          forwardBusList
+            .filter(
+              (bus) =>
+                bus.startDate >= busSearchTime.value &&
+                (busSearchOption.value === '전체' ||
+                  busSearchOption.value === '무정차' ||
+                  bus.class.includes(busSearchOption.value))
+            )
+            .map((bus, index) => (
+              <ButtonComponent key={index} bus={bus} direction="outbound" />
+            ))}
       </section>
+      {forwardBusList.length === 0 && <ErrorComponent needRebooking={true} />}
+      {forwardBusList.filter(
+        (bus) =>
+          bus.startDate >= busSearchTime.value &&
+          (busSearchOption.value === '전체' ||
+            busSearchOption.value === '무정차' ||
+            bus.class.includes(busSearchOption.value))
+      ).length === 0 && <ErrorComponent needRebooking={false} />}
     </div>
   );
 }

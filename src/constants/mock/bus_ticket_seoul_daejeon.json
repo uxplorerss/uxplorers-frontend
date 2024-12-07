@@ -1,0 +1,242 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL SERVICE."
+    },
+    "body": {
+      "items": {
+        "item": [
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412020800,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020600,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412020850,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020650,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412020940,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020740,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021020,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020820,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021100,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020900,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021130,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412020930,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021200,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021000,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021240,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021040,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021320,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021120,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021400,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021200,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021440,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021240,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021510,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021310,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021550,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021350,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021630,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021430,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021710,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021510,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021750,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021550,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021830,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021630,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021910,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021710,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412021940,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021740,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412022020,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021820,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412022100,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021900,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412022140,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412021940,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412022220,
+            "charge": 18100,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412022020,
+            "gradeNm": "우등",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412022300,
+            "charge": 12400,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412022100,
+            "gradeNm": "고속",
+            "routeId": "NAEK032300"
+          },
+          {
+            "arrPlaceNm": "대전복합",
+            "arrPlandTime": 202412030010,
+            "charge": 19900,
+            "depPlaceNm": "동서울",
+            "depPlandTime": 202412022210,
+            "gradeNm": "심야우등",
+            "routeId": "NAEK032300"
+          }
+        ]
+      },
+      "numOfRows": 100,
+      "pageNo": 1,
+      "totalCount": 25
+    }
+  }
+}

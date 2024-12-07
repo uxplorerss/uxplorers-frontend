@@ -1,3 +1,5 @@
+import { parseBusTerminalId } from '../utils/searchTerminalInfo';
+
 export const getBusNowTimeAPI = async (fromTmnId: string, toTmnId: string) => {
   const queryStringParams: Record<string, string> = {
     serviceKey: import.meta.env.VITE_OPEN_API_KEY,
@@ -32,7 +34,7 @@ export interface BusTicket {
   depPlaceNm: string;
   depPlandTime: number;
   gradeNm: string;
-  routeId: number;
+  routeId: number | string;
 }
 
 interface ResponseBusTickets {
@@ -48,18 +50,6 @@ interface ResponseBusTickets {
     };
   };
 }
-
-/**
- *
- * @param busTmnId
- * @returns
- */
-const parseBusTerminalId = (busTmnId: string) => {
-  if (busTmnId.length === 3) {
-    return `NAEK${busTmnId}`;
-  }
-  return busTmnId;
-};
 
 export const getBusTicketsAPI = async (
   fromTmnId: string,

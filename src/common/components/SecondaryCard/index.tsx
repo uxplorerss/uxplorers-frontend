@@ -17,6 +17,7 @@ export default function SecondaryCard({
       align="start"
       justify="start"
       boxSizing="border-box"
+      width="100%"
       cx={{
         padding: '20px 18px',
         border: `1px solid ${theme.colors.gray[2]}`,
