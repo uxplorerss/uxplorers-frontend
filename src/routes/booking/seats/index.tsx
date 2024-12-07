@@ -21,7 +21,7 @@ export const Route = createFileRoute('/booking/seats/')({
 
 function IndexComponent() {
   //TODO : query param 받아오기
-  const query = 'in';
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
