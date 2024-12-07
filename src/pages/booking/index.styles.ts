@@ -58,6 +58,7 @@ export const transferButtonWrapper = css({
   top: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: 2,
+  cursor: 'pointer',
 });
 
 export const dateSelector = css({
