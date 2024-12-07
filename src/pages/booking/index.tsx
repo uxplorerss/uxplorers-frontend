@@ -26,6 +26,7 @@ import PersonIcon from '../../assets/PersonIcon.svg?react';
 import TransferBtn from '../../assets/booking/btn_transfer.svg?react';
 import LeftArrowMonthIcon from '../../assets/booking/btn_leftArrowMonth.svg?react';
 import RightArrowMonthIcon from '../../assets/booking/btn_rightArrowMonth.svg?react';
+import CloseIcon from '../../assets/CloseIcon.svg?react';
 
 import { buildTypography } from '../../common/components/Typography/index.styles';
 import { container as buttonContainer } from '../../common/components/Button/index.styles';
@@ -232,6 +233,19 @@ function BookingPage() {
               throw new Error('Function not implemented.');
             }}
           />
+          <Button
+            onClick={() => {
+              setSearchQuery({ destDate: null });
+              //setRoundTrip(false);
+            }}
+            cx={css`
+              position: absolute;
+              right: 5px;
+              top: 9px;
+            `}
+          >
+            <CloseIcon />
+          </Button>
         </div>
 
         <div css={searchButton}>

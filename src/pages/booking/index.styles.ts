@@ -66,6 +66,7 @@ export const dateSelector = css({
   flexDirection: 'row',
   gap: '12px',
   marginTop: '8px',
+  position: 'relative',
 });
 
 export const dateBox = css({
