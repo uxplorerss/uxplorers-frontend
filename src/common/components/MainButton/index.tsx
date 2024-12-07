@@ -8,11 +8,12 @@ import Typography from '../Typography';
 export default function MainButton({
   children,
   disabled = false,
+  cx,
   ...rest
 }: MainButtonPropsType) {
   const theme = useTheme();
   return (
-    <Button {...rest} css={buildMainButton(theme, disabled)}>
+    <Button {...rest} cx={[buildMainButton(theme, disabled), cx]}>
       <Typography variant={'button1'}>{children}</Typography>
     </Button>
   );
