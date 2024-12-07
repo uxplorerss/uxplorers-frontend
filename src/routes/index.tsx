@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import BookingPage from '../pages/booking';
 
 export const Route = createFileRoute('/')({
   component: IndexComponent,
@@ -7,9 +8,5 @@ export const Route = createFileRoute('/')({
 function IndexComponent() {
   // TODO 홈 페이지 구현하기
 
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-    </div>
-  );
+  return <BookingPage />;
 }
