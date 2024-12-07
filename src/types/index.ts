@@ -28,7 +28,7 @@ export interface Bus {
   eta: number | string; // n시간 n분
   class: Class | string; // string으로 '우등' | '고속' | '프리미엄' | '심야프리미엄' 등으로 넘김
   seats: Seat[];
-  distance: string;
+  distance: number;
   isExpress: boolean;
 }
 

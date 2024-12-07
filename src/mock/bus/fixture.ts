@@ -4,8 +4,8 @@ import { seats } from '../seats/fixture';
 
 // FIXME change distance property
 export const outboundBus: Bus = {
-  eta: 10,
-  distance: '',
+  eta: 100,
+  distance: 30,
   startDate: new Date(),
   isExpress: false,
   company: '중앙고속',
@@ -18,8 +18,8 @@ export const outboundBus: Bus = {
 
 // FIXME change distance property
 export const inboundBus: Bus = {
-  eta: 10,
-  distance: '',
+  eta: 100,
+  distance: 40,
   startDate: new Date(),
   isExpress: false,
   company: '중앙고속',
