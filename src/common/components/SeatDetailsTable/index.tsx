@@ -27,10 +27,12 @@ export default function SeatDetailsTable({
   startDate,
   inactive = false,
 }: SeatDetailsTablePropsType) {
-  const [adultSeats, childrenSeats] = [
+  const [adultSeats, teensSeats, childrenSeats] = [
     filterSeatsByType(seats, 'adults'),
+    filterSeatsByType(seats, 'teens'),
     filterSeatsByType(seats, 'children'),
   ];
+  console.log(adultSeats, teensSeats, childrenSeats);
 
   const theme = useTheme();
   return (
@@ -59,7 +61,9 @@ export default function SeatDetailsTable({
               gridTemplateAreas: `"seat-icon seat-label seat-value ."
           "person-icon person-label person-value ."
           ". . adult-label adult-price"
+          ". . teen-label teen-price"
           ". . child-label child-price"
+          
           `,
               rowGap: '6px',
               width: '100%',
@@ -121,57 +125,97 @@ export default function SeatDetailsTable({
           >
             총 {seats.length}장
           </Typography>
-          <Typography
-            variant="body3"
-            cx={[
-              {
-                color: theme.colors.gray[4],
-                gridArea: 'adult-label',
-              },
-              buildGray4Styles(theme, inactive),
-            ]}
-          >
-            일반 {adultSeats.length}명
-          </Typography>
-          <Typography
-            variant="body3"
-            cx={[
-              {
-                color: theme.colors.gray[4],
-                gridArea: 'adult-price',
-                justifySelf: 'end',
-              },
-              buildGray4Styles(theme, inactive),
-            ]}
-          >
-            {getLocaleStringNumber(adultSeats.length * adultSeats[0].fee)}원
-          </Typography>
-          <Typography
-            variant="body3"
-            cx={[
-              {
-                color: theme.colors.gray[4],
-                gridArea: 'child-label',
-              },
-              buildGray4Styles(theme, inactive),
-            ]}
-          >
-            초등생 {childrenSeats.length}명
-          </Typography>
-          <Typography
-            variant="body3"
-            cx={[
-              {
-                color: theme.colors.gray[4],
-                gridArea: 'child-price',
-                justifySelf: 'end',
-              },
-              buildGray4Styles(theme, inactive),
-            ]}
-          >
-            {getLocaleStringNumber(childrenSeats.length * childrenSeats[0].fee)}
-            원
-          </Typography>
+          {adultSeats.length && (
+            <>
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'adult-label',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                일반 {adultSeats.length}명
+              </Typography>
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'adult-price',
+                    justifySelf: 'end',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                {getLocaleStringNumber(adultSeats.length * adultSeats[0].fee)}원
+              </Typography>
+            </>
+          )}
+          {teensSeats.length && (
+            <>
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'teen-label',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                청소년 {teensSeats.length}명
+              </Typography>
+
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'teen-price',
+                    justifySelf: 'end',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                {getLocaleStringNumber(teensSeats.length * teensSeats[0].fee)}원
+              </Typography>
+            </>
+          )}
+          {childrenSeats.length && (
+            <>
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'child-label',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                초등생 {childrenSeats.length}명
+              </Typography>
+              <Typography
+                variant="body3"
+                cx={[
+                  {
+                    color: theme.colors.gray[4],
+                    gridArea: 'child-price',
+                    justifySelf: 'end',
+                  },
+                  buildGray4Styles(theme, inactive),
+                ]}
+              >
+                {getLocaleStringNumber(
+                  childrenSeats.length * childrenSeats[0].fee
+                )}
+                원
+              </Typography>
+            </>
+          )}
         </div>
       </Flex>
       <FeeSumRow
