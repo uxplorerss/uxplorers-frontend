@@ -1,7 +1,7 @@
 import useTicketListStore from '../../stores/useTicketListStore';
 import { css, useTheme } from '@emotion/react';
 import Flex from '../../common/components/Flex';
-import { Typography } from '../../common/components';
+import { Button, TopBar, Typography } from '../../common/components';
 import PrimaryCard from '../../common/components/PrimaryCard';
 import RouteOptionRow from '../../common/components/RouteOptionRow';
 import SeatDetailsTable from '../../common/components/SeatDetailsTable';
@@ -18,6 +18,8 @@ import PaymentMethodCard from '../../common/components/payment/PaymentMethodCard
 import { useNavigate } from '@tanstack/react-router';
 import { useShallow } from 'zustand/shallow';
 import useReservationStore from '../../stores/useReservationStore';
+import StikcyHeader from '../../common/components/StickyHeader';
+import LeftArrowIcon from '../../assets/LeftArrowIcon.svg?react';
 
 export default function BookingPaymentPage() {
   const { ticketList, purchaseTicketList } = useReservationStore(
@@ -39,6 +41,24 @@ export default function BookingPaymentPage() {
 
   return (
     <ViewportContainer>
+      <StikcyHeader>
+        <TopBar
+          leftSlot={
+            <Button
+              onClick={() => {
+                history.back();
+              }}
+            >
+              <LeftArrowIcon />
+            </Button>
+          }
+          centerSlot={
+            <Typography variant="body2" cx={{ fontSize: '1.125rem' }}>
+              결제하기
+            </Typography>
+          }
+        />
+      </StikcyHeader>
       <ContentSection>
         <Flex direction="column" gap="17px">
           {ticketList.map(({ ...props }, index) => {

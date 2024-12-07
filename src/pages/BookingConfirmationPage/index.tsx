@@ -1,5 +1,5 @@
 import Flex from '../../common/components/Flex';
-import { Typography } from '../../common/components';
+import { Button, TopBar, Typography } from '../../common/components';
 import PrimaryCard from '../../common/components/PrimaryCard';
 import RouteOptionRow from '../../common/components/RouteOptionRow';
 import SeatDetailsTable from '../../common/components/SeatDetailsTable';
@@ -13,10 +13,12 @@ import { getLocaleStringNumber } from '../../lib';
 import { getTerminalName } from '../../lib/terminal';
 import ContentSection from '../../common/components/ContentSection';
 import useReservationStore from '../../stores/useReservationStore';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 import { useShallow } from 'zustand/shallow';
 import { Ticket } from '../../types';
 import ViewportContainer from '../../common/components/ViewportContainer';
+import LeftArrowIcon from '../../assets/LeftArrowIcon.svg?react';
+import StikcyHeader from '../../common/components/StickyHeader';
 
 export default function BookingConfirmationPage() {
   const { inboundBus, outboundBus, inboundSeatList, outboundSeatList } =
@@ -32,6 +34,8 @@ export default function BookingConfirmationPage() {
   const theme = useTheme();
 
   const navigate = useNavigate();
+
+  const { history } = useRouter();
 
   if (!outboundBus) {
     console.log(outboundBus);
@@ -63,6 +67,19 @@ export default function BookingConfirmationPage() {
 
   return (
     <ViewportContainer>
+      <StikcyHeader>
+        <TopBar
+          leftSlot={
+            <Button
+              onClick={() => {
+                history.back();
+              }}
+            >
+              <LeftArrowIcon />
+            </Button>
+          }
+        />
+      </StikcyHeader>
       <ContentSection>
         <Flex
           justify="center"
