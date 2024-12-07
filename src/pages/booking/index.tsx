@@ -292,9 +292,11 @@ function BookingPage() {
       {showStartDatePicker && (
         <div css={DatePickerWrapper}>
           <DatePicker
-            selected={searchQuery.startDate}
+            selected={new Date(searchQuery.startDate)}
             onChange={(date: Date | null) => {
               if (!date) return;
+              const nowDate = new Date(Date.now());
+              date.setHours(nowDate.getHours(), nowDate.getMinutes(), 0, 0);
               setSearchQuery({ startDate: date });
               setShowStartDatePicker(false);
             }}
