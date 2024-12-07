@@ -36,6 +36,7 @@ yarn deploy
   - 즐겨찾기를 제외한 전역 상태 설계 및 구현
   - github actions를 통한 lint, build 및 storybook 배포 플로우 작성
 - 양석준:
+  - 프로젝트 기획
   - 좌석 선택 페이지 구현
 - 김지환:
   - vercel에서의 배포 및 proxy server를 이용한 티머니고 api 통신 로직 작성,
