@@ -8,19 +8,11 @@ import StickyFooter from '../../common/components/StickyFooter';
 import MainButton from '../../common/components/MainButton';
 import ActionBar from '../../common/components/ActionBar';
 import { css, useTheme } from '@emotion/react';
-import terminal2Data from '../../constants/terminal_gosok.json';
+
 import { calculateTicketListFee } from '../../lib/tickets';
 import { getLocaleStringNumber } from '../../lib';
-
-const getTerminalName = (terminalId: string) => {
-  const terminals = terminal2Data.response.body.items.item;
-
-  const filteredTerminal = terminals.find(
-    (terminal) => terminal.terminalId === 'NAEK' + terminalId
-  );
-
-  return filteredTerminal?.terminalNm;
-};
+import { getTerminalName } from '../../lib/terminal';
+import ContentSection from '../../common/components/ContentSection';
 
 export default function BookingConfirmationPage() {
   const ticketList = useTicketListStore((state) => state.ticketList);
@@ -35,31 +27,34 @@ export default function BookingConfirmationPage() {
 
   return (
     <div>
-      <Flex
-        justify="center"
-        align="center"
-        cx={{
-          padding: '48px 20px 20px 20px',
-        }}
-        direction="column"
-      >
-        <Typography variant="title1">예매할 내역을 확인하세요</Typography>
-      </Flex>
-      {ticketList.map(({ ...props }, index) => {
-        return (
-          <PrimaryCard
-            {...props}
-            headerSlot={
-              <RouteOptionRow
-                {...props}
-                startName={itineraries[index].startName}
-                destName={itineraries[index].destName}
-              />
-            }
-            children={<SeatDetailsTable {...props} />}
-          />
-        );
-      })}
+      <ContentSection>
+        <Flex
+          justify="center"
+          align="center"
+          cx={{
+            padding: '48px 20px 20px 20px',
+          }}
+          direction="column"
+        >
+          <Typography variant="title1">예매할 내역을 확인하세요</Typography>
+        </Flex>
+
+        {ticketList.map(({ ...props }, index) => {
+          return (
+            <PrimaryCard
+              {...props}
+              headerSlot={
+                <RouteOptionRow
+                  {...props}
+                  startName={itineraries[index].startName}
+                  destName={itineraries[index].destName}
+                />
+              }
+              children={<SeatDetailsTable {...props} />}
+            />
+          );
+        })}
+      </ContentSection>
       <StickyFooter>
         <ActionBar
           actionSlot={
