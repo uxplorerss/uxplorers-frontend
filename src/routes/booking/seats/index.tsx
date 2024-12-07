@@ -18,6 +18,9 @@ import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
 import useReservationStore from '../../../stores/useReservationStore';
 import { Seat } from '../../../types';
+import { Button } from '../../../common/components';
+
+import CloseIcon from '../../../assets/CloseIcon.svg?react';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
@@ -27,7 +30,6 @@ function IndexComponent() {
   //TODO : query param 받아오기
   const param: { direction: 'out' | 'in' } = Route.useSearch();
   const query = param.direction;
-  console.log(query);
 
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
@@ -146,7 +148,18 @@ function IndexComponent() {
 
   return (
     <>
-      <TopBar />
+      <TopBar
+        leftSlot={
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              history.go(-1);
+            }}
+          >
+            <CloseIcon />
+          </Button>
+        }
+      />
       <Flex children={<ReaminSeat num={available} />}></Flex>
       <Flex
         direction={'column'}
