@@ -1,16 +1,16 @@
-import React from 'react';
 import Flex from '../../common/components/Flex';
 import { Typography } from '../../common/components';
 import PrimaryCard from '../../common/components/PrimaryCard';
 import RouteOptionRow from '../../common/components/RouteOptionRow';
 import SeatDetailsTable from '../../common/components/SeatDetailsTable';
-import FeeSumRow from '../../common/components/FeeSumRow';
 import useTicketListStore from '../../stores/useTicketListStore';
 import StickyFooter from '../../common/components/StickyFooter';
 import MainButton from '../../common/components/MainButton';
 import ActionBar from '../../common/components/ActionBar';
 import { css, useTheme } from '@emotion/react';
 import terminal2Data from '../../constants/terminal_gosok.json';
+import { calculateTicketListFee } from '../../lib/tickets';
+import { getLocaleStringNumber } from '../../lib';
 
 const getTerminalName = (terminalId: string) => {
   const terminals = terminal2Data.response.body.items.item;
@@ -65,7 +65,10 @@ export default function BookingPaymentPage() {
           actionSlot={
             <MainButton>
               <Flex gap="20px">
-                <span>30,200원 결제하기</span>
+                <span>
+                  {getLocaleStringNumber(calculateTicketListFee(ticketList))}원
+                  결제하기
+                </span>
                 <Flex
                   cx={css({
                     borderRadius: theme.radii.circle,
@@ -75,7 +78,7 @@ export default function BookingPaymentPage() {
                     color: theme.colors.gray.black,
                   })}
                 >
-                  <Typography variant="body3">3</Typography>
+                  <Typography variant="body3">{ticketList.length}</Typography>
                 </Flex>
               </Flex>
             </MainButton>
