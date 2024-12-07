@@ -42,10 +42,10 @@ export default function RouteComponent() {
   const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
 
   const [busSearchTime, setBusSearchTime] = useState<{
-    value: string;
+    value: Date;
     label: string;
   }>({
-    value: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
+    value: new Date(searchQuery.startDate),
     label: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
   });
   const [busSearchOption, setBusSearchOption] = useState<{
@@ -57,7 +57,7 @@ export default function RouteComponent() {
     const date = new Date(searchQuery.startDate);
     date.setHours(i, 0, 0, 0);
     return {
-      value: `${convertAMPMHHMM(date)} 이후`,
+      value: date,
       label: `${convertAMPMHHMM(date)} 이후`,
     };
   });
@@ -161,7 +161,7 @@ export default function RouteComponent() {
             placeholder="시간 선택"
             value={busSearchTime}
             onChange={(newValue) =>
-              setBusSearchTime(newValue as { value: string; label: string })
+              setBusSearchTime(newValue as { value: Date; label: string })
             }
             options={timeOptions}
             styles={{
@@ -217,9 +217,17 @@ export default function RouteComponent() {
         </div>
 
         {forwardBusList &&
-          forwardBusList.map((bus, index) => (
-            <ButtonComponent key={index} bus={bus} direction="outbound" />
-          ))}
+          forwardBusList
+            .filter(
+              (bus) =>
+                bus.startDate >= busSearchTime.value &&
+                (busSearchOption.value === '전체' ||
+                  busSearchOption.value === '무정차' ||
+                  bus.class.includes(busSearchOption.value))
+            )
+            .map((bus, index) => (
+              <ButtonComponent key={index} bus={bus} direction="outbound" />
+            ))}
       </section>
     </div>
   );
