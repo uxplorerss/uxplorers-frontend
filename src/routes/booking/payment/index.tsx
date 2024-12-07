@@ -3,9 +3,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import BookingPaymentPage from '../../../pages/BookingPaymentPage';
 
 export const Route = createFileRoute('/booking/payment/')({
-  component: IndexComponent,
+  component: RouteComponent,
 });
 
-function IndexComponent() {
+function RouteComponent() {
   return <BookingPaymentPage />;
 }

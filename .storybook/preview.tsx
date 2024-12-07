@@ -6,6 +6,12 @@ import FontProvider from '../src/common/components/FontProvider';
 import theme from '../src/theme';
 import React from 'react';
 import GlobalStyles from './GlobalStyles';
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 
 const preview: Preview = {
   parameters: {
@@ -30,6 +36,16 @@ const preview: Preview = {
       <FontProvider>
         <Story />
       </FontProvider>
+    ),
+    (Story) => (
+      <RouterProvider
+        router={createRouter({
+          history: createMemoryHistory(),
+          routeTree: createRootRoute({
+            component: Story,
+          }),
+        })}
+      />
     ),
   ],
 };

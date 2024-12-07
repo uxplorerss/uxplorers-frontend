@@ -11,7 +11,7 @@ export default function CompanyRow({
   company,
   cx,
 }: CompanyRowPropsType) {
-  const hasStops = destIdList.length > 1;
+  const isDirect = destIdList.length === 1;
   const theme = useTheme();
   return (
     <Flex justify="space-between" width="100%" boxSizing="border-box" cx={cx}>
@@ -26,7 +26,7 @@ export default function CompanyRow({
             borderRadius: '9px',
           }}
         >
-          {hasStops ? '무정차' : '경유'}
+          {isDirect ? '무정차' : '경유'}
         </Typography>
 
         <Typography

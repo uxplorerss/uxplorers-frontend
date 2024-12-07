@@ -4,13 +4,17 @@ import Flex from '../Flex';
 import Typography from '../Typography';
 import { useTheme } from '@emotion/react';
 
-const getLocalStringNumber = (num: number) => num.toLocaleString();
-
-export default function FeeSumRow({ totalFee }: FeeSumRowPropsType) {
+export default function FeeSumRow({ totalFee, ...props }: FeeSumRowPropsType) {
   const theme = useTheme();
-  const localeStringNumber = getLocalStringNumber(totalFee);
+  const localeStringNumber = totalFee.toLocaleString();
   return (
-    <Flex justify="flex-end" align="center" width="100%" boxSizing="border-box">
+    <Flex
+      justify="flex-end"
+      align="center"
+      width="100%"
+      boxSizing="border-box"
+      {...props}
+    >
       <Typography
         variant="title3"
         cx={{

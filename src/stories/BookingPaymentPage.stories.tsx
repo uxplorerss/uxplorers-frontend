@@ -1,36 +1,26 @@
 import { Meta, StoryObj } from '@storybook/react';
 import BookingPaymentPage from '../pages/BookingPaymentPage';
-import { ReactNode, useEffect } from 'react';
-import useTicketListStore from '../stores/useTicketListStore';
-import { tickets } from '../mock/ticket/fixture';
-
-function TicketListProvider({ children }: { children: ReactNode }) {
-  useSetTicketList();
-  return <>{children}</>;
-}
-
-function useSetTicketList() {
-  useEffect(() => {
-    useTicketListStore.setState({ ticketList: tickets });
-    return () => {
-      useTicketListStore.setState({ ticketList: [] });
-    };
-  });
-}
+import PendingTicketListProvider from '../mock/ticket';
 
 const meta = {
-  title: 'Pages/BookingPaymentPage',
+  title: 'pages/BookingPaymentPage',
   component: BookingPaymentPage,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: (Story) => {
     return (
-      <TicketListProvider>
+      <PendingTicketListProvider>
         <Story />
-      </TicketListProvider>
+      </PendingTicketListProvider>
     );
   },
 } satisfies Meta;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {},
+};
