@@ -123,7 +123,7 @@ export default function SeatDetailsTable({
           >
             총 {seats.length}장
           </Typography>
-          {adultSeats.length && (
+          {!!adultSeats.length && (
             <>
               <Typography
                 variant="body3"
@@ -152,7 +152,7 @@ export default function SeatDetailsTable({
               </Typography>
             </>
           )}
-          {teensSeats.length && (
+          {!!teensSeats.length && (
             <>
               <Typography
                 variant="body3"
@@ -164,7 +164,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                청소년 {teensSeats.length}명
+                초등생 {teensSeats.length}명
               </Typography>
 
               <Typography
@@ -182,7 +182,7 @@ export default function SeatDetailsTable({
               </Typography>
             </>
           )}
-          {childrenSeats.length && (
+          {!!childrenSeats.length && (
             <>
               <Typography
                 variant="body3"
@@ -194,7 +194,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                초등생 {childrenSeats.length}명
+                아동 {childrenSeats.length}명
               </Typography>
               <Typography
                 variant="body3"
