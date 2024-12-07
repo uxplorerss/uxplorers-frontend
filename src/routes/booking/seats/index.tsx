@@ -80,7 +80,6 @@ function IndexComponent() {
               break;
           }
         }
-
         tmp.push({
           seatNum: v.id!,
           type: v.type!,
@@ -93,7 +92,7 @@ function IndexComponent() {
       selectOutboundSeatList(tmp);
     }
     if (pageType || query === 'in') {
-      navigate({ to: '/booking/payment' });
+      navigate({ to: '/booking/bookingConfirmation' });
     } else {
       navigate({ to: '/booking/tickets/inbound' });
     }

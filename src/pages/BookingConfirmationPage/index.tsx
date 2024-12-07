@@ -20,15 +20,21 @@ import LeftArrowIcon from '../../assets/LeftArrowIcon.svg?react';
 import StikcyHeader from '../../common/components/StickyHeader';
 
 export default function BookingConfirmationPage() {
-  const { inboundBus, outboundBus, inboundSeatList, outboundSeatList } =
-    useReservationStore(
-      useShallow((state) => ({
-        inboundBus: state.selectedInboundBus,
-        outboundBus: state.selectedOutboundBus!,
-        inboundSeatList: state.selectedInboundSeatList,
-        outboundSeatList: state.selectedOutboundSeatList,
-      }))
-    );
+  const {
+    inboundBus,
+    outboundBus,
+    inboundSeatList,
+    outboundSeatList,
+    issueTicketList,
+  } = useReservationStore(
+    useShallow((state) => ({
+      inboundBus: state.selectedInboundBus,
+      outboundBus: state.selectedOutboundBus!,
+      inboundSeatList: state.selectedInboundSeatList,
+      outboundSeatList: state.selectedOutboundSeatList,
+      issueTicketList: state.issueTicketList,
+    }))
+  );
 
   const theme = useTheme();
 
@@ -37,7 +43,6 @@ export default function BookingConfirmationPage() {
   const { history } = useRouter();
 
   if (!outboundBus) {
-    console.log(outboundBus);
     return <>비어있습니다.</>;
   }
 
@@ -113,6 +118,7 @@ export default function BookingConfirmationPage() {
           actionSlot={
             <MainButton
               onClick={() => {
+                issueTicketList();
                 navigate({
                   to: '/booking/payment',
                 });
