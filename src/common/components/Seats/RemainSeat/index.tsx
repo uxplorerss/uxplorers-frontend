@@ -7,7 +7,7 @@ const ReaminSeat = ({ num }: remainSeatPropsType) => {
       <div>
         잔여 <b>{num}</b> / 28석
       </div>
-      <RefreshIcon />
+      <RefreshIcon style={{ cursor: 'pointer' }} />
     </>
   );
 };

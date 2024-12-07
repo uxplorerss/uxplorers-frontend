@@ -1,28 +1,33 @@
 import { create } from 'zustand';
 import type { ForwardBusListState } from './index.types';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 const initialState = {
   forwardBusList: [],
 };
 
 const useForwardBusListStore = create<ForwardBusListState>()(
-  devtools((set) => ({
-    ...initialState,
-    reset: () => set({ ...initialState }),
-    concat: (newforwardBusList) =>
-      set((state) => ({
-        ...state,
-        forwardBusList: [...state.forwardBusList, ...newforwardBusList],
-      })),
-    deleteByStartId: (targetStartId) =>
-      set((state) => ({
-        ...state,
-        forwardBusList: state.forwardBusList.filter(
-          (forwardBus) => forwardBus.startId !== targetStartId
-        ),
-      })),
-  }))
+  persist(
+    devtools((set) => ({
+      ...initialState,
+      reset: () => set({ ...initialState }),
+      concat: (newforwardBusList) =>
+        set((state) => ({
+          ...state,
+          forwardBusList: [...newforwardBusList],
+        })),
+      deleteByStartId: (targetStartId) =>
+        set((state) => ({
+          ...state,
+          forwardBusList: state.forwardBusList.filter(
+            (forwardBus) => forwardBus.startId !== targetStartId
+          ),
+        })),
+    })),
+    {
+      name: 'forward-bus-list',
+    }
+  )
 );
 
 export default useForwardBusListStore;

@@ -5,6 +5,7 @@ export const container = css({
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100vh',
+  userSelect: 'none',
 });
 
 export const topBarWrapper = css({
@@ -57,6 +58,7 @@ export const transferButtonWrapper = css({
   top: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: 2,
+  cursor: 'pointer',
 });
 
 export const dateSelector = css({
@@ -64,6 +66,7 @@ export const dateSelector = css({
   flexDirection: 'row',
   gap: '12px',
   marginTop: '8px',
+  position: 'relative',
 });
 
 export const dateBox = css({

@@ -9,4 +9,13 @@ export const globalStyle = css`
   * {
     box-sizing: border-box;
   }
+
+  a {
+    text-decoration: none;
+    outline: none;
+  }
+  a:hover,
+  a:active {
+    text-decoration: none;
+  }
 `;
