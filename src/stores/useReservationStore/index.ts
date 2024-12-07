@@ -28,8 +28,6 @@ const useReservationStore = create<ReservationState>()(
         set((state) => ({ ...state, selectedInboundSeatList: seatList })),
       issueTicketList: () =>
         set((state) => {
-          console.log(state.selectedOutboundSeatList);
-          console.log(state.selectedInboundSeatList);
           if (state.selectedOutboundBus && state.selectedInboundBus) {
             const outboundTicket = {
               ...state.selectedOutboundBus,

@@ -43,7 +43,6 @@ export default function BookingConfirmationPage() {
   const { history } = useRouter();
 
   if (!outboundBus) {
-    console.log(outboundBus);
     return <>비어있습니다.</>;
   }
 

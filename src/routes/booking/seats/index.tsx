@@ -27,7 +27,6 @@ function IndexComponent() {
   //TODO : query param 받아오기
   const param: { direction: 'out' | 'in' } = Route.useSearch();
   const query = param.direction;
-  console.log(query);
 
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
@@ -91,7 +90,7 @@ function IndexComponent() {
       selectOutboundSeatList(tmp);
     }
     if (pageType || query === 'in') {
-      navigate({ to: '/booking/payment' });
+      navigate({ to: '/booking/bookingConfirmation' });
     } else {
       navigate({ to: '/booking/tickets/inbound' });
     }
