@@ -10,7 +10,7 @@ export default function PrimaryCard({
 }: PrimaryCardPropsType) {
   const theme = useTheme();
   return (
-    <Component css={buildContainerStyles(theme)}>
+    <Component css={[buildContainerStyles(theme), cx]}>
       {headerSlot}
       <div css={[horizontalPaddingStyles]}>{children}</div>
     </Component>
