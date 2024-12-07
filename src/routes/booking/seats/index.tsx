@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   seat,
@@ -12,12 +12,16 @@ import SeatType from '../../../common/components/Seats/SeatType';
 import ReaminSeat from '../../../common/components/Seats/RemainSeat';
 import SeatsPayInfo from '../../../common/components/Seats/SeatsPayInfo';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
+import useReservationStore from '../../../stores/useReservationStore';
+import { Seat } from '../../../types';
 
 export const Route = createFileRoute('/booking/seats/')({
   component: IndexComponent,
 });
 
 function IndexComponent() {
+  //TODO : query param 받아오기
+  const query = 'in';
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
@@ -36,23 +40,54 @@ function IndexComponent() {
     setSelectedType(type);
   };
 
-  const handleNavigate = () =>
+  const handleNavigate = () => {
+    const tmp: Seat[] = [];
+    seats
+      .filter((value) => value.status === 'SELECTED')
+      .forEach((v) => {
+        tmp.push({
+          seatNum: v.id!,
+          type: v.type!,
+          fee: 15000, //이 부분 단순히 그냥 하드코딩을 해야할까요? Bus 별로 어른 / 아이 / 초등학생 요금을 받아올 수 있을 지
+        });
+      });
+    if (query === 'in') {
+      selectInboundSeatList(tmp);
+    } else {
+      selectOutboundSeatList(tmp);
+    }
     pageType
       ? navigate({ to: '/booking/payment' })
       : navigate({ to: '/booking/tickets' });
+  };
 
   //TODO GET /seats/${bus}
-  const initSeats = (): seat[] => {
+  const initSeats = () => {
     const tmp: seat[] = [];
+    const originSeat: Seat[] | undefined =
+      query === 'in' ? selectedInboundBus?.seats : selectedOutboundBus?.seats;
+
     seatMap.forEach((value) => {
       if (value !== -1) {
-        tmp.push({ id: value, status: 'NORMAL' });
+        //true 이면 OCCUPIED, false면 NORMAL
+        let flag = false;
+        originSeat?.forEach((idx) => {
+          if (idx.seatNum === value) {
+            flag = true;
+            return false; //break 역할
+          }
+        });
+        tmp.push({ id: value, status: flag ? 'OCCUPIED' : 'NORMAL' });
       } else {
         tmp.push({ id: value, status: 'NONE' });
       }
     });
-    return tmp;
+    setSeats(tmp);
   };
+
+  useEffect(() => {
+    initSeats();
+  }, []);
 
   const seatMap: (number | undefined)[] = [
     1, 2, -1, 3, 4, 5, -1, 6, 7, 8, -1, 9, 10, 11, -1, 12, 13, 14, -1, 15, 16,
@@ -60,8 +95,14 @@ function IndexComponent() {
   ];
 
   const [selectedType, setSelectedType] = useState<SeatTypeVariant>('adults');
-  const [seats, setSeats] = useState<seat[]>(initSeats());
+  const [seats, setSeats] = useState<seat[]>([]);
   const { searchQuery } = useSearchQueryStore();
+  const {
+    selectInboundSeatList,
+    selectOutboundSeatList,
+    selectedInboundBus,
+    selectedOutboundBus,
+  } = useReservationStore();
 
   const navigate = useNavigate();
   const pageType = searchQuery.destId === ''; // true면 예약확인페이지, false면 오는 길 버스 리스트 페이지
