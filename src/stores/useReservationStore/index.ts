@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { ReservationState } from './index.types';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
+import { Ticket } from '../../types';
 
 const initialState = {
   selectedOutboundBus: null,
@@ -15,7 +16,7 @@ const initialState = {
 
 const useReservationStore = create<ReservationState>()(
   persist(
-    (set) => ({
+    devtools((set) => ({
       ...initialState,
       selectOutboundBus: (bus) =>
         set((state) => ({ ...state, selectedOutboundBus: bus })),
@@ -27,6 +28,8 @@ const useReservationStore = create<ReservationState>()(
         set((state) => ({ ...state, selectedInboundSeatList: seatList })),
       issueTicketList: () =>
         set((state) => {
+          console.log(state.selectedOutboundSeatList);
+          console.log(state.selectedInboundSeatList);
           if (state.selectedOutboundBus && state.selectedInboundBus) {
             const outboundTicket = {
               ...state.selectedOutboundBus,
@@ -47,9 +50,9 @@ const useReservationStore = create<ReservationState>()(
             };
           }
           if (state.selectedOutboundBus) {
-            const outboundTicket = {
+            const outboundTicket: Ticket = {
               ...state.selectedOutboundBus,
-              seats: [...state.selectedOutboundBus.seats],
+              seats: [...state.selectedOutboundSeatList],
             };
 
             return {
@@ -70,7 +73,7 @@ const useReservationStore = create<ReservationState>()(
             ...state.pendingTicketList,
           ],
         })),
-    }),
+    })),
     {
       name: 'reservationStore',
       partialize: (state) => ({
