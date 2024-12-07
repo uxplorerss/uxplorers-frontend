@@ -45,10 +45,37 @@ function IndexComponent() {
     seats
       .filter((value) => value.status === 'SELECTED')
       .forEach((v) => {
+        let f: number | undefined = 0;
+        if (query === 'in') {
+          switch (v.type) {
+            case 'adults':
+              f = selectedInboundBus?.fee.adults;
+              break;
+            case 'children':
+              f = selectedInboundBus?.fee.children;
+              break;
+            case 'teens':
+              f = selectedInboundBus?.fee.teens;
+              break;
+          }
+        } else {
+          switch (v.type) {
+            case 'adults':
+              f = selectedOutboundBus?.fee.adults;
+              break;
+            case 'children':
+              f = selectedOutboundBus?.fee.children;
+              break;
+            case 'teens':
+              f = selectedOutboundBus?.fee.teens;
+              break;
+          }
+        }
+
         tmp.push({
           seatNum: v.id!,
           type: v.type!,
-          fee: 15000, //이 부분 단순히 그냥 하드코딩을 해야할까요? Bus 별로 어른 / 아이 / 초등학생 요금을 받아올 수 있을 지
+          fee: f!, //이 부분 단순히 그냥 하드코딩을 해야할까요? Bus 별로 어른 / 아이 / 초등학생 요금을 받아올 수 있을 지
         });
       });
     if (query === 'in') {
@@ -122,11 +149,21 @@ function IndexComponent() {
         onSelectSeat={handleSelectSeat}
         selectedType={selectedType}
       />
-      <SeatsPayInfo
-        seats={seats}
-        pageType={pageType}
-        onClick={handleNavigate}
-      />
+      {query === 'in' ? (
+        <SeatsPayInfo
+          busFee={selectedInboundBus?.fee}
+          seats={seats}
+          pageType={pageType}
+          onClick={handleNavigate}
+        />
+      ) : (
+        <SeatsPayInfo
+          busFee={selectedOutboundBus?.fee}
+          seats={seats}
+          pageType={pageType}
+          onClick={handleNavigate}
+        />
+      )}
     </>
   );
 }

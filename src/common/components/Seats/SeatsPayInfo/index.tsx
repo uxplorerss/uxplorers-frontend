@@ -14,6 +14,7 @@ export default function SeatsPayInfo({
   seats,
   pageType,
   onClick,
+  busFee,
 }: SeatsPayInfoPropsType) {
   const adults: seat[] = [];
   const teens: seat[] = [];
@@ -62,9 +63,10 @@ export default function SeatsPayInfo({
     if (children.length > 0) {
       pushString('아동 ' + children.length);
     }
-    //TODO
     setFee(
-      10000 * adults.length + 7000 * teens.length + 5000 * children.length
+      busFee!.adults * adults.length +
+        busFee!.teens * teens.length +
+        busFee!.children * children.length
     );
   }, [seats]);
 
