@@ -1,13 +1,19 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Typography } from '../../common/components';
 import MainButton from '../../common/components/MainButton';
+import { css } from '@emotion/react';
 
 function ErrorComponent({ needRebooking }: { needRebooking: boolean }) {
   const navigate = useNavigate();
 
   return (
     <div style={{ textAlign: 'center', padding: '50px 25px' }}>
-      <Typography variant="body1">
+      <Typography
+        variant="body1"
+        cx={(theme) => css`
+          color: ${theme.colors.gray[4]};
+        `}
+      >
         {needRebooking ? (
           <p>이 경로와 날짜의 버스를 검색하지 못했어요.</p>
         ) : (
