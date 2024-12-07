@@ -1,50 +1,101 @@
-import React from 'react';
-import Flex from '../../common/components/Flex';
-import { Typography } from '../../common/components';
-import PrimaryCard from '../../common/components/PrimaryCard';
-import RouteRow from '../../common/components/RouteRow';
-import SeatDetailsTable from '../../common/components/SeatDetailsTable';
-import FeeSumRow from '../../common/components/FeeSumRow';
 import useTicketListStore from '../../stores/useTicketListStore';
-import StickyFooter from '../../common/components/StickyFooter';
-import MainButton from '../../common/components/MainButton';
-import ActionBar from '../../common/components/ActionBar';
 import { css, useTheme } from '@emotion/react';
+import Flex from '../../common/components/Flex';
+import { Button, TopBar, Typography } from '../../common/components';
+import PrimaryCard from '../../common/components/PrimaryCard';
+import RouteOptionRow from '../../common/components/RouteOptionRow';
+import SeatDetailsTable from '../../common/components/SeatDetailsTable';
+import StickyFooter from '../../common/components/StickyFooter';
+import ActionBar from '../../common/components/ActionBar';
+import MainButton from '../../common/components/MainButton';
+
+import { calculateTicketListFee } from '../../lib/tickets';
+import { getTerminalName } from '../../lib/terminal';
+import ViewportContainer from '../../common/components/ViewportContainer';
+import ContentSection from '../../common/components/ContentSection';
+import CouponAndMileageCard from '../../common/components/payment/CouponAndMileageCard';
+import PaymentMethodCard from '../../common/components/payment/PaymentMethodCard';
+import { useNavigate } from '@tanstack/react-router';
+import { useShallow } from 'zustand/shallow';
+import useReservationStore from '../../stores/useReservationStore';
+import StikcyHeader from '../../common/components/StickyHeader';
+import LeftArrowIcon from '../../assets/LeftArrowIcon.svg?react';
 
 export default function BookingPaymentPage() {
-  const ticketList = useTicketListStore((state) => state.ticketList);
+  const { ticketList, purchaseTicketList } = useReservationStore(
+    useShallow((state) => ({
+      ticketList: state.pendingTicketList,
+      purchaseTicketList: state.purchaseTicketList,
+    }))
+  );
+  const itineraries = ticketList.map(({ startId, destIdList }) => {
+    return {
+      startName: getTerminalName(startId)!,
+      destName: getTerminalName(destIdList[destIdList.length - 1])!,
+    };
+  });
+
   const theme = useTheme();
 
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <Flex
-        justify="center"
-        align="center"
-        cx={{
-          padding: '48px 20px 20px 20px',
-        }}
-        direction="column"
-      >
-        <Typography variant="title1">예매할 내역을 확인하세요</Typography>
-      </Flex>
-      {ticketList.map(({ ...props }) => {
-        return (
-          <PrimaryCard
-            {...props}
-            headerSlot={
-              <RouteRow {...props} startName="부산해운대" destName="동서울" />
-            }
-            bodySlot={<SeatDetailsTable {...props} />}
-            footerSlot={<FeeSumRow totalFee={12345} />}
-          />
-        );
-      })}
+    <ViewportContainer>
+      <StikcyHeader>
+        <TopBar
+          leftSlot={
+            <Button
+              onClick={() => {
+                history.back();
+              }}
+            >
+              <LeftArrowIcon />
+            </Button>
+          }
+          centerSlot={
+            <Typography variant="body2" cx={{ fontSize: '1.125rem' }}>
+              결제하기
+            </Typography>
+          }
+        />
+      </StikcyHeader>
+      <ContentSection>
+        <Flex direction="column" gap="17px">
+          {ticketList.map(({ ...props }, index) => {
+            return (
+              <PrimaryCard
+                {...props}
+                headerSlot={
+                  <RouteOptionRow
+                    {...props}
+                    startName={itineraries[index].startName}
+                    destName={itineraries[index].destName}
+                  />
+                }
+                children={<SeatDetailsTable {...props} />}
+              />
+            );
+          })}
+          <CouponAndMileageCard />
+          <PaymentMethodCard />
+        </Flex>
+      </ContentSection>
       <StickyFooter>
         <ActionBar
           actionSlot={
-            <MainButton>
+            <MainButton
+              onClick={() => {
+                purchaseTicketList();
+                navigate({
+                  to: '/booking/paymentConfirmation',
+                });
+              }}
+            >
               <Flex gap="20px">
-                <span>30,200원 결제하기</span>
+                <span>
+                  {calculateTicketListFee(ticketList).toLocaleString()}원
+                  결제하기
+                </span>
                 <Flex
                   cx={css({
                     borderRadius: theme.radii.circle,
@@ -54,13 +105,13 @@ export default function BookingPaymentPage() {
                     color: theme.colors.gray.black,
                   })}
                 >
-                  <Typography variant="body3">3</Typography>
+                  <Typography variant="body3">{ticketList.length}</Typography>
                 </Flex>
               </Flex>
             </MainButton>
           }
         />
       </StickyFooter>
-    </div>
+    </ViewportContainer>
   );
 }

@@ -26,6 +26,7 @@ import PersonIcon from '../../assets/PersonIcon.svg?react';
 import TransferBtn from '../../assets/booking/btn_transfer.svg?react';
 import LeftArrowMonthIcon from '../../assets/booking/btn_leftArrowMonth.svg?react';
 import RightArrowMonthIcon from '../../assets/booking/btn_rightArrowMonth.svg?react';
+import CloseIcon from '../../assets/CloseIcon.svg?react';
 
 import { buildTypography } from '../../common/components/Typography/index.styles';
 import { container as buttonContainer } from '../../common/components/Button/index.styles';
@@ -39,24 +40,51 @@ import terminalData from '../../constants/terminal.json';
 import useSearchQueryStore from '../../stores/useSearchQueryStore';
 import LanguageSwitchButton from '../../common/components/LanguageSwitchButton';
 import { buildInput } from '../../common/components/Input/index.styles';
+import useFavoriteRouteStore from '../../stores/useFavoriteRouteStore';
+
+const tmnCdToTmnNm = (tmnCd: string | number) => {
+  const terminal = terminalData.response.body.items.item.find(
+    (terminal) => terminal.tmnCd.toString() === tmnCd.toString()
+  );
+  return terminal?.tmnNm;
+};
 
 function BookmarkList() {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  const { favoriteRouteList } = useFavoriteRouteStore();
+  const { setSearchQuery } = useSearchQueryStore();
+
   return (
-    <div style={{ padding: '0 20px', marginTop: '48px' }}>
+    <div
+      css={css`
+        padding: 0px 20px;
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      `}
+    >
       <Typography variant="body1" as="p">
         즐겨찾기
       </Typography>
-      <Button
-        cx={buildInput(theme)}
-        onClick={() => {
-          navigate({ to: '/booking/tickets' });
-        }}
-        style={{ cursor: 'pointer' }}
-      >
-        서울 경부 → 구미
-      </Button>
+      {favoriteRouteList.map((route, index) => (
+        <Button
+          key={index}
+          cx={buildInput(theme)}
+          onClick={() => {
+            setSearchQuery({
+              startId: route.startId,
+              destId: route.destId,
+            });
+            navigate({ to: '/booking/tickets' });
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          {tmnCdToTmnNm(route.startId)} → {tmnCdToTmnNm(route.destId)}
+        </Button>
+      ))}
     </div>
   );
 }
@@ -97,14 +125,6 @@ function BookingPage() {
 
     return `${month}. ${day} (${weekday})`;
   };
-
-  const tmnCdToTmnNm = (tmnCd: string | number) => {
-    const terminal = terminalData.response.body.items.item.find(
-      (terminal) => terminal.tmnCd.toString() === tmnCd.toString()
-    );
-    return terminal?.tmnNm;
-  };
-
 
   return (
     <div css={container}>
@@ -173,7 +193,7 @@ function BookingPage() {
               navigate({ to: '/booking/arrivalLocation' });
             }}
           >
-            {searchQuery.startId
+            {searchQuery.destId
               ? tmnCdToTmnNm(searchQuery.destId)
               : '도착지 선택'}
           </Button>
@@ -182,7 +202,7 @@ function BookingPage() {
         <div css={dateSelector}>
           <Input
             css={dateBox}
-            value={formatDate(searchQuery.startDate)}
+            value={formatDate(new Date(searchQuery.startDate))}
             onValueChange={(value: string) => {
               setSearchQuery({
                 startDate: new Date(value),
@@ -198,7 +218,11 @@ function BookingPage() {
           <Input
             css={dateBox}
             placeholder="+왕복 선택"
-            value={roundTrip ? formatDate(searchQuery.destDate) : ''}
+            value={
+              roundTrip && searchQuery.destDate
+                ? formatDate(new Date(searchQuery.destDate))
+                : ''
+            }
             onClick={() => {
               setShowEndDatePicker(true);
               setShowStartDatePicker(false);
@@ -209,6 +233,19 @@ function BookingPage() {
               throw new Error('Function not implemented.');
             }}
           />
+          <Button
+            onClick={() => {
+              setSearchQuery({ destDate: null });
+              //setRoundTrip(false);
+            }}
+            cx={css`
+              position: absolute;
+              right: 5px;
+              top: 9px;
+            `}
+          >
+            <CloseIcon />
+          </Button>
         </div>
 
         <div css={searchButton}>
@@ -269,9 +306,11 @@ function BookingPage() {
       {showStartDatePicker && (
         <div css={DatePickerWrapper}>
           <DatePicker
-            selected={searchQuery.startDate}
+            selected={new Date(searchQuery.startDate)}
             onChange={(date: Date | null) => {
               if (!date) return;
+              const nowDate = new Date();
+              date.setHours(nowDate.getHours(), nowDate.getMinutes(), 0, 0);
               setSearchQuery({ startDate: date });
               setShowStartDatePicker(false);
             }}
@@ -308,7 +347,7 @@ function BookingPage() {
       {showEndDatePicker && (
         <div css={DatePickerWrapper}>
           <DatePicker
-            selected={searchQuery.destDate}
+            selected={new Date(searchQuery.destDate ?? Date.now())}
             onChange={(date: Date | null) => {
               setSearchQuery({ destDate: date });
               setShowEndDatePicker(false);

@@ -1,30 +1,18 @@
-import React from 'react';
 import { PrimaryCardPropsType } from './index.types';
 import { useTheme } from '@emotion/react';
-import Flex from '../Flex';
-import { buildContainerStyles, paddingContainer } from './index.styles';
+import { buildContainerStyles, horizontalPaddingStyles } from './index.styles';
 
 export default function PrimaryCard({
   headerSlot,
-  bodySlot,
-  footerSlot,
+  children,
   as: Component = 'ul',
   cx,
 }: PrimaryCardPropsType) {
   const theme = useTheme();
   return (
-    <Component css={buildContainerStyles(theme)}>
+    <Component css={[buildContainerStyles(theme), cx]}>
       {headerSlot}
-      <Flex justify="center" align="center" cx={[paddingContainer, cx]}>
-        {bodySlot}
-      </Flex>
-      <Flex
-        justify="center"
-        align="center"
-        cx={[{ padding: '0px 20px 20px 0px' }, cx]}
-      >
-        {footerSlot}
-      </Flex>
+      <div css={[horizontalPaddingStyles]}>{children}</div>
     </Component>
   );
 }
