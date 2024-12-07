@@ -56,9 +56,11 @@ function IndexComponent() {
     } else {
       selectOutboundSeatList(tmp);
     }
-    pageType
-      ? navigate({ to: '/booking/payment' })
-      : navigate({ to: '/booking/tickets' });
+    if (pageType) {
+      navigate({ to: '/booking/payment' });
+    } else {
+      navigate({ to: '/booking/tickets' });
+    }
   };
 
   const initSeats = () => {
