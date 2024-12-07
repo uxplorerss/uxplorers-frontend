@@ -34,13 +34,13 @@ function ErrorComponent({
 
       {direction === 'in' && (
         <MainButton
+          cx={{ marginTop: '50px' }}
           css={(theme: Theme) => css`
-            margin-top: '50px';
             background-color: ${theme.colors.primary.base};
           `}
           children="가는 길만 편도 예매하기"
           onClick={() => {
-            navigate({ to: '/booking/payment' });
+            navigate({ to: '/booking/bookingConfirmation' });
           }}
         />
       )}
