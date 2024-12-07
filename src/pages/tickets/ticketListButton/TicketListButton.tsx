@@ -21,10 +21,11 @@ function ButtonComponent({
   const handleClickBusBtn = () => {
     if (direction === 'outbound') {
       selectOutboundBus(bus);
+      navigate({ to: '/booking/seats', search: '?direction=out' });
     } else {
       selectInboundBus(bus);
+      navigate({ to: '/booking/seats', search: '?direction=in' });
     }
-    navigate({ to: '/booking/seats' });
   };
 
   return (
