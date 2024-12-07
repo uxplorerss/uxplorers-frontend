@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button, TopBar, Typography } from '../../../common/components';
-import { css, Theme } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
 import FavIcon from '../../../assets/FavoriteStarIcon.svg';
 import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
@@ -19,6 +19,7 @@ import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBu
 import StikcyHeader from '../../../common/components/StickyHeader';
 import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
 import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
+import Select from 'react-select';
 
 export const Route = createFileRoute('/booking/tickets/')({
   component: RouteComponent,
@@ -35,11 +36,27 @@ const container = (theme: Theme) => css`
 export default function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
   // const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
-  const [busSearchTime, setBusSearchTime] = useState<number>(202411290500);
-
+  const theme = useTheme();
   const { searchQuery } = useSearchQueryStore((state) => state);
   const { forwardBusList, concat } = useForwardBusListStore();
   const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
+
+  const [busSearchTime, setBusSearchTime] = useState<Date>(
+    searchQuery.startDate
+  );
+  const [busSearchOption, setBusSearchOption] = useState<{
+    value: string;
+    label: string;
+  }>({ value: '전체', label: '전체' });
+
+  const options = [
+    { value: '전체', label: '전체' },
+    { value: '무정차', label: '무정차' },
+    { value: '경유', label: '경유' },
+    { value: '고속', label: '고속' },
+    { value: '우등', label: '우등' },
+    { value: '심야', label: '심야' },
+  ];
 
   const handleFavoriteRoute = () => {
     if (
@@ -138,17 +155,62 @@ export default function RouteComponent() {
               {convertAMPMHHMM(busSearchTime)} 이후
             </Typography>
           </Button>
-          <Button>
-            <Typography
-              variant="body4"
-              backgroundColor="gray"
-              cx={(theme) => css`
-                color: ${theme.colors.gray[4]};
-              `}
-            >
-              검색조건
-            </Typography>
-          </Button>
+          <Select
+            placeholder="검색조건"
+            value={busSearchOption}
+            onChange={(newValue) =>
+              setBusSearchOption(newValue as { value: string; label: string })
+            }
+            options={options}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: theme.colors.gray[2],
+                borderColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                borderRadius: '20px',
+                minWidth: '100px',
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                color: state.isFocused
+                  ? theme.colors.gray.white
+                  : theme.colors.gray[4],
+              }),
+            }}
+          />
+          <Select
+            placeholder="검색조건"
+            value={busSearchOption}
+            onChange={(newValue) =>
+              setBusSearchOption(newValue as { value: string; label: string })
+            }
+            options={options}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: theme.colors.gray[2],
+                borderColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                borderRadius: '20px',
+                minWidth: '100px',
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: state.isFocused
+                  ? theme.colors.primary.base
+                  : theme.colors.gray[2],
+                color: state.isFocused
+                  ? theme.colors.gray.white
+                  : theme.colors.gray[4],
+              }),
+            }}
+          />
         </div>
 
         {forwardBusList &&
