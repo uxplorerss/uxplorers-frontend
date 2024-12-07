@@ -1,4 +1,8 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import {
+  createFileRoute,
+  useLocation,
+  useNavigate,
+} from '@tanstack/react-router';
 import TopBar from '../../../common/components/TopBar';
 import { useEffect, useState } from 'react';
 
@@ -21,7 +25,10 @@ export const Route = createFileRoute('/booking/seats/')({
 
 function IndexComponent() {
   //TODO : query param 받아오기
-  const query = 'in';
+  const param: { direction: 'out' | 'in' } = Route.useSearch();
+  const query = param.direction;
+  console.log(query);
+
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
     if (now !== undefined) {
