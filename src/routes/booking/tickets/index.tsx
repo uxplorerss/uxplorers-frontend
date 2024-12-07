@@ -41,13 +41,26 @@ export default function RouteComponent() {
   const { forwardBusList, concat } = useForwardBusListStore();
   const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
 
-  const [busSearchTime, setBusSearchTime] = useState<Date>(
-    searchQuery.startDate
-  );
+  const [busSearchTime, setBusSearchTime] = useState<{
+    value: string;
+    label: string;
+  }>({
+    value: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
+    label: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
+  });
   const [busSearchOption, setBusSearchOption] = useState<{
     value: string;
     label: string;
   }>({ value: '전체', label: '전체' });
+
+  const timeOptions = Array.from({ length: 24 }, (_, i) => {
+    const date = new Date(searchQuery.startDate);
+    date.setHours(i, 0, 0, 0);
+    return {
+      value: `${convertAMPMHHMM(date)} 이후`,
+      label: `${convertAMPMHHMM(date)} 이후`,
+    };
+  });
 
   const options = [
     { value: '전체', label: '전체' },
@@ -144,24 +157,13 @@ export default function RouteComponent() {
         </Typography>
 
         <div css={css({ display: 'flex', justifyContent: 'space-between' })}>
-          <Button>
-            <Typography
-              variant="body4"
-              backgroundColor="gray"
-              cx={(theme) => css`
-                color: ${theme.colors.gray[4]};
-              `}
-            >
-              {convertAMPMHHMM(busSearchTime)} 이후
-            </Typography>
-          </Button>
           <Select
-            placeholder="검색조건"
-            value={busSearchOption}
+            placeholder="시간 선택"
+            value={busSearchTime}
             onChange={(newValue) =>
-              setBusSearchOption(newValue as { value: string; label: string })
+              setBusSearchTime(newValue as { value: string; label: string })
             }
-            options={options}
+            options={timeOptions}
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
@@ -183,6 +185,7 @@ export default function RouteComponent() {
               }),
             }}
           />
+
           <Select
             placeholder="검색조건"
             value={busSearchOption}
