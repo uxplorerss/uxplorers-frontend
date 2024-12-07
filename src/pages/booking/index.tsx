@@ -98,8 +98,6 @@ function BookingPage() {
 
   const [roundTrip, setRoundTrip] = useState<boolean>(false);
 
-  console.log(searchQuery);
-
   const isSearchable = () => {
     return searchQuery.startId !== '' && searchQuery.destId !== '';
   };

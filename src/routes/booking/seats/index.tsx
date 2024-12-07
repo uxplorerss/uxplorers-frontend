@@ -27,7 +27,6 @@ function IndexComponent() {
   //TODO : query param 받아오기
   const param: { direction: 'out' | 'in' } = Route.useSearch();
   const query = param.direction;
-  console.log(query);
 
   const handleSelectSeat = (num: number) => {
     const now = seats.find((seat) => seat.id === num);
