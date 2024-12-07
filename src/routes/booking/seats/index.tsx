@@ -90,6 +90,7 @@ function IndexComponent() {
     } else {
       selectOutboundSeatList(tmp);
     }
+
     if (pageType) {
       navigate({ to: '/booking/payment' });
     } else {
@@ -140,9 +141,10 @@ function IndexComponent() {
   } = useReservationStore();
 
   const navigate = useNavigate();
-  const pageType = searchQuery.destId === ''; // true면 예약확인페이지, false면 오는 길 버스 리스트 페이지
+  const pageType = searchQuery.destDate === null; // true면 예약확인페이지, false면 오는 길 버스 리스트 페이지
   const available =
     28 - seats.filter((value) => value.status === 'SELECTED').length;
+
   return (
     <>
       <TopBar />
