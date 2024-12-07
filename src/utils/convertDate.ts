@@ -56,7 +56,7 @@ export function parseYYYYMMDDHHMM(datetime: string): Date {
 export function getDifferenceInMinutes(
   datetime1: string,
   datetime2: string
-): string {
+): { hour: number; minute: number } {
   const date1 = parseYYYYMMDDHHMM(datetime1);
   const date2 = parseYYYYMMDDHHMM(datetime2);
 
@@ -66,5 +66,5 @@ export function getDifferenceInMinutes(
   const hour = Math.floor(minutes / 60);
   const minute = minutes % 60;
 
-  return `${hour}시간 ${minute}분`;
+  return { hour: hour, minute: minute };
 }

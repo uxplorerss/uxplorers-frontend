@@ -16,23 +16,27 @@ export function convertBusTicketsToBusList(
     '동양고속',
   ];
 
-  return busTickets.map((busTicket, index) => ({
-    startDate: parseYYYYMMDDHHMM(busTicket.depPlandTime.toString()),
-    startId: searchQuery.startId,
-    destIdList: [searchQuery.destId],
-    company: busCompany[index % busCompany.length],
-    fee: {
-      children: busTicket.charge * 0.5,
-      teens: busTicket.charge * 0.8,
-      adults: busTicket.charge,
-    },
-    eta: getDifferenceInMinutes(
+  return busTickets.map((busTicket, index) => {
+    const etaNum = getDifferenceInMinutes(
       busTicket.arrPlandTime.toString(),
       busTicket.depPlandTime.toString()
-    ),
-    class: busTicket.gradeNm,
-    seats: [],
-    distance: 0,
-    isExpress: true,
-  }));
+    );
+
+    return {
+      startDate: parseYYYYMMDDHHMM(busTicket.depPlandTime.toString()),
+      startId: searchQuery.startId,
+      destIdList: [searchQuery.destId],
+      company: busCompany[index % busCompany.length],
+      fee: {
+        children: busTicket.charge * 0.5,
+        teens: busTicket.charge * 0.8,
+        adults: busTicket.charge,
+      },
+      eta: `${etaNum.hour}시간 ${etaNum.minute}분`,
+      class: busTicket.gradeNm,
+      seats: [],
+      distance: 75 * etaNum.hour + Math.floor(1.2 * etaNum.minute),
+      isExpress: true,
+    };
+  });
 }
