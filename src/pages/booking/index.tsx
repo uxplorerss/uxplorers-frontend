@@ -333,7 +333,7 @@ function BookingPage() {
       {showEndDatePicker && (
         <div css={DatePickerWrapper}>
           <DatePicker
-            selected={searchQuery.destDate}
+            selected={new Date(searchQuery.destDate ?? Date.now())}
             onChange={(date: Date | null) => {
               setSearchQuery({ destDate: date });
               setShowEndDatePicker(false);
