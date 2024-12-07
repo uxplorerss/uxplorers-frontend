@@ -24,7 +24,7 @@ function ButtonComponent({
       navigate({ to: '/booking/seats', search: { direction: 'out' } });
     } else {
       selectInboundBus(bus);
-      navigate({ to: '/booking/seats', search: { direction: 'out' } });
+      navigate({ to: '/booking/seats', search: { direction: 'in' } });
     }
   };
 
