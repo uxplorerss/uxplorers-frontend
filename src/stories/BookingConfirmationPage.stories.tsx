@@ -6,6 +6,9 @@ import SeatListProvider from '../mock/seats';
 const meta = {
   title: 'Pages/BookingConfirmationPage',
   component: BookingConfirmationPage,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: (Story) => {
     return (
       <BusListProvider>

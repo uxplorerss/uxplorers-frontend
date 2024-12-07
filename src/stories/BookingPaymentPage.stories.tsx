@@ -5,6 +5,9 @@ import PendingTicketListProvider from '../mock/ticket';
 const meta = {
   title: 'pages/BookingPaymentPage',
   component: BookingPaymentPage,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: (Story) => {
     return (
       <PendingTicketListProvider>
