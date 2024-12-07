@@ -63,11 +63,13 @@ export default function SeatsPayInfo({
     if (children.length > 0) {
       pushString('아동 ' + children.length);
     }
-    setFee(
-      busFee!.adults * adults.length +
-        busFee!.teens * teens.length +
-        busFee!.children * children.length
-    );
+    if (busFee !== undefined) {
+      setFee(
+        busFee.adults * adults.length +
+          busFee.teens * teens.length +
+          busFee.children * children.length
+      );
+    }
   }, [seats]);
 
   return (
