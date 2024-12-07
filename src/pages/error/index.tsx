@@ -34,7 +34,7 @@ function ErrorComponent({
 
       {direction === 'in' && (
         <MainButton
-          cx={(theme: Theme) => css`
+          css={(theme: Theme) => css`
             margin-top: '50px';
             background-color: ${theme.colors.primary.base};
           `}
@@ -47,7 +47,7 @@ function ErrorComponent({
 
       {needRebooking && (
         <MainButton
-          cx={{ marginTop: '50px' }}
+          css={{ marginTop: '50px' }}
           children="처음부터 다시 예매하기"
           onClick={() => {
             navigate({ to: '/booking' });
