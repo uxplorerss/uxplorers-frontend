@@ -28,7 +28,7 @@ export interface Bus {
   eta: number;
   class: Class;
   seats: Seat[];
-  distance: number;
+  distance: string;
   isExpress: boolean;
 }
 
