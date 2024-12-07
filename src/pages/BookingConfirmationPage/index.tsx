@@ -9,7 +9,6 @@ import ActionBar from '../../common/components/ActionBar';
 import { css, useTheme } from '@emotion/react';
 
 import { calculateTicketListFee } from '../../lib/tickets';
-import { getLocaleStringNumber } from '../../lib';
 import { getTerminalName } from '../../lib/terminal';
 import ContentSection from '../../common/components/ContentSection';
 import useReservationStore from '../../stores/useReservationStore';
@@ -121,7 +120,7 @@ export default function BookingConfirmationPage() {
             >
               <Flex gap="20px">
                 <span>
-                  {getLocaleStringNumber(calculateTicketListFee(ticketList))}원
+                  {calculateTicketListFee(ticketList).toLocaleString()}원
                   결제하기
                 </span>
                 <Flex

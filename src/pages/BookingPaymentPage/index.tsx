@@ -8,7 +8,7 @@ import SeatDetailsTable from '../../common/components/SeatDetailsTable';
 import StickyFooter from '../../common/components/StickyFooter';
 import ActionBar from '../../common/components/ActionBar';
 import MainButton from '../../common/components/MainButton';
-import { getLocaleStringNumber } from '../../lib';
+
 import { calculateTicketListFee } from '../../lib/tickets';
 import { getTerminalName } from '../../lib/terminal';
 import ViewportContainer from '../../common/components/ViewportContainer';
@@ -93,7 +93,7 @@ export default function BookingPaymentPage() {
             >
               <Flex gap="20px">
                 <span>
-                  {getLocaleStringNumber(calculateTicketListFee(ticketList))}원
+                  {calculateTicketListFee(ticketList).toLocaleString()}원
                   결제하기
                 </span>
                 <Flex

@@ -3,11 +3,10 @@ import { FeeSumRowPropsType } from './index.types';
 import Flex from '../Flex';
 import Typography from '../Typography';
 import { useTheme } from '@emotion/react';
-import { getLocaleStringNumber } from '../../../lib';
 
 export default function FeeSumRow({ totalFee, ...props }: FeeSumRowPropsType) {
   const theme = useTheme();
-  const localeStringNumber = getLocaleStringNumber(totalFee);
+  const localeStringNumber = totalFee.toLocaleString();
   return (
     <Flex
       justify="flex-end"

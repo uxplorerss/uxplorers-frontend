@@ -15,7 +15,6 @@ import {
   verticalPaddingStyles,
 } from './index.styles';
 import { calculateSeatListFee } from '../../../lib/seats';
-import { getLocaleStringNumber } from '../../../lib';
 
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
@@ -149,7 +148,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                {getLocaleStringNumber(adultSeats.length * adultSeats[0].fee)}원
+                {(adultSeats.length * adultSeats[0].fee).toLocaleString()}원
               </Typography>
             </>
           )}
@@ -179,7 +178,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                {getLocaleStringNumber(teensSeats.length * teensSeats[0].fee)}원
+                {(teensSeats.length * teensSeats[0].fee).toLocaleString()}원
               </Typography>
             </>
           )}
@@ -208,9 +207,7 @@ export default function SeatDetailsTable({
                   buildGray4Styles(theme, inactive),
                 ]}
               >
-                {getLocaleStringNumber(
-                  childrenSeats.length * childrenSeats[0].fee
-                )}
+                {(childrenSeats.length * childrenSeats[0].fee).toLocaleString()}
                 원
               </Typography>
             </>
