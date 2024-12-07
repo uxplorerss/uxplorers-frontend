@@ -32,7 +32,6 @@ export default function SeatDetailsTable({
     filterSeatsByType(seats, 'teens'),
     filterSeatsByType(seats, 'children'),
   ];
-  console.log(adultSeats, teensSeats, childrenSeats);
 
   const theme = useTheme();
   return (
