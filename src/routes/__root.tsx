@@ -1,5 +1,5 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { lazy, Suspense } from 'react';
 import { globalStyle } from '../index.styles';
 import theme from '../theme';
@@ -20,16 +20,6 @@ export const Route = createRootRoute({
       <Global styles={globalStyle} />
       <ThemeProvider theme={theme}>
         <FontProvider>
-          <div className="p-2 flex gap-2">
-            <Link to="/">승차권 확인</Link>
-            <br />
-            <Link to="/booking">예매하기</Link>
-            <br />
-            <Link to="/booking/tickets">가는날 / 오는 날 버스 선택</Link>
-            <br />
-            <Link to="/account">마이페이지</Link>
-          </div>
-          <hr />
           <Outlet />
         </FontProvider>
       </ThemeProvider>
