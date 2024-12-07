@@ -123,7 +123,7 @@ export default function SeatDetailsTable({
           >
             총 {seats.length}장
           </Typography>
-          {adultSeats.length && (
+          {!!adultSeats.length && (
             <>
               <Typography
                 variant="body3"
@@ -152,7 +152,7 @@ export default function SeatDetailsTable({
               </Typography>
             </>
           )}
-          {teensSeats.length && (
+          {!!teensSeats.length && (
             <>
               <Typography
                 variant="body3"
@@ -182,7 +182,7 @@ export default function SeatDetailsTable({
               </Typography>
             </>
           )}
-          {childrenSeats.length && (
+          {!!childrenSeats.length && (
             <>
               <Typography
                 variant="body3"
