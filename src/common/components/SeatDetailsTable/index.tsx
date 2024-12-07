@@ -14,6 +14,7 @@ import {
   buildGray4Styles,
   verticalPaddingStyles,
 } from './index.styles';
+import { calculateTotalFee } from '../../../lib/seats';
 
 const filterSeatsByType = (seats: Seat[], targetType: keyof Fee) =>
   seats.filter(({ type }) => type === targetType);
@@ -171,7 +172,10 @@ export default function SeatDetailsTable({
           </Typography>
         </div>
       </Flex>
-      <FeeSumRow totalFee={123} cx={verticalPaddingStyles} />
+      <FeeSumRow
+        totalFee={calculateTotalFee(seats)}
+        cx={verticalPaddingStyles}
+      />
     </Flex>
   );
 }
