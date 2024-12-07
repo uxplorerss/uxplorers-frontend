@@ -1,27 +1,28 @@
 import { ReactNode, useEffect } from 'react';
-import { tickets } from './fixture';
-import useReservationStore from '../../stores/useReservationStore';
 
-export default function PendingTicketListProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  useSetTicketList();
+import useReservationStore from '../../stores/useReservationStore';
+import { inboundBus, outboundBus } from './fixture';
+
+export default function BusListProvider({ children }: { children: ReactNode }) {
+  useSetBusList();
+
   return <>{children}</>;
 }
 
-function useSetTicketList() {
+function useSetBusList() {
   useEffect(() => {
     useReservationStore.setState((state) => ({
       ...state,
-      pendingTicketList: tickets,
+      selectedOutboundBus: outboundBus,
+      selectedInboundBus: inboundBus,
     }));
+
     return () => {
       useReservationStore.setState((state) => ({
         ...state,
-        pendingTicketList: [],
+        selectedOutboundBus: null,
+        selectedInboundBus: null,
       }));
     };
-  });
+  }, []);
 }

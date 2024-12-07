@@ -13,9 +13,43 @@ import { getLocaleStringNumber } from '../../lib';
 import { getTerminalName } from '../../lib/terminal';
 import ContentSection from '../../common/components/ContentSection';
 import useReservationStore from '../../stores/useReservationStore';
+import { useNavigate } from '@tanstack/react-router';
+import { useShallow } from 'zustand/shallow';
+import { Ticket } from '../../types';
+import ViewportContainer from '../../common/components/ViewportContainer';
 
 export default function BookingConfirmationPage() {
-  const ticketList = useReservationStore((state) => state.pendingTicketList);
+  const { inboundBus, outboundBus, inboundSeatList, outboundSeatList } =
+    useReservationStore(
+      useShallow((state) => ({
+        inboundBus: state.selectedInboundBus,
+        outboundBus: state.selectedOutboundBus!,
+        inboundSeatList: state.selectedInboundSeatList,
+        outboundSeatList: state.selectedOutboundSeatList,
+      }))
+    );
+
+  const theme = useTheme();
+
+  const navigate = useNavigate();
+
+  if (!outboundBus) {
+    console.log(outboundBus);
+    return <>비어있습니다.</>;
+  }
+
+  const outboundTicket: Ticket = {
+    ...outboundBus,
+    seats: outboundSeatList,
+  };
+
+  const inboundTicket: Ticket | null | undefined = inboundBus && {
+    ...inboundBus,
+    seats: inboundSeatList,
+  };
+
+  const ticketList = [outboundTicket].concat(inboundTicket ?? []);
+
   const itineraries = ticketList.map(({ startId, destIdList }) => {
     return {
       startName: getTerminalName(startId)!,
@@ -23,10 +57,12 @@ export default function BookingConfirmationPage() {
     };
   });
 
-  const theme = useTheme();
+  if (!outboundBus) {
+    <>로딩중입니다.</>;
+  }
 
   return (
-    <div>
+    <ViewportContainer>
       <ContentSection>
         <Flex
           justify="center"
@@ -38,27 +74,34 @@ export default function BookingConfirmationPage() {
         >
           <Typography variant="title1">예매할 내역을 확인하세요</Typography>
         </Flex>
-
-        {ticketList.map(({ ...props }, index) => {
-          return (
-            <PrimaryCard
-              {...props}
-              headerSlot={
-                <RouteOptionRow
-                  {...props}
-                  startName={itineraries[index].startName}
-                  destName={itineraries[index].destName}
-                />
-              }
-              children={<SeatDetailsTable {...props} />}
-            />
-          );
-        })}
+        <Flex direction="column" gap="17px">
+          {ticketList.map(({ ...props }, index) => {
+            return (
+              <PrimaryCard
+                {...props}
+                headerSlot={
+                  <RouteOptionRow
+                    {...props}
+                    startName={itineraries[index].startName}
+                    destName={itineraries[index].destName}
+                  />
+                }
+                children={<SeatDetailsTable {...props} />}
+              />
+            );
+          })}
+        </Flex>
       </ContentSection>
       <StickyFooter>
         <ActionBar
           actionSlot={
-            <MainButton>
+            <MainButton
+              onClick={() => {
+                navigate({
+                  to: '/booking/payment',
+                });
+              }}
+            >
               <Flex gap="20px">
                 <span>
                   {getLocaleStringNumber(calculateTicketListFee(ticketList))}원
@@ -80,6 +123,6 @@ export default function BookingConfirmationPage() {
           }
         />
       </StickyFooter>
-    </div>
+    </ViewportContainer>
   );
 }

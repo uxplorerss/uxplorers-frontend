@@ -6,8 +6,8 @@ export const ticket: Ticket = {
   isExpress: false,
   company: '중앙고속',
   class: 'economy',
-  startId: 'something',
-  destIdList: ['해운대'],
+  startId: '010',
+  destIdList: ['020'],
   seats,
 };
 

@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react';
 import BookingPaymentPage from '../pages/BookingPaymentPage';
-import TicketListProvider from '../mock/ticket';
+import PendingTicketListProvider from '../mock/ticket';
 
 const meta = {
   title: 'pages/BookingPaymentPage',
   component: BookingPaymentPage,
   decorators: (Story) => {
     return (
-      <TicketListProvider>
+      <PendingTicketListProvider>
         <Story />
-      </TicketListProvider>
+      </PendingTicketListProvider>
     );
   },
 } satisfies Meta;
