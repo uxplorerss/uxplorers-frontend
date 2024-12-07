@@ -1,61 +1,55 @@
+import * as React from 'react';
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { Button, TopBar, Typography } from '../../../common/components';
-import { css, Theme, useTheme } from '@emotion/react';
-import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
-import FavIcon from '../../../assets/FavoriteStarIcon.svg';
-import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
-import { useEffect, useState } from 'react';
-import { getBusTicketsAPI } from '../../../apis/getBusTickets';
+import { css, useTheme } from '@emotion/react';
 import useSearchQueryStore from '../../../stores/useSearchQueryStore';
+import useBackwardBusListStore from '../../../stores/useBackwardBusListStore';
+import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
 import {
   convertAMPMHHMM,
   convertMMDDday,
   convertYYYYMMDD,
 } from '../../../utils/convertDate';
-import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
-import useForwardBusListStore from '../../../stores/useTowardBusListStore';
-import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
+import { getBusTicketsAPI } from '../../../apis/getBusTickets';
 import { convertBusTicketsToBusList } from '../../../utils/convertBusTicketsToBusList';
+import MOCK_busTickets from '../../../constants/mock/bus_ticket_seoul_daejeon.json';
 import StikcyHeader from '../../../common/components/StickyHeader';
-import useFavoriteRouteStore from '../../../stores/useFavoriteRouteStore';
-import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
+import { TopBar, Typography } from '../../../common/components';
+import LeftArrowIcon from '../../../assets/LeftArrowIcon.svg';
+import FavIcon from '../../../assets/FavoriteStarIcon.svg';
+import SelectedFavIcon from '../../../assets/FavoriteStarIcon-selected.svg';
+import { searchTerminalNameToCode } from '../../../utils/searchTerminalInfo';
+import { container } from '.';
 import Select from 'react-select';
+import ButtonComponent from '../../../pages/tickets/ticketListButton/TicketListButton';
 import ErrorComponent from '../../../pages/error';
 
-export const Route = createFileRoute('/booking/tickets/')({
+export const Route = createFileRoute('/booking/tickets/inbound')({
   component: RouteComponent,
 });
-
-export const container = (theme: Theme) => css`
-  padding: 15px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: ${theme.colors.gray[3]};
-`;
 
 export default function RouteComponent() {
   // 가는 날(가는 길 버스를 선택하세요) 및 오는 날 페이지 구현하기
   // const [busTickets, setBusTickets] = useState<BusTicket[]>([]);
   const theme = useTheme();
   const { searchQuery } = useSearchQueryStore((state) => state);
-  const { forwardBusList, concat } = useForwardBusListStore();
+
+  const { backwardBusList, concat } = useBackwardBusListStore();
   const { favoriteRouteList, addRoute, deleteRoute } = useFavoriteRouteStore();
 
-  const [busSearchTime, setBusSearchTime] = useState<{
+  const [busSearchTime, setBusSearchTime] = React.useState<{
     value: Date;
     label: string;
   }>({
-    value: new Date(searchQuery.startDate),
-    label: `${convertAMPMHHMM(new Date(searchQuery.startDate))} 이후`,
+    value: new Date(searchQuery.destDate ?? Date.now()),
+    label: `${convertAMPMHHMM(new Date(searchQuery.destDate ?? Date.now()))} 이후`,
   });
-  const [busSearchOption, setBusSearchOption] = useState<{
+  const [busSearchOption, setBusSearchOption] = React.useState<{
     value: string;
     label: string;
   }>({ value: '전체', label: '전체' });
 
   const timeOptions = Array.from({ length: 24 }, (_, i) => {
-    const date = new Date(searchQuery.startDate);
+    const date = new Date(searchQuery.destDate ?? Date.now());
     date.setHours(i, 0, 0, 0);
     return {
       value: date,
@@ -86,11 +80,11 @@ export default function RouteComponent() {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     getBusTicketsAPI(
       searchQuery.startId,
       searchQuery.destId,
-      convertYYYYMMDD(new Date(searchQuery.startDate))
+      convertYYYYMMDD(new Date(searchQuery.destDate ?? Date.now()))
     )
       .then((data) => {
         // TODO: 전역 상태에 넣기
@@ -131,10 +125,12 @@ export default function RouteComponent() {
           centerSlot={
             <div>
               <div>
-                {searchTerminalNameToCode(searchQuery.startId) ?? '동서울'} →{' '}
-                {searchTerminalNameToCode(searchQuery.destId) ?? '대전복합'}
+                {searchTerminalNameToCode(searchQuery.destId)} →{' '}
+                {searchTerminalNameToCode(searchQuery.startId)}
               </div>
-              <div>{convertMMDDday(new Date(searchQuery.startDate))}</div>
+              <div>
+                {convertMMDDday(new Date(searchQuery.destDate ?? Date.now()))}
+              </div>
             </div>
           }
           rightSlot={
@@ -159,7 +155,7 @@ export default function RouteComponent() {
       <section css={(theme) => container(theme)}>
         <Typography variant="title1" as="p" cx={{ textAlign: 'center' }}>
           <div>
-            가는 길 <br></br> 버스를 선택하세요
+            오는 길 <br></br> 버스를 선택하세요
           </div>
         </Typography>
 
@@ -223,8 +219,8 @@ export default function RouteComponent() {
           />
         </div>
 
-        {forwardBusList &&
-          forwardBusList
+        {backwardBusList &&
+          backwardBusList
             .filter(
               (bus) =>
                 bus.startDate >= busSearchTime.value &&
@@ -233,17 +229,18 @@ export default function RouteComponent() {
                   bus.class.includes(busSearchOption.value))
             )
             .map((bus, index) => (
-              <ButtonComponent key={index} bus={bus} direction="outbound" />
+              <ButtonComponent key={index} bus={bus} direction="inbound" />
             ))}
       </section>
-      {forwardBusList.length === 0 && <ErrorComponent needRebooking={true} />}
-      {forwardBusList.filter(
-        (bus) =>
-          bus.startDate >= busSearchTime.value &&
-          (busSearchOption.value === '전체' ||
-            busSearchOption.value === '무정차' ||
-            bus.class.includes(busSearchOption.value))
-      ).length === 0 && <ErrorComponent needRebooking={false} />}
+      {backwardBusList.length === 0 && <ErrorComponent needRebooking={true} />}
+      {backwardBusList &&
+        backwardBusList.filter(
+          (bus) =>
+            bus.startDate >= busSearchTime.value &&
+            (busSearchOption.value === '전체' ||
+              busSearchOption.value === '무정차' ||
+              bus.class.includes(busSearchOption.value))
+        ).length === 0 && <ErrorComponent needRebooking={false} />}
     </div>
   );
 }
