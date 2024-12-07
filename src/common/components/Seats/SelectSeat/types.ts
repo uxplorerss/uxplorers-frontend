@@ -9,6 +9,7 @@ export interface seat {
 export interface selectSeatPropType {
   seats: seat[];
   onSelectSeat: (seatNum: number) => void;
+  selectedType: SeatTypeVariant;
 }
 
-type SeatTypeVariant = 'children' | 'teens' | 'adults';
+export type SeatTypeVariant = 'adults' | 'teens' | 'children';

@@ -30,6 +30,7 @@ export const SelectSeat = ({ seats, ...props }: selectSeatPropType) => {
                   key={index}
                   attr={value.status}
                   num={value.id}
+                  type={value.type}
                   {...props}
                 />
               );

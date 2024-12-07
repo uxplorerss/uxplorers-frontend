@@ -10,26 +10,67 @@ import { SeatsPayInfoPropsType } from './types';
 import { useEffect, useState } from 'react';
 import { seat } from '../SelectSeat/types';
 
-export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
-  const selected: seat[] = [];
-  // const textBuilder = () => {
-  //   let str = '';
-  //   let adult,
-  //     teen,
-  //     children = 0;
+export default function SeatsPayInfo({
+  seats,
+  pageType,
+  onClick,
+  busFee,
+}: SeatsPayInfoPropsType) {
+  const adults: seat[] = [];
+  const teens: seat[] = [];
+  const children: seat[] = [];
 
-  // selected.forEach((value) => {});
-  //   return str;
-  // };
+  const [content, setContent] = useState<string[]>([]);
+  const [fee, setFee] = useState<number>(0);
+
+  const pushString = (str: string) => {
+    setContent((prev) => {
+      return [...prev, str];
+    });
+  };
+  const resetString = () => {
+    content.length = 0;
+  };
   useEffect(() => {
-    selected.length = 0;
-
+    resetString();
+    adults.length = 0;
+    teens.length = 0;
+    children.length = 0;
     seats
       .filter((value) => value.status === 'SELECTED')
       .forEach((value) => {
-        selected.push(value);
+        switch (value.type) {
+          case 'adults':
+            adults.push(value);
+            break;
+          case 'teens':
+            teens.push(value);
+            break;
+          case 'children':
+            children.push(value);
+            break;
+          default:
+            break;
+        }
       });
-  }, []);
+
+    if (adults.length > 0) {
+      pushString('일반 ' + adults.length);
+    }
+    if (teens.length > 0) {
+      pushString('초등학생 ' + teens.length);
+    }
+    if (children.length > 0) {
+      pushString('아동 ' + children.length);
+    }
+    if (busFee !== undefined) {
+      setFee(
+        busFee.adults * adults.length +
+          busFee.teens * teens.length +
+          busFee.children * children.length
+      );
+    }
+  }, [seats]);
 
   return (
     <StickyFooter
@@ -44,18 +85,27 @@ export default function SeatsPayInfo({ seats }: SeatsPayInfoPropsType) {
                   align="left"
                   style={{ flexGrow: 1 }}
                 >
-                  <div>총 결제 금액</div>
-                  <div>일반 1, 초등생 1</div>
+                  <Typography variant="title4">총 결제 금액</Typography>
+
+                  <div>
+                    {content.map((value, index) => {
+                      if (content.length - 1 === index) {
+                        return value;
+                      }
+                      return value + ', ';
+                    })}
+                  </div>
                 </Flex>
                 <Flex style={{ flexGrow: 1 }} justify="end">
                   <Typography variant="title1" textAlign="right">
-                    30,200원
+                    {/* TODO */}
+                    {fee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
                   </Typography>
                 </Flex>
               </Flex>
-              <MainButton>
+              <MainButton onClick={onClick}>
                 <Flex gap="20px">
-                  <span>다음</span>
+                  <span>{pageType ? '결제하기' : '다음'}</span>
                 </Flex>
               </MainButton>
             </>
