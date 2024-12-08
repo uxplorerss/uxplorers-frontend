@@ -47,7 +47,7 @@ const Seat = ({
             <Typography
               variant="body4"
               children={selectedTypeName}
-              cx={{ color: theme.colors.primary.base }}
+              cx={{ color: theme.colors.primary.base, wordBreak: 'keep-all' }}
             ></Typography>
           </div>
         </div>
