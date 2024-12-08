@@ -6,8 +6,16 @@ import { ticketCardStyles } from './index.styles';
 import QRCode from '../../../assets/QRCode.jpg';
 import Subtract from '../../../assets/Subtract.svg?react';
 import { Divider } from '../Divider';
+import { TicketCardPropsType } from './index.types';
+import { getTerminalName } from '../../../lib/terminal';
 
-export default function TicketCard() {
+export default function TicketCard({
+  startId,
+  destIdList,
+  startDate,
+  seats,
+  company,
+}: TicketCardPropsType) {
   return (
     <Flex
       justify="center"
@@ -41,14 +49,14 @@ export default function TicketCard() {
         }}
       >
         <RouteRow
-          startName={'동서울'}
-          destName={'부산'}
+          startName={getTerminalName(startId)!}
+          destName={getTerminalName(destIdList[destIdList.length - 1])!}
           outlined
           cx={{
             padding: 0,
           }}
         />
-        <TicketDateRow startDate={new Date()} />
+        <TicketDateRow startDate={startDate} />
       </div>
       <Divider
         orientation="horizontal"
