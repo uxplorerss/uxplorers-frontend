@@ -73,7 +73,7 @@ export default function TicketCard({
         />
         <div
           css={{
-            paddingTop: '33%',
+            paddingTop: '135px',
             height: '360px',
             width: '330px',
             display: 'flex',
