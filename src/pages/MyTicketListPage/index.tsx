@@ -20,6 +20,7 @@ import QRIcon from '../../assets/QRIcon_color.svg?react';
 import TicketIcon from '../../assets/TicketIcon_nonc.svg?react';
 import PersonIcon from '../../assets/PersonIcon.svg?react';
 import { css } from '@emotion/react';
+import MainButton from '../../common/components/MainButton';
 
 export default function MyTicketListPage() {
   const ticketList = useReservationStore((state) => state.purchasedTicketList);
@@ -53,9 +54,20 @@ export default function MyTicketListPage() {
               margin: '50px 100px',
             }}
           >
-            <Typography variant="body1" cx={{ color: theme.colors.gray[4] }}>
+            <Typography
+              variant="body1"
+              cx={{ color: theme.colors.gray[4], wordBreak: 'keep-all' }}
+            >
               예매한 티켓이 없습니다.
             </Typography>
+            <MainButton
+              onClick={() => {
+                navigate({ to: '/booking' });
+              }}
+              cx={{ marginTop: '100px', wordBreak: 'keep-all' }}
+            >
+              티켓 예매하러 가기
+            </MainButton>
           </div>
         )}
         {ticketList.map((ticket) => (
