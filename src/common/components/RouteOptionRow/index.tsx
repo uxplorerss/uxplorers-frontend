@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteOptionRowPropsType } from './index.types';
 import Flex from '../Flex';
-import ArrowRightPrimaryIcon from '../../../assets/ArrowRightPrimaryIcon.svg?react';
+import ArrowRightWhiteIcon from '../../../assets/ArrowRightWhiteIcon.svg?react';
 import ArrowRightGrayIcon from '../../../assets/ArrowRightGrayIcon.svg?react';
 import { buildContainerStyles } from './index.styles';
 import { useTheme } from '@emotion/react';
@@ -34,7 +34,7 @@ export default function RouteOptionRow({
         {inactive ? <CheckboxEmptyCircleIcon /> : <CheckCircleOutlinedIcon />}
       </Flex>
       <Typography variant="title2">{startName}</Typography>
-      {inactive ? <ArrowRightGrayIcon /> : <ArrowRightPrimaryIcon />}
+      {inactive ? <ArrowRightGrayIcon /> : <ArrowRightWhiteIcon />}
       <Typography variant="title2">{destName}</Typography>
     </Flex>
   );

@@ -29,7 +29,7 @@ export default function TicketDateRow({
 
   return (
     <Flex
-      justify="start"
+      justify="center"
       align="center"
       gap="8px"
       cx={cx}
