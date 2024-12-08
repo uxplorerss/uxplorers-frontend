@@ -21,26 +21,55 @@ export default function TicketCard() {
       <Subtract
         css={{
           position: 'absolute',
+          top: 0,
+          minWidth: '900px',
           width: '100%',
           height: '100%',
           zIndex: '-1',
         }}
       />
-      <RouteRow
-        startName={'동서울'}
-        destName={'부산'}
-        outlined
-        cx={{
-          padding: 0,
+      <div
+        css={{
+          position: 'absolute',
+          top: '6%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px',
+          zIndex: '1',
+        }}
+      >
+        <RouteRow
+          startName={'동서울'}
+          destName={'부산'}
+          outlined
+          cx={{
+            padding: 0,
+          }}
+        />
+        <TicketDateRow startDate={new Date()} />
+      </div>
+      <Divider
+        orientation="horizontal"
+        css={{
+          position: 'absolute',
+          top: '30%',
+          maxWidth: '340px',
+          zIndex: '1',
         }}
       />
-      <TicketDateRow startDate={new Date()} />
-      <Divider orientation="horizontal" />
-      <img src={QRCode} />
+      <div
+        css={{
+          paddingTop: '40%',
+        }}
+      >
+        <img src={QRCode} />
 
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
+        <h1>123</h1>
+        <h1>123</h1>
+        <h1>123</h1>
+      </div>
     </Flex>
   );
 }
