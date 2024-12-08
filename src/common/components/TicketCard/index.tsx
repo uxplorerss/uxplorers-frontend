@@ -8,6 +8,9 @@ import Subtract from '../../../assets/Subtract.svg?react';
 import { Divider } from '../Divider';
 import { TicketCardPropsType } from './index.types';
 import { getTerminalName } from '../../../lib/terminal';
+import MainButton from '../MainButton';
+import Typography from '../Typography';
+import { css } from '@emotion/react';
 
 export default function TicketCard({
   startId,
@@ -17,7 +20,7 @@ export default function TicketCard({
   company,
 }: TicketCardPropsType) {
   return (
-    <div css={{ paddingTop: '50px', height: '100vh' }}>
+    <div css={{ paddingTop: '50px' }}>
       <Flex
         justify="center"
         align="center"
@@ -71,12 +74,80 @@ export default function TicketCard({
         <div
           css={{
             paddingTop: '33%',
-            height: '400px',
+            height: '360px',
+            width: '330px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
-          <img src={QRCode} />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '15px',
+              justifyContent: 'space-between',
+            }}
+          >
+            <img src={QRCode} />
+            <div
+              css={{
+                width: '150px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+              }}
+            >
+              <div
+                css={css`
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                `}
+              >
+                <Typography variant="body2">경유</Typography>
+                {destIdList.length > 1 ? (
+                  <Typography variant="body2">O</Typography>
+                ) : (
+                  <Typography variant="body2">X</Typography>
+                )}
+              </div>
+              <div
+                css={css`
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                `}
+              >
+                <Typography variant="body2">운행회사</Typography>
+                <Typography variant="body2">{company}</Typography>
+              </div>
+              <div
+                css={css`
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                `}
+              >
+                <Typography variant="body2">좌석번호</Typography>
+                <Typography variant="body2" cx={{ maxWidth: '80px' }}>
+                  {seats.map((seat) => seat.seatNum).join(', ')}
+                </Typography>
+              </div>
+            </div>
+          </div>
 
-          <h1>123</h1>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '15px',
+              justifyContent: 'space-between',
+            }}
+          >
+            <MainButton>티켓 저장</MainButton>
+            <MainButton>결제 내역</MainButton>
+          </div>
         </div>
       </Flex>
     </div>

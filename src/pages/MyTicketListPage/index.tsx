@@ -45,18 +45,23 @@ export default function MyTicketListPage() {
         />
       </StikcyHeader>
 
-      {ticketList.length === 0 && (
-        <div
-          style={{ textAlign: 'center', margin: '50px 100px', height: '100vh' }}
-        >
-          <Typography variant="body1" cx={{ color: theme.colors.gray[4] }}>
-            예매한 티켓이 없습니다.
-          </Typography>
-        </div>
-      )}
-      {ticketList.map((ticket) => (
-        <TicketCard {...ticket} />
-      ))}
+      <div style={{ minHeight: '100vh' }}>
+        {ticketList.length === 0 && (
+          <div
+            style={{
+              textAlign: 'center',
+              margin: '50px 100px',
+            }}
+          >
+            <Typography variant="body1" cx={{ color: theme.colors.gray[4] }}>
+              예매한 티켓이 없습니다.
+            </Typography>
+          </div>
+        )}
+        {ticketList.map((ticket) => (
+          <TicketCard {...ticket} />
+        ))}
+      </div>
 
       <StickyFooter cx={{ bottom: 0 }}>
         <BottomBar
