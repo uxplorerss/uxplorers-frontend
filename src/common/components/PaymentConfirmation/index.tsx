@@ -1,7 +1,11 @@
+import { useNavigate } from '@tanstack/react-router';
 import { Typography } from '..';
 import CheckIcon from '../../../assets/checkIcon.svg?react';
 import Flex from '../Flex';
+import MainButton from '../MainButton';
 export default function PaymentConfirmation() {
+  const navigate = useNavigate();
+
   return (
     <Flex>
       <Flex
@@ -17,10 +21,16 @@ export default function PaymentConfirmation() {
         }}
       >
         <CheckIcon />
-        <Typography
-          variant="title1"
-          children={'예매가 완료되었어요!'}
-        ></Typography>
+        <Typography variant="title1">예매가 완료되었어요!</Typography>
+        <MainButton
+          onClick={() => {
+            navigate({
+              to: '/',
+            });
+          }}
+        >
+          홈 화면으로 이동하기
+        </MainButton>
       </Flex>
     </Flex>
   );
