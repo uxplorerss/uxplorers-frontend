@@ -40,6 +40,7 @@ export default function MyTicketListPage() {
               <LogoIcon />
             </Button>
           }
+          centerSlot={<Typography variant="title3">내 티켓</Typography>}
           rightSlot={<LanguageSwitchButton language="English" />}
         />
       </StikcyHeader>

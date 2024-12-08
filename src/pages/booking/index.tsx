@@ -133,6 +133,7 @@ function BookingPage() {
               <LogoIcon />
             </Button>
           }
+          centerSlot={<Typography variant="title3">예매하기</Typography>}
           rightSlot={<LanguageSwitchButton language="English" />}
         />
       </div>
