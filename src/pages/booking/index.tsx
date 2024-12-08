@@ -264,6 +264,9 @@ function BookingPage() {
         <BottomBar
           leftSlot={
             <Button
+              onClick={() => {
+                navigate({ to: '/myTicket' });
+              }}
               css={[
                 buttonContainer,
                 buildTypography(theme, 'caption1'),
