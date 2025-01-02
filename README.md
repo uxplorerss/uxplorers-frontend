@@ -4,8 +4,8 @@ https://uxplorers-frontend.vercel.app/
 
 ## Presentation pdf
 
-[Browser pdf viewer](https://uxplorers-frontend.vercel.app/UXplorers.pdf)
-[Orign pdf file in github](https://github.com/uxplorerss/uxplorers-frontend/blob/main/UXplorers.pdf)
+[Browser pdf viewer](https://uxplorers-frontend.vercel.app/UXplorers.pdf)   
+[Orign pdf file in github](https://github.com/uxplorerss/uxplorers-frontend/blob/main/UXplorers.pdf)   
 
 ### Some slides of Presentation
 ![alt text](readme_img/image.png)
